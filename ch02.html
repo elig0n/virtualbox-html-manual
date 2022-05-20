@@ -1,0 +1,744 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter 2. Installation Details</title><meta name="generator" content="DocBook XSL Stylesheets V1.69.1"><link rel="start" href="index.html" title="Oracle® VM VirtualBox®"><link rel="up" href="index.html" title="Oracle® VM VirtualBox®"><link rel="prev" href="ch01.html" title="Chapter 1. First Steps"><link rel="next" href="ch03.html" title="Chapter 3. Configuring Virtual Machines"><style type="text/css"><!--
+   body
+   {
+     font-family:  Verdana, Sans-serif, Arial, 'Trebuchet MS', 'Times New Roman';
+     font-size: small;
+   }
+   h2.title
+   {
+     font-family: Verdana, Sans-serif, Arial, 'Trebuchet MS', 'Times New Roman';
+     margin: 5px 0 0;
+     padding: 1px 5px 1px;
+     border: 1px solid #6b89d4;
+     -moz-border-radius: 0.3em;
+     background: #e6edff;
+   }
+   .titlepage
+   {
+     text-align: center;
+   }
+   .refsynopsisdiv, .refsect1, .refsect2, .refsect3
+   {
+     text-align: left;
+   }
+   .warning
+   {
+     padding: 5px;
+     border: 1px solid #ff0011;
+     -moz-border-radius: 0.3em;
+     background: #ffbbbb;
+   }
+   .warning .title { margin: 0px 0px 5px 0px; }
+   .warning p { margin: 1px; }
+   .note
+   {
+     padding: 1px 5px 1px;
+     border: 1px solid #84c43b;
+     -moz-border-radius: 0.3em;
+     background: #d7e9a7;
+   }
+   .note .title { margin: 0px 0px 5px 0px; }
+   .note p { margin: 1px; }
+   .cmdsynopsis
+   {
+     font-family: monospace;
+   }
+   .refsynopsisdiv        > .cmdsynopsis p, .refsect1        > .cmdsynopsis p,
+   .refsynopsisdiv .sect2 > .cmdsynopsis p, .refsect1 .sect2 > .cmdsynopsis p
+   {
+     margin-top: 0px;
+     margin-bottom: 0px;
+   }
+   .cmdsynopsis p
+   {
+     padding-left: 3.4em;
+     text-indent: -2.2em;
+   }
+   p.nextcommand
+   {
+     margin-top:    0px;
+     margin-bottom: 0px;
+   }
+   p.lastcommand
+   {
+     margin-top:    0px;
+   }
+   .refentry * h3
+   {
+     font-size: large;
+   }
+   .refentry * h4
+   {
+     font-size: larger;
+   }
+   .refentry * h5
+   {
+     font-size: larger;
+   }
+
+  --></style></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="installation"></a>Chapter 2. Installation Details</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="ch02.html#installation_windows">2.1. Installing on Windows Hosts</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch02.html#install-win-prereq">2.1.1. Prerequisites</a></span></dt><dt><span class="sect2"><a href="ch02.html#install-win-performing">2.1.2. Performing the Installation</a></span></dt><dt><span class="sect2"><a href="ch02.html#install-win-uninstall">2.1.3. Uninstallation</a></span></dt><dt><span class="sect2"><a href="ch02.html#install-win-unattended">2.1.4. Unattended Installation</a></span></dt><dt><span class="sect2"><a href="ch02.html#install-win-public-props">2.1.5. Public Properties</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch02.html#installation-mac">2.2. Installing on Mac OS X Hosts</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch02.html#install-mac-performing">2.2.1. Performing the Installation</a></span></dt><dt><span class="sect2"><a href="ch02.html#install-mac-uninstall">2.2.2. Uninstallation</a></span></dt><dt><span class="sect2"><a href="ch02.html#install-mac-unattended">2.2.3. Unattended Installation</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch02.html#install-linux-host">2.3. Installing on Linux Hosts</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch02.html#install-linux-prereq">2.3.1. Prerequisites</a></span></dt><dt><span class="sect2"><a href="ch02.html#externalkernelmodules">2.3.2. The Oracle VM VirtualBox Kernel Modules</a></span></dt><dt><span class="sect2"><a href="ch02.html#install-linux-performing">2.3.3. Performing the Installation</a></span></dt><dt><span class="sect2"><a href="ch02.html#install-linux-vboxusers">2.3.4. The vboxusers Group</a></span></dt><dt><span class="sect2"><a href="ch02.html#startingvboxonlinux">2.3.5. Starting Oracle VM VirtualBox on Linux</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch02.html#install-solaris-host">2.4. Installing on Oracle Solaris Hosts</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch02.html#install-solaris-performing">2.4.1. Performing the Installation</a></span></dt><dt><span class="sect2"><a href="ch02.html#install-solaris-vboxuser">2.4.2. The vboxuser Group</a></span></dt><dt><span class="sect2"><a href="ch02.html#install-solaris-starting">2.4.3. Starting Oracle VM VirtualBox on Oracle Solaris</a></span></dt><dt><span class="sect2"><a href="ch02.html#uninstall-solaris-host">2.4.4. Uninstallation</a></span></dt><dt><span class="sect2"><a href="ch02.html#install-solaris-unattended">2.4.5. Unattended Installation</a></span></dt><dt><span class="sect2"><a href="ch02.html#solaris-zones">2.4.6. Configuring a Zone for Running Oracle VM VirtualBox</a></span></dt></dl></dd></dl></div><p>
+    As installation of Oracle VM VirtualBox varies depending on your host
+    operating system, the following sections provide installation
+    instructions for Windows, Mac OS X, Linux, and Oracle Solaris.
+  </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="installation_windows"></a>2.1. Installing on Windows Hosts</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="install-win-prereq"></a>2.1.1. Prerequisites</h3></div></div></div><p>
+        For the various versions of Windows that are supported as host
+        operating systems, please refer to
+        <a href="ch01.html#hostossupport" title="1.4. Supported Host Operating Systems">Section 1.4, &#8220;Supported Host Operating Systems&#8221;</a>.
+      </p><p>
+        In addition, Windows Installer must be present on your system.
+        This should be the case for all supported Windows platforms.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="install-win-performing"></a>2.1.2. Performing the Installation</h3></div></div></div><p>
+        The Oracle VM VirtualBox installation can be started in either of the
+        following ways:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            By double-clicking on the executable file.
+          </p></li><li><p>
+            By entering the following command:
+          </p><pre class="screen">VirtualBox-&lt;version&gt;-&lt;revision&gt;-Win.exe -extract</pre><p>
+            This will extract the installer into a temporary directory,
+            along with the .MSI file. Run the following command to
+            perform the installation:
+          </p><pre class="screen">msiexec /i VirtualBox-&lt;version&gt;-&lt;revision&gt;-Win.msi</pre></li></ul></div><p>
+        Using either way displays the installation
+        <span class="bold"><strong>Welcome</strong></span> dialog and enables you
+        to choose where to install Oracle VM VirtualBox, and which components
+        to install. In addition to the Oracle VM VirtualBox application, the
+        following components are available:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            <span class="bold"><strong>USB support.</strong></span> This package
+            contains special drivers for your Windows host that
+            Oracle VM VirtualBox requires to fully support USB devices inside
+            your virtual machines.
+          </p></li><li><p>
+            <span class="bold"><strong>Networking.</strong></span> This package
+            contains extra networking drivers for your Windows host that
+            Oracle VM VirtualBox needs to support Bridged Networking. This
+            enables your VM's virtual network cards to be accessed from
+            other machines on your physical network.
+          </p></li><li><p>
+            <span class="bold"><strong>Python support.</strong></span> This
+            package contains Python scripting support for the
+            Oracle VM VirtualBox API, see <a href="ch11.html" title="Chapter 11. Oracle VM VirtualBox Programming Interfaces">Chapter 11, <i>Oracle VM VirtualBox Programming Interfaces</i></a>.
+            For this to work, an already working Windows Python
+            installation on the system is required.
+          </p><p>
+            See, for example:
+            <a href="http://www.python.org/download/windows/" target="_top">http://www.python.org/download/windows/</a>.
+          </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+              Python version at least 2.6 is required. Python 3 is also
+              supported.
+            </p></div></li></ul></div><p>
+        Depending on your Windows configuration, you may see warnings
+        about unsigned drivers, or similar. Click
+        <span class="bold"><strong>Continue</strong></span> for these warnings, as
+        otherwise Oracle VM VirtualBox might not function correctly after
+        installation.
+      </p><p>
+        The installer will create an Oracle VM VirtualBox group in the Windows
+        <span class="bold"><strong>Start</strong></span> menu, which enables you
+        to launch the application and access its documentation.
+      </p><p>
+        With standard settings, Oracle VM VirtualBox will be installed for all
+        users on the local system. If this is not wanted, you must
+        invoke the installer by first extracting as follows:
+      </p><pre class="screen">VirtualBox.exe -extract</pre><p>
+        Then, run either of the following commands on the extracted .MSI
+        file. This will install Oracle VM VirtualBox only for the current
+        user.
+      </p><pre class="screen">VirtualBox.exe -msiparams ALLUSERS=2</pre><pre class="screen">msiexec /i VirtualBox-&lt;version&gt;-Win.msi ALLUSERS=2</pre><p>
+        If you do not want to install all features of Oracle VM VirtualBox,
+        you can set the optional <code class="literal">ADDLOCAL</code> parameter
+        to explicitly name the features to be installed. The following
+        features are available:
+      </p><div class="variablelist"><dl><dt><span class="term">
+            VBoxApplication
+          </span></dt><dd><p>
+              Main binaries of Oracle VM VirtualBox.
+            </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+                This feature must not be absent, since it contains the
+                minimum set of files to have working Oracle VM VirtualBox
+                installation.
+              </p></div></dd><dt><span class="term">
+            VBoxUSB
+          </span></dt><dd><p>
+              USB support.
+            </p></dd><dt><span class="term">
+            VBoxNetwork
+          </span></dt><dd><p>
+              All networking support. This includes the VBoxNetworkFlt
+              and VBoxNetworkAdp features.
+            </p></dd><dt><span class="term">
+            VBoxNetworkFlt
+          </span></dt><dd><p>
+              Bridged networking support.
+            </p></dd><dt><span class="term">
+            VBoxNetworkAdp
+          </span></dt><dd><p>
+              Host-only networking support
+            </p></dd><dt><span class="term">
+            VBoxPython
+          </span></dt><dd><p>
+              Python support
+            </p></dd></dl></div><p>
+        For example, to only install USB support along with the main
+        binaries, run either of the following commands:
+      </p><pre class="screen">VirtualBox.exe -msiparams ADDLOCAL=VBoxApplication,VBoxUSB</pre><pre class="screen">msiexec /i VirtualBox-&lt;version&gt;-Win.msi ADDLOCAL=VBoxApplication,VBoxUSB</pre><p>
+        The user is able to choose between NDIS5 and NDIS6 host network
+        filter drivers during the installation. This is done using a
+        command line parameter, <code class="literal">NETWORKTYPE</code>. The
+        NDIS6 driver is the default for most supported Windows hosts.
+        For some legacy Windows versions, the installer will
+        automatically select the NDIS5 driver and this cannot be
+        changed.
+      </p><p>
+        You can force an install of the legacy NDIS5 host network filter
+        driver by specifying <code class="literal">NETWORKTYPE=NDIS5</code>. For
+        example, to install the NDIS5 driver on Windows 7 use either of
+        the following commands:
+      </p><pre class="screen">VirtualBox.exe -msiparams NETWORKTYPE=NDIS5</pre><pre class="screen">msiexec /i VirtualBox-&lt;version&gt;-Win;.msi NETWORKTYPE=NDIS5</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="install-win-uninstall"></a>2.1.3. Uninstallation</h3></div></div></div><p>
+        As Oracle VM VirtualBox uses the standard Microsoft Windows installer,
+        Oracle VM VirtualBox can be safely uninstalled at any time. Click the
+        program entry in the <span class="bold"><strong>Add/Remove
+        Programs</strong></span> list in the Windows Control Panel.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="install-win-unattended"></a>2.1.4. Unattended Installation</h3></div></div></div><p>
+        Unattended installations can be performed using the standard MSI
+        support.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="install-win-public-props"></a>2.1.5. Public Properties</h3></div></div></div><p>
+        Public properties can be specified with the MSI API, to control
+        additional behavior and features of the Windows host installer.
+        Use either of the following commands:
+      </p><pre class="screen">VirtualBox.exe -msiparams NAME=VALUE [...]</pre><pre class="screen">msiexec /i VirtualBox-&lt;version&gt;-Win.msi NAME=VALUE [...]</pre><p>
+        The following public properties are available.
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            VBOX_INSTALLDESKTOPSHORTCUT
+          </p><p>
+            Specifies whether or not an Oracle VM VirtualBox icon on the
+            desktop should be created.
+          </p><p>
+            Set to <code class="literal">1</code> to enable, <code class="literal">0</code>
+            to disable. Default is 1.
+          </p></li><li><p>
+            VBOX_INSTALLQUICKLAUNCHSHORTCUT
+          </p><p>
+            Specifies whether or not an Oracle VM VirtualBox icon in the Quick
+            Launch Bar should be created.
+          </p><p>
+            Set to <code class="literal">1</code> to enable, <code class="literal">0</code>
+            to disable. Default is 1.
+          </p></li><li><p>
+            VBOX_REGISTERFILEEXTENSIONS
+          </p><p>
+            Specifies whether or not the file extensions .vbox,
+            .vbox-extpack, .ovf, .ova, .vdi, .vmdk, .vhd and .vdd should
+            be associated with Oracle VM VirtualBox. Files of these types then
+            will be opened with Oracle VM VirtualBox.
+          </p><p>
+            Set to <code class="literal">1</code> to enable, <code class="literal">0</code>
+            to disable. Default is 1.
+          </p></li><li><p>
+            VBOX_START
+          </p><p>
+            Specifies whether to start Oracle VM VirtualBox right after
+            successful installation.
+          </p><p>
+            Set to <code class="literal">1</code> to enable, <code class="literal">0</code>
+            to disable. Default is 1.
+          </p></li></ul></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="installation-mac"></a>2.2. Installing on Mac OS X Hosts</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="install-mac-performing"></a>2.2.1. Performing the Installation</h3></div></div></div><p>
+        For Mac OS X hosts, Oracle VM VirtualBox ships in a
+        <code class="filename">dmg</code> disk image file. Perform the following
+        steps to install on a Mac OS X host:
+      </p><div class="orderedlist"><ol type="1"><li><p>
+            Double-click on the <code class="filename">dmg</code> file, to mount
+            the contents.
+          </p></li><li><p>
+            A window opens, prompting you to double-click on the
+            <code class="filename">VirtualBox.pkg</code> installer file displayed
+            in that window.
+          </p></li><li><p>
+            This starts the installer, which enables you to select where
+            to install Oracle VM VirtualBox.
+          </p></li><li><p>
+            An Oracle VM VirtualBox icon is added to the
+            <code class="filename">Applications</code> folder in the Finder.
+          </p></li></ol></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="install-mac-uninstall"></a>2.2.2. Uninstallation</h3></div></div></div><p>
+        To uninstall Oracle VM VirtualBox, open the disk image
+        <code class="filename">dmg</code> file and double-click on the uninstall
+        icon shown.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="install-mac-unattended"></a>2.2.3. Unattended Installation</h3></div></div></div><p>
+        To perform a non-interactive installation of Oracle VM VirtualBox you
+        can use the command line version of the installer application.
+      </p><p>
+        Mount the <code class="filename">dmg</code> disk image file, as described
+        in the installation procedure, or use the following command
+        line:
+      </p><pre class="screen">hdiutil attach /path/to/VirtualBox-xyz.dmg</pre><p>
+        Open a terminal session and run the following command:
+      </p><pre class="screen">sudo installer -pkg /Volumes/VirtualBox/VirtualBox.pkg -target /Volumes/Macintosh\ HD</pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="install-linux-host"></a>2.3. Installing on Linux Hosts</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="install-linux-prereq"></a>2.3.1. Prerequisites</h3></div></div></div><p>
+        For the various versions of Linux that are supported as host
+        operating systems, see <a href="ch01.html#hostossupport" title="1.4. Supported Host Operating Systems">Section 1.4, &#8220;Supported Host Operating Systems&#8221;</a>.
+      </p><p>
+        You may need to install the following packages on your Linux
+        system before starting the installation. Some systems will do
+        this for you automatically when you install Oracle VM VirtualBox.
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            Qt 5.3.2 or later. Qt 5.6.2 or later is recommended.
+          </p></li><li><p>
+            SDL 1.2.7 or later. This graphics library is typically
+            called <code class="filename">libsdl</code> or similar.
+          </p></li></ul></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+          These packages are only required if you want to run the
+          Oracle VM VirtualBox graphical user interfaces. In particular,
+          <span><strong class="command">VirtualBox</strong></span>, the graphical VirtualBox
+          Manager, requires both Qt and SDL. If you only want to run
+          <span><strong class="command">VBoxHeadless</strong></span>, neither Qt nor SDL are
+          required.
+        </p></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="externalkernelmodules"></a>2.3.2. The Oracle VM VirtualBox Kernel Modules</h3></div></div></div><p>
+        In order to run other operating systems in virtual machines
+        alongside your main operating system, Oracle VM VirtualBox needs to
+        integrate very tightly with your system. To do this it installs
+        a driver module called <span><strong class="command">vboxdrv</strong></span> into the
+        system kernel. The kernel is the part of the operating system
+        which controls your processor and physical hardware. Without
+        this kernel module, you can still use the VirtualBox Manager to
+        configure virtual machines, but they will not start.
+      </p><p>
+        Network drivers called <span><strong class="command">vboxnetflt</strong></span> and
+        <span><strong class="command">vboxnetadp</strong></span> are also installed. They enable
+        virtual machines to make more use of your computer's network
+        capabilities and are needed for any virtual machine networking
+        beyond the basic NAT mode.
+      </p><p>
+        Since distributing driver modules separately from the kernel is
+        not something which Linux supports well, the Oracle VM VirtualBox
+        install process creates the modules on the system where they
+        will be used. This means that you may need to install some
+        software packages from the distribution which are needed for the
+        build process. Required packages may include the following:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            GNU compiler (GCC)
+          </p></li><li><p>
+            GNU Make (make)
+          </p></li><li><p>
+            Kernel header files
+          </p></li></ul></div><p>
+        Also ensure that all system updates have been installed and that
+        your system is running the most up-to-date kernel for the
+        distribution.
+      </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+          The running kernel and the kernel header files must be updated
+          to matching versions.
+        </p></div><p>
+        The following list includes some details of the required files
+        for some common distributions. Start by finding the version name
+        of your kernel, using the command <span><strong class="command">uname -r</strong></span> in
+        a terminal. The list assumes that you have not changed too much
+        from the original installation, in particular that you have not
+        installed a different kernel type.
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            With Debian and Ubuntu-based distributions, you must install
+            the correct version of the
+            <code class="filename">linux-headers</code>, usually whichever of
+            <code class="filename">linux-headers-generic</code>,
+            <code class="filename">linux-headers-amd64</code>,
+            <code class="filename">linux-headers-i686</code> or
+            <code class="filename">linux-headers-i686-pae</code> best matches the
+            kernel version name. Also, the
+            <code class="filename">linux-kbuild</code> package if it exists.
+            Basic Ubuntu releases should have the correct packages
+            installed by default.
+          </p></li><li><p>
+            On Fedora, Red Hat, Oracle Linux and many other RPM-based
+            systems, the kernel version sometimes has a code of letters
+            or a word close to the end of the version name. For example
+            "uek" for the Oracle Unbreakable Enterprise Kernel or
+            "default" or "desktop" for the standard kernels. In this
+            case, the package name is
+            <code class="filename">kernel-uek-devel</code> or equivalent. If
+            there is no such code, it is usually
+            <code class="filename">kernel-devel</code>.
+          </p></li><li><p>
+            On some SUSE and openSUSE Linux versions, you may need to
+            install the <code class="filename">kernel-source</code> and
+            <code class="filename">kernel-syms</code> packages.
+          </p></li></ul></div><p>
+        If you suspect that something has gone wrong with module
+        installation, check that your system is set up as described
+        above and try running the following command, as root:
+      </p><pre class="screen">rcvboxdrv setup</pre><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="kernel-modules-efi-secure-boot"></a>2.3.2.1. Kernel Modules and UEFI Secure Boot</h4></div></div></div><p>
+          If you are running on a system using UEFI (Unified Extensible
+          Firmware Interface) Secure Boot, you may need to sign the
+          following kernel modules before you can load them:
+        </p><div class="itemizedlist"><ul type="disc"><li><p>
+              <span><strong class="command">vboxdrv</strong></span>
+            </p></li><li><p>
+              <span><strong class="command">vboxnetadp</strong></span>
+            </p></li><li><p>
+              <span><strong class="command">vboxnetflt</strong></span>
+            </p></li><li><p>
+              <span><strong class="command">vboxpci</strong></span>
+            </p></li></ul></div><p>
+          See your system documentation for details of the kernel module
+          signing process.
+        </p></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="install-linux-performing"></a>2.3.3. Performing the Installation</h3></div></div></div><p>
+        Oracle VM VirtualBox is available in a number of package formats
+        native to various common Linux distributions. See
+        <a href="ch01.html#hostossupport" title="1.4. Supported Host Operating Systems">Section 1.4, &#8220;Supported Host Operating Systems&#8221;</a>. In addition, there is an
+        alternative generic installer (.run) which you can use on
+        supported Linux distributions.
+      </p><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="install-linux-debian-ubuntu"></a>2.3.3.1. Installing Oracle VM VirtualBox from a Debian or Ubuntu Package</h4></div></div></div><p>
+          Download the appropriate package for your distribution. The
+          following example assumes that you are installing to a 64-bit
+          Ubuntu Xenial system. Use <span><strong class="command">dpkg</strong></span> to install
+          the Debian package,as follows:
+        </p><pre class="screen">sudo dpkg -i virtualbox-<em class="replaceable"><code>version-number</code></em>_Ubuntu_xenial_amd64.deb</pre><p>
+          The installer will also try to build kernel modules suitable
+          for the current running kernel. If the build process is not
+          successful you will be shown a warning and the package will be
+          left unconfigured. Look at
+          <code class="filename">/var/log/vbox-install.log</code> to find out why
+          the compilation failed. You may have to install the
+          appropriate Linux kernel headers, see
+          <a href="ch02.html#externalkernelmodules" title="2.3.2. The Oracle VM VirtualBox Kernel Modules">Section 2.3.2, &#8220;The Oracle VM VirtualBox Kernel Modules&#8221;</a>. After correcting any
+          problems, run the following command:
+        </p><pre class="screen">sudo rcvboxdrv setup</pre><p>
+          This will start a second attempt to build the module.
+        </p><p>
+          If a suitable kernel module was found in the package or the
+          module was successfully built, the installation script will
+          attempt to load that module. If this fails, please see
+          <a href="ch12.html#ts_linux-kernelmodule-fails-to-load" title="12.7.1. Linux Kernel Module Refuses to Load">Section 12.7.1, &#8220;Linux Kernel Module Refuses to Load&#8221;</a> for
+          further information.
+        </p><p>
+          Once Oracle VM VirtualBox has been successfully installed and
+          configured, you can start it by clicking
+          <span class="bold"><strong>VirtualBox</strong></span> in your
+          <span class="bold"><strong>Start</strong></span> menu or from the
+          command line. See <a href="ch02.html#startingvboxonlinux" title="2.3.5. Starting Oracle VM VirtualBox on Linux">Section 2.3.5, &#8220;Starting Oracle VM VirtualBox on Linux&#8221;</a>.
+        </p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="install-linux-alt-installer"></a>2.3.3.2. Using the Alternative Generic Installer (VirtualBox.run)</h4></div></div></div><p>
+          The alternative generic installer performs the following
+          steps:
+        </p><div class="itemizedlist"><ul type="disc"><li><p>
+              Unpacks the application files to the target directory
+              <code class="filename">/opt/VirtualBox/</code>, which cannot be
+              changed.
+            </p></li><li><p>
+              Builds and installs the Oracle VM VirtualBox kernel modules:
+              <span><strong class="command">vboxdrv</strong></span>, <span><strong class="command">vboxnetflt</strong></span>,
+              and <span><strong class="command">vboxnetadp</strong></span>.
+            </p></li><li><p>
+              Creates <code class="filename">/sbin/rcvboxdrv</code>, an init
+              script to start the Oracle VM VirtualBox kernel module.
+            </p></li><li><p>
+              Creates a new system group called
+              <code class="literal">vboxusers</code>.
+            </p></li><li><p>
+              Creates symbolic links in <code class="filename">/usr/bin</code> to
+              a shell script <code class="filename">/opt/VirtualBox/VBox</code>
+              which does some sanity checks and dispatches to the actual
+              executables: <span><strong class="command">VirtualBox</strong></span>,
+              <span><strong class="command">VBoxVRDP</strong></span>,
+              <span><strong class="command">VBoxHeadless</strong></span> and
+              <span><strong class="command">VBoxManage</strong></span>.
+            </p></li><li><p>
+              Creates
+              <code class="filename">/etc/udev/rules.d/60-vboxdrv.rules</code>, a
+              description file for udev, if that is present, which makes
+              the USB devices accessible to all users in the
+              <code class="literal">vboxusers</code> group.
+            </p></li><li><p>
+              Writes the installation directory to
+              <code class="filename">/etc/vbox/vbox.cfg</code>.
+            </p></li></ul></div><p>
+          The installer must be executed as root with either
+          <code class="literal">install</code> or <code class="literal">uninstall</code> as
+          the first parameter. For example:
+        </p><pre class="screen">sudo ./VirtualBox.run install</pre><p>
+          Or if you do not have the <span><strong class="command">sudo</strong></span> command
+          available, run the following as root instead:
+        </p><pre class="screen">./VirtualBox.run install</pre><p>
+          Add every user who needs to access USB devices from a
+          VirtualBox guests to the group <code class="literal">vboxusers</code>.
+          Either use the OS user management tools or run the following
+          command as root:
+        </p><pre class="screen">sudo usermod -a -G vboxusers username</pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+            The <span><strong class="command">usermod</strong></span> command of some older Linux
+            distributions does not support the <code class="option">-a</code>
+            option, which adds the user to the given group without
+            affecting membership of other groups. In this case, find out
+            the current group memberships with the
+            <span><strong class="command">groups</strong></span> command and add all these groups
+            in a comma-separated list to the command line after the
+            <code class="option">-G</code> option. For example: <span><strong class="command">usermod -G
+            <em class="replaceable"><code>group1</code></em>,<em class="replaceable"><code>group2</code></em>,vboxusers
+            <em class="replaceable"><code>username</code></em></strong></span>.
+          </p></div></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="install-linux-manual"></a>2.3.3.3. Performing a Manual Installation</h4></div></div></div><p>
+          If you cannot use the shell script installer described in
+          <a href="ch02.html#install-linux-alt-installer" title="2.3.3.2. Using the Alternative Generic Installer (VirtualBox.run)">Section 2.3.3.2, &#8220;Using the Alternative Generic Installer (VirtualBox.run)&#8221;</a>, you can perform
+          a manual installation. Run the installer as follows:
+        </p><pre class="screen">./VirtualBox.run --keep --noexec</pre><p>
+          This will unpack all the files needed for installation in the
+          directory <code class="literal">install</code> under the current
+          directory. The Oracle VM VirtualBox application files are contained
+          in <code class="filename">VirtualBox.tar.bz2</code> which you can
+          unpack to any directory on your system. For example:
+        </p><pre class="screen">sudo mkdir /opt/VirtualBox
+sudo tar jxf ./install/VirtualBox.tar.bz2 -C /opt/VirtualBox</pre><p>
+          To run the same example as root, use the following commands:
+        </p><pre class="screen">mkdir /opt/VirtualBox
+tar jxf ./install/VirtualBox.tar.bz2 -C /opt/VirtualBox</pre><p>
+          The sources for Oracle VM VirtualBox's kernel module are provided in
+          the <code class="filename">src</code> directory. To build the module,
+          change to the directory and use the following command:
+        </p><pre class="screen">make</pre><p>
+          If everything builds correctly, run the following command to
+          install the module to the appropriate module directory:
+        </p><pre class="screen">sudo make install</pre><p>
+          In case you do not have sudo, switch the user account to root
+          and run the following command:
+        </p><pre class="screen">make install</pre><p>
+          The Oracle VM VirtualBox kernel module needs a device node to
+          operate. The above <span><strong class="command">make</strong></span> command will tell
+          you how to create the device node, depending on your Linux
+          system. The procedure is slightly different for a classical
+          Linux setup with a <code class="filename">/dev</code> directory, a
+          system with the now deprecated <span><strong class="command">devfs</strong></span> and a
+          modern Linux system with <span><strong class="command">udev</strong></span>.
+        </p><p>
+          On certain Linux distributions, you might experience
+          difficulties building the module. You will have to analyze the
+          error messages from the build system to diagnose the cause of
+          the problems. In general, make sure that the correct Linux
+          kernel sources are used for the build process.
+        </p><p>
+          Note that the <code class="filename">/dev/vboxdrv</code> kernel module
+          device node must be owned by root:root and must be
+          read/writable only for the user.
+        </p><p>
+          Next, you install the system initialization script for the
+          kernel module and activate the initialization script using the
+          right method for your distribution, as follows:
+        </p><pre class="screen">cp /opt/VirtualBox/vboxdrv.sh /sbin/rcvboxdrv</pre><p>
+          This example assumes you installed Oracle VM VirtualBox to the
+          <code class="filename">/opt/VirtualBox</code> directory.
+        </p><p>
+          Create a configuration file for Oracle VM VirtualBox, as follows:
+        </p><pre class="screen">mkdir /etc/vbox
+echo INSTALL_DIR=/opt/VirtualBox &gt; /etc/vbox/vbox.cfg</pre><p>
+          Create the following symbolic links:
+        </p><pre class="screen">ln -sf /opt/VirtualBox/VBox.sh /usr/bin/VirtualBox
+ln -sf /opt/VirtualBox/VBox.sh /usr/bin/VBoxManage
+ln -sf /opt/VirtualBox/VBox.sh /usr/bin/VBoxHeadless</pre></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="install-linux-update-uninstall"></a>2.3.3.4. Updating and Uninstalling Oracle VM VirtualBox</h4></div></div></div><p>
+          Before updating or uninstalling Oracle VM VirtualBox, you must
+          terminate any virtual machines which are currently running and
+          exit the Oracle VM VirtualBox or VBoxSVC applications. To update
+          Oracle VM VirtualBox, simply run the installer of the updated
+          version. To uninstall Oracle VM VirtualBox, run the installer as
+          follows:
+        </p><pre class="screen">sudo ./VirtualBox.run uninstall</pre><p>
+          As root, you can use the following command:
+        </p><pre class="screen">./VirtualBox.run uninstall</pre><p>
+          You can uninstall the .run package as follows:
+        </p><pre class="screen">/opt/VirtualBox/uninstall.sh</pre><p>
+          To manually uninstall Oracle VM VirtualBox, perform the manual
+          installation steps in reverse order.
+        </p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="install-linux-debian-automatic"></a>2.3.3.5. Automatic Installation of Debian Packages</h4></div></div></div><p>
+          The Debian packages will request some user feedback when
+          installed for the first time. The debconf system is used to
+          perform this task. To prevent any user interaction during
+          installation, default values can be defined. A file
+          <code class="literal">vboxconf</code> can contain the following debconf
+          settings:
+        </p><pre class="screen">virtualbox virtualbox/module-compilation-allowed boolean true
+virtualbox virtualbox/delete-old-modules boolean true</pre><p>
+          The first line enables compilation of the vboxdrv kernel
+          module if no module was found for the current kernel. The
+          second line enables the package to delete any old vboxdrv
+          kernel modules compiled by previous installations.
+        </p><p>
+          These default settings can be applied prior to the
+          installation of the Oracle VM VirtualBox Debian package, as follows:
+        </p><pre class="screen">debconf-set-selections vboxconf</pre><p>
+          In addition there are some common configuration options that
+          can be set prior to the installation. See
+          <a href="ch02.html#linux_install_opts" title="2.3.3.7. Automatic Installation Options">Section 2.3.3.7, &#8220;Automatic Installation Options&#8221;</a>.
+        </p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="install-linux-rpm-automatic"></a>2.3.3.6. Automatic Installation of RPM Packages</h4></div></div></div><p>
+          The RPM format does not provide a configuration system
+          comparable to the debconf system. See
+          <a href="ch02.html#linux_install_opts" title="2.3.3.7. Automatic Installation Options">Section 2.3.3.7, &#8220;Automatic Installation Options&#8221;</a> for how to set some
+          common installation options provided by Oracle VM VirtualBox.
+        </p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="linux_install_opts"></a>2.3.3.7. Automatic Installation Options</h4></div></div></div><p>
+          To configure the installation process for .deb and .rpm
+          packages, you can create a response file named
+          <code class="filename">/etc/default/virtualbox</code>. The automatic
+          generation of the udev rule can be prevented with the
+          following setting:
+        </p><pre class="screen">INSTALL_NO_UDEV=1</pre><p>
+          The creation of the group vboxusers can be prevented as
+          follows:
+        </p><pre class="screen">INSTALL_NO_GROUP=1</pre><p>
+          If the following line is specified, the package installer will
+          not try to build the <span><strong class="command">vboxdrv</strong></span> kernel module
+          if no module fitting the current kernel was found.
+        </p><pre class="screen">INSTALL_NO_VBOXDRV=1</pre></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="install-linux-vboxusers"></a>2.3.4. The vboxusers Group</h3></div></div></div><p>
+        The Linux installers create the system user group
+        <code class="literal">vboxusers</code> during installation. Any system
+        user who is going to use USB devices from Oracle VM VirtualBox guests
+        must be a member of that group. A user can be made a member of
+        the group <code class="literal">vboxusers</code> either by using the
+        desktop user and group tools, or with the following command:
+      </p><pre class="screen">sudo usermod -a -G vboxusers username</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="startingvboxonlinux"></a>2.3.5. Starting Oracle VM VirtualBox on Linux</h3></div></div></div><p>
+        The easiest way to start an Oracle VM VirtualBox program is by running
+        the program of your choice (<span><strong class="command">VirtualBox</strong></span>,
+        <span><strong class="command">VBoxManage</strong></span>, or
+        <span><strong class="command">VBoxHeadless</strong></span>) from a terminal. These are
+        symbolic links to <span><strong class="command">VBox.sh</strong></span> that start the
+        required program for you.
+      </p><p>
+        The following detailed instructions should only be of interest
+        if you wish to execute Oracle VM VirtualBox without installing it
+        first. You should start by compiling the
+        <span><strong class="command">vboxdrv</strong></span> kernel module and inserting it into
+        the Linux kernel. Oracle VM VirtualBox consists of a service daemon,
+        <span><strong class="command">VBoxSVC</strong></span>, and several application programs.
+        The daemon is automatically started if necessary. All
+        Oracle VM VirtualBox applications will communicate with the daemon
+        through UNIX local domain sockets. There can be multiple daemon
+        instances under different user accounts and applications can
+        only communicate with the daemon running under the user account
+        as the application. The local domain socket resides in a
+        subdirectory of your system's directory for temporary files
+        called <code class="filename">.vbox-&lt;username&gt;-ipc</code>. In case
+        of communication problems or server startup problems, you may
+        try to remove this directory.
+      </p><p>
+        All Oracle VM VirtualBox applications (<span><strong class="command">VirtualBox</strong></span>,
+        <span><strong class="command">VBoxManage</strong></span>, and
+        <span><strong class="command">VBoxHeadless</strong></span>) require the Oracle VM VirtualBox
+        directory to be in the library path, as follows:
+      </p><pre class="screen">LD_LIBRARY_PATH=. ./VBoxManage showvminfo "Windows XP"</pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="install-solaris-host"></a>2.4. Installing on Oracle Solaris Hosts</h2></div></div></div><p>
+      For the specific versions of Oracle Solaris that are supported as
+      host operating systems, see <a href="ch01.html#hostossupport" title="1.4. Supported Host Operating Systems">Section 1.4, &#8220;Supported Host Operating Systems&#8221;</a>.
+    </p><p>
+      If you have a previously installed instance of Oracle VM VirtualBox on
+      your Oracle Solaris host, please uninstall it first before
+      installing a new instance. See
+      <a href="ch02.html#uninstall-solaris-host" title="2.4.4. Uninstallation">Section 2.4.4, &#8220;Uninstallation&#8221;</a> for uninstall
+      instructions.
+    </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="install-solaris-performing"></a>2.4.1. Performing the Installation</h3></div></div></div><p>
+        Oracle VM VirtualBox is available as a standard Oracle Solaris
+        package. Download the Oracle VM VirtualBox SunOS package, which
+        includes the 64-bit version of Oracle VM VirtualBox. <span class="emphasis"><em>The
+        installation must be performed as root and from the global
+        zone</em></span>. This is because the Oracle VM VirtualBox installer
+        loads kernel drivers, which cannot be done from non-global
+        zones. To verify which zone you are currently in, execute the
+        <span><strong class="command">zonename</strong></span> command.
+      </p><p>
+        To start installation, run the following commands:
+      </p><pre class="screen">gunzip -cd VirtualBox-<em class="replaceable"><code>version-number</code></em>-SunOS.tar.gz | tar xvf -</pre><p>
+        The Oracle VM VirtualBox kernel package is integrated into the main
+        package. Install the Oracle VM VirtualBox package as follows:
+      </p><pre class="screen">pkgadd -d VirtualBox-<em class="replaceable"><code>version-number</code></em>-SunOS.pkg</pre><p>
+        The installer will then prompt you to enter the package you wish
+        to install. Choose <span class="bold"><strong>1</strong></span> or
+        <span class="bold"><strong>all</strong></span> and proceed. Next the
+        installer will ask you if you want to allow the postinstall
+        script to be executed. Choose <span class="bold"><strong>y</strong></span>
+        and proceed, as it is essential to execute this script which
+        installs the Oracle VM VirtualBox kernel module. Following this
+        confirmation the installer will install Oracle VM VirtualBox and
+        execute the postinstall setup script.
+      </p><p>
+        Once the postinstall script has been executed your installation
+        is now complete. You may now safely delete the uncompressed
+        package and <code class="filename">autoresponse</code> files from your
+        system. Oracle VM VirtualBox is installed in
+        <code class="filename">/opt/VirtualBox</code>.
+      </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+          If you need to use Oracle VM VirtualBox from non-global zones, see
+          <a href="ch02.html#solaris-zones" title="2.4.6. Configuring a Zone for Running Oracle VM VirtualBox">Section 2.4.6, &#8220;Configuring a Zone for Running Oracle VM VirtualBox&#8221;</a>.
+        </p></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="install-solaris-vboxuser"></a>2.4.2. The vboxuser Group</h3></div></div></div><p>
+        The installer creates the system user group
+        <code class="literal">vboxuser</code> during installation for Oracle
+        Solaris hosts that support the USB features required by
+        Oracle VM VirtualBox. Any system user who is going to use USB devices
+        from Oracle VM VirtualBox guests must be a member of this group. A
+        user can be made a member of this group either by using the
+        desktop user and group tools or by running the following command
+        as root:
+      </p><pre class="screen">usermod -G vboxuser username</pre><p>
+        Note that adding an active user to the
+        <code class="literal">vboxuser</code> group will require the user to log
+        out and then log in again. This should be done manually after
+        successful installation of the package.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="install-solaris-starting"></a>2.4.3. Starting Oracle VM VirtualBox on Oracle Solaris</h3></div></div></div><p>
+        The easiest way to start an Oracle VM VirtualBox program is by running
+        the program of your choice (<span><strong class="command">VirtualBox</strong></span>,
+        <span><strong class="command">VBoxManage</strong></span>, or
+        <span><strong class="command">VBoxHeadless</strong></span>) from a terminal. These are
+        symbolic links to <span><strong class="command">VBox.sh</strong></span> that start the
+        required program for you.
+      </p><p>
+        Alternatively, you can directly invoke the required programs
+        from <code class="filename">/opt/VirtualBox</code>. Using the links
+        provided is easier as you do not have to enter the full path.
+      </p><p>
+        You can configure some elements of the
+        <span><strong class="command">VirtualBox</strong></span> Qt GUI, such as fonts and colours,
+        by running <span><strong class="command">VBoxQtconfig</strong></span> from the terminal.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="uninstall-solaris-host"></a>2.4.4. Uninstallation</h3></div></div></div><p>
+        Uninstallation of Oracle VM VirtualBox on Oracle Solaris requires root
+        permissions. To perform the uninstallation, start a root
+        terminal session and run the following command:
+      </p><pre class="screen">pkgrm SUNWvbox</pre><p>
+        After confirmation, this will remove Oracle VM VirtualBox from your
+        system.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="install-solaris-unattended"></a>2.4.5. Unattended Installation</h3></div></div></div><p>
+        To perform a non-interactive installation of Oracle VM VirtualBox
+        there is a response file named
+        <code class="filename">autoresponse</code>. The installer uses this for
+        responses to inputs, rather than prompting the user.
+      </p><p>
+        Extract the tar.gz package as described in
+        <a href="ch02.html#install-solaris-performing" title="2.4.1. Performing the Installation">Section 2.4.1, &#8220;Performing the Installation&#8221;</a>. Then open a root
+        terminal session and run the following command:
+      </p><pre class="screen">pkgadd -d VirtualBox-<em class="replaceable"><code>version-number</code></em>-SunOS-x86 -n -a autoresponse SUNWvbox</pre><p>
+        To perform a non-interactive uninstallation, open a root
+        terminal session and run the following command:
+      </p><pre class="screen">pkgrm -n -a /opt/VirtualBox/autoresponse SUNWvbox</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="solaris-zones"></a>2.4.6. Configuring a Zone for Running Oracle VM VirtualBox</h3></div></div></div><p>
+        Assuming that Oracle VM VirtualBox has already been installed into
+        your zone, you need to give the zone access to Oracle VM VirtualBox's
+        device node. This is done by performing the following steps.
+        Start a root terminal and run the following command:
+      </p><pre class="screen">zonecfg -z <em class="replaceable"><code>vboxzone</code></em></pre><p>
+        Replace <em class="replaceable"><code>vboxzone</code></em> with the name of the
+        zone where you intend to run Oracle VM VirtualBox.
+      </p><p>
+        Use <span><strong class="command">zonecfg</strong></span> to add the
+        <code class="literal">device</code> resource and <code class="literal">match</code>
+        properties to the zone, as follows:
+      </p><pre class="screen">zonecfg:vboxzone&gt;add device
+zonecfg:vboxzone:device&gt;set match=/dev/vboxdrv
+zonecfg:vboxzone:device&gt;end
+zonecfg:vboxzone&gt;add device
+zonecfg:vboxzone:device&gt;set match=/dev/vboxdrvu
+zonecfg:vboxzone:device&gt;end
+zonecfg:vboxzone&gt;exit</pre><p>
+        On Oracle Solaris 11 or later, you may also add a device for
+        <code class="filename">/dev/vboxusbmon</code>, similar to that shown
+        above.
+      </p><p>
+        If you are not using sparse root zones, you will need to
+        loopback mount <code class="filename">/opt/VirtualBox</code> from the
+        global zone into the non-global zone at the same path. This is
+        specified below using the <code class="literal">dir</code> attribute and
+        the <code class="literal">special</code> attribute. For example:
+      </p><pre class="screen">zonecfg:vboxzone&gt;add fs
+zonecfg:vboxzone:device&gt;set dir=/opt/VirtualBox
+zonecfg:vboxzone:device&gt;set special=/opt/VirtualBox
+zonecfg:vboxzone:device&gt;set type=lofs
+zonecfg:vboxzone:device&gt;end
+zonecfg:vboxzone&gt;exit</pre><p>
+        Reboot the zone using <span><strong class="command">zoneadm</strong></span> and you should
+        be able to run Oracle VM VirtualBox from within the configured zone.
+      </p></div></div></div></body></html>

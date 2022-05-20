@@ -1,0 +1,471 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter 13. Security Guide</title><meta name="generator" content="DocBook XSL Stylesheets V1.69.1"><link rel="start" href="index.html" title="Oracle® VM VirtualBox®"><link rel="up" href="index.html" title="Oracle® VM VirtualBox®"><link rel="prev" href="ch12.html" title="Chapter 12. Troubleshooting"><link rel="next" href="ch14.html" title="Chapter 14. Known Limitations"><style type="text/css"><!--
+   body
+   {
+     font-family:  Verdana, Sans-serif, Arial, 'Trebuchet MS', 'Times New Roman';
+     font-size: small;
+   }
+   h2.title
+   {
+     font-family: Verdana, Sans-serif, Arial, 'Trebuchet MS', 'Times New Roman';
+     margin: 5px 0 0;
+     padding: 1px 5px 1px;
+     border: 1px solid #6b89d4;
+     -moz-border-radius: 0.3em;
+     background: #e6edff;
+   }
+   .titlepage
+   {
+     text-align: center;
+   }
+   .refsynopsisdiv, .refsect1, .refsect2, .refsect3
+   {
+     text-align: left;
+   }
+   .warning
+   {
+     padding: 5px;
+     border: 1px solid #ff0011;
+     -moz-border-radius: 0.3em;
+     background: #ffbbbb;
+   }
+   .warning .title { margin: 0px 0px 5px 0px; }
+   .warning p { margin: 1px; }
+   .note
+   {
+     padding: 1px 5px 1px;
+     border: 1px solid #84c43b;
+     -moz-border-radius: 0.3em;
+     background: #d7e9a7;
+   }
+   .note .title { margin: 0px 0px 5px 0px; }
+   .note p { margin: 1px; }
+   .cmdsynopsis
+   {
+     font-family: monospace;
+   }
+   .refsynopsisdiv        > .cmdsynopsis p, .refsect1        > .cmdsynopsis p,
+   .refsynopsisdiv .sect2 > .cmdsynopsis p, .refsect1 .sect2 > .cmdsynopsis p
+   {
+     margin-top: 0px;
+     margin-bottom: 0px;
+   }
+   .cmdsynopsis p
+   {
+     padding-left: 3.4em;
+     text-indent: -2.2em;
+   }
+   p.nextcommand
+   {
+     margin-top:    0px;
+     margin-bottom: 0px;
+   }
+   p.lastcommand
+   {
+     margin-top:    0px;
+   }
+   .refentry * h3
+   {
+     font-size: large;
+   }
+   .refentry * h4
+   {
+     font-size: larger;
+   }
+   .refentry * h5
+   {
+     font-size: larger;
+   }
+
+  --></style></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="Security"></a>Chapter 13. Security Guide</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="ch13.html#security-general">13.1. General Security Principles</a></span></dt><dt><span class="sect1"><a href="ch13.html#security-secure-install">13.2. Secure Installation and Configuration</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch13.html#security-secure-install-overview">13.2.1. Installation Overview</a></span></dt><dt><span class="sect2"><a href="ch13.html#security-secure-install-postinstall">13.2.2. Post Installation Configuration</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch13.html#security-features">13.3. Security Features</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch13.html#security-model">13.3.1. The Security Model</a></span></dt><dt><span class="sect2"><a href="ch13.html#secure-config-vms">13.3.2. Secure Configuration of Virtual Machines</a></span></dt><dt><span class="sect2"><a href="ch13.html#auth-config-using">13.3.3. Configuring and Using Authentication</a></span></dt><dt><span class="sect2"><a href="ch13.html#pot-insecure">13.3.4. Potentially Insecure Operations</a></span></dt><dt><span class="sect2"><a href="ch13.html#security-encryption">13.3.5. Encryption</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch13.html#security-recommendations">13.4. Security Recommendations</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch13.html#sec-rec-cve-2018-3646">13.4.1. CVE-2018-3646</a></span></dt><dt><span class="sect2"><a href="ch13.html#sec-rec-cve-2018-12126-et-al">13.4.2. CVE-2018-12126, CVE-2018-12127, CVE-2018-12130, CVE-2019-11091</a></span></dt></dl></dd></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="security-general"></a>13.1. General Security Principles</h2></div></div></div><p>
+      The following principles are fundamental to using any application
+      securely.
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          <span class="bold"><strong>Keep software up to date</strong></span>. One
+          of the principles of good security practise is to keep all
+          software versions and patches up to date. Activate the
+          Oracle VM VirtualBox update notification to get notified when a new
+          Oracle VM VirtualBox release is available. When updating
+          Oracle VM VirtualBox, do not forget to update the Guest Additions.
+          Keep the host operating system as well as the guest operating
+          system up to date.
+        </p></li><li><p>
+          <span class="bold"><strong>Restrict network access to critical
+          services.</strong></span> Use proper means, for instance a
+          firewall, to protect your computer and your guests from
+          accesses from the outside. Choosing the proper networking mode
+          for VMs helps to separate host networking from the guest and
+          vice versa.
+        </p></li><li><p>
+          <span class="bold"><strong>Follow the principle of least
+          privilege.</strong></span> The principle of least privilege states
+          that users should be given the least amount of privilege
+          necessary to perform their jobs. Always execute Oracle VM VirtualBox
+          as a regular user. We strongly discourage anyone from
+          executing Oracle VM VirtualBox with system privileges.
+        </p><p>
+          Choose restrictive permissions when creating configuration
+          files, for instance when creating /etc/default/virtualbox, see
+          <a href="ch02.html#linux_install_opts" title="2.3.3.7. Automatic Installation Options">Section 2.3.3.7, &#8220;Automatic Installation Options&#8221;</a>. Mode 0600 is preferred.
+        </p></li><li><p>
+          <span class="bold"><strong>Monitor system activity.</strong></span>
+          System security builds on three pillars: good security
+          protocols, proper system configuration and system monitoring.
+          Auditing and reviewing audit records address the third
+          requirement. Each component within a system has some degree of
+          monitoring capability. Follow audit advice in this document
+          and regularly monitor audit records.
+        </p></li><li><p>
+          <span class="bold"><strong>Keep up to date on latest security
+          information.</strong></span> Oracle continually improves its
+          software and documentation. Check this note yearly for
+          revisions.
+        </p></li></ul></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="security-secure-install"></a>13.2. Secure Installation and Configuration</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="security-secure-install-overview"></a>13.2.1. Installation Overview</h3></div></div></div><p>
+        The Oracle VM VirtualBox base package should be downloaded only from a
+        trusted source, for instance the official website
+        <a href="http://www.virtualbox.org" target="_top">http://www.virtualbox.org</a>. The integrity of the
+        package should be verified with the provided SHA256 checksum
+        which can be found on the official website.
+      </p><p>
+        General Oracle VM VirtualBox installation instructions for the
+        supported hosts can be found in <a href="ch02.html" title="Chapter 2. Installation Details">Chapter 2, <i>Installation Details</i></a>.
+      </p><p>
+        On Windows hosts, the installer can be used to disable USB
+        support, support for bridged networking, support for host-only
+        networking and the Python language binding. See
+        <a href="ch02.html#installation_windows" title="2.1. Installing on Windows Hosts">Section 2.1, &#8220;Installing on Windows Hosts&#8221;</a>. All these features are
+        enabled by default but disabling some of them could be
+        appropriate if the corresponding functionality is not required
+        by any virtual machine. The Python language bindings are only
+        required if the Oracle VM VirtualBox API is to be used by external
+        Python applications. In particular USB support and support for
+        the two networking modes require the installation of Windows
+        kernel drivers on the host. Therefore disabling those selected
+        features can not only be used to restrict the user to certain
+        functionality but also to minimize the surface provided to a
+        potential attacker.
+      </p><p>
+        The general case is to install the complete Oracle VM VirtualBox
+        package. The installation must be done with system privileges.
+        All Oracle VM VirtualBox binaries should be executed as a regular user
+        and never as a privileged user.
+      </p><p>
+        The Oracle VM VirtualBox Extension Pack provides additional features
+        and must be downloaded and installed separately, see
+        <a href="ch01.html#intro-installing" title="1.5. Installing Oracle VM VirtualBox and Extension Packs">Section 1.5, &#8220;Installing Oracle VM VirtualBox and Extension Packs&#8221;</a>. As for the base package, the
+        SHA256 checksum of the extension pack should be verified. As the
+        installation requires system privileges, Oracle VM VirtualBox will ask
+        for the system password during the installation of the extension
+        pack.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="security-secure-install-postinstall"></a>13.2.2. Post Installation Configuration</h3></div></div></div><p>
+        Normally there is no post installation configuration of
+        Oracle VM VirtualBox components required. However, on Oracle Solaris
+        and Linux hosts it is necessary to configure the proper
+        permissions for users executing VMs and who should be able to
+        access certain host resources. For instance, Linux users must be
+        member of the <span class="emphasis"><em>vboxusers</em></span> group to be able to
+        pass USB devices to a guest. If a serial host interface should
+        be accessed from a VM, the proper permissions must be granted to
+        the user to be able to access that device. The same applies to
+        other resources like raw partitions, DVD/CD drives, and sound
+        devices.
+      </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="security-features"></a>13.3. Security Features</h2></div></div></div><p>
+      This section outlines the specific security mechanisms offered by
+      Oracle VM VirtualBox.
+    </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="security-model"></a>13.3.1. The Security Model</h3></div></div></div><p>
+        One property of virtual machine monitors (VMMs) like
+        Oracle VM VirtualBox is to encapsulate a guest by executing it in a
+        protected environment, a virtual machine, running as a user
+        process on the host operating system. The guest cannot
+        communicate directly with the hardware or other computers but
+        only through the VMM. The VMM provides emulated physical
+        resources and devices to the guest which are accessed by the
+        guest operating system to perform the required tasks. The VM
+        settings control the resources provided to the guest, for
+        example the amount of guest memory or the number of guest
+        processors and the enabled features for that guest. For example
+        remote control, certain screen settings and others. See
+        <a href="ch03.html#generalsettings" title="3.4. General Settings">Section 3.4, &#8220;General Settings&#8221;</a>.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="secure-config-vms"></a>13.3.2. Secure Configuration of Virtual Machines</h3></div></div></div><p>
+        Several aspects of a virtual machine configuration are subject
+        to security considerations.
+      </p><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="security-networking"></a>13.3.2.1. Networking</h4></div></div></div><p>
+          The default networking mode for VMs is NAT which means that
+          the VM acts like a computer behind a router, see
+          <a href="ch06.html#network_nat" title="6.3. Network Address Translation (NAT)">Section 6.3, &#8220;Network Address Translation (NAT)&#8221;</a>. The guest is part of a private
+          subnet belonging to this VM and the guest IP is not visible
+          from the outside. This networking mode works without any
+          additional setup and is sufficient for many purposes. Keep in
+          mind that NAT allows access to the host operating system's
+          loopback interface.
+        </p><p>
+          If bridged networking is used, the VM acts like a computer
+          inside the same network as the host, see
+          <a href="ch06.html#network_bridged" title="6.5. Bridged Networking">Section 6.5, &#8220;Bridged Networking&#8221;</a>. In this case, the guest has
+          the same network access as the host and a firewall might be
+          necessary to protect other computers on the subnet from a
+          potential malicious guest as well as to protect the guest from
+          a direct access from other computers. In some cases it is
+          worth considering using a forwarding rule for a specific port
+          in NAT mode instead of using bridged networking.
+        </p><p>
+          Some setups do not require a VM to be connected to the public
+          network at all. Internal networking, see
+          <a href="ch06.html#network_internal" title="6.6. Internal Networking">Section 6.6, &#8220;Internal Networking&#8221;</a>, or host-only networking,
+          see <a href="ch06.html#network_hostonly" title="6.7. Host-Only Networking">Section 6.7, &#8220;Host-Only Networking&#8221;</a>, are often sufficient
+          to connect VMs among each other or to connect VMs only with
+          the host but not with the public network.
+        </p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="security-vrdp-auth"></a>13.3.2.2. VRDP Remote Desktop Authentication</h4></div></div></div><p>
+          When using the Oracle VM VirtualBox Extension Pack provided by
+          Oracle for VRDP remote desktop support, you can optionally use
+          various methods to configure RDP authentication. The "null"
+          method is very insecure and should be avoided in a public
+          network. See <a href="ch07.html#vbox-auth" title="7.1.5. RDP Authentication">Section 7.1.5, &#8220;RDP Authentication&#8221;</a>.
+        </p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="security_clipboard"></a>13.3.2.3. Clipboard</h4></div></div></div><p>
+          The shared clipboard enables users to share data between the
+          host and the guest. Enabling the clipboard in Bidirectional
+          mode enables the guest to read and write the host clipboard.
+          The Host to Guest mode and the Guest to Host mode limit the
+          access to one direction. If the guest is able to access the
+          host clipboard it can also potentially access sensitive data
+          from the host which is shared over the clipboard.
+        </p><p>
+          If the guest is able to read from and/or write to the host
+          clipboard then a remote user connecting to the guest over the
+          network will also gain this ability, which may not be
+          desirable. As a consequence, the shared clipboard is disabled
+          for new machines.
+        </p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="security-shared-folders"></a>13.3.2.4. Shared Folders</h4></div></div></div><p>
+          If any host folder is shared with the guest then a remote user
+          connected to the guest over the network can access these files
+          too as the folder sharing mechanism cannot be selectively
+          disabled for remote users.
+        </p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="security-3d-graphics"></a>13.3.2.5. 3D Graphics Acceleration</h4></div></div></div><p>
+          Enabling 3D graphics using the Guest Additions exposes the
+          host to additional security risks. See
+          <a href="ch04.html#guestadd-3d" title="4.5.1. Hardware 3D Acceleration (OpenGL and Direct3D 8/9)">Section 4.5.1, &#8220;Hardware 3D Acceleration (OpenGL and Direct3D 8/9)&#8221;</a>.
+        </p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="security-cd-dvd-passthrough"></a>13.3.2.6. CD/DVD Passthrough</h4></div></div></div><p>
+          Enabling CD/DVD passthrough enables the guest to perform
+          advanced operations on the CD/DVD drive, see
+          <a href="ch05.html#storage-cds" title="5.9. CD/DVD Support">Section 5.9, &#8220;CD/DVD Support&#8221;</a>. This could induce a security
+          risk as a guest could overwrite data on a CD/DVD medium.
+        </p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="security-usb-passthrough"></a>13.3.2.7. USB Passthrough</h4></div></div></div><p>
+          Passing USB devices to the guest provides the guest full
+          access to these devices, see <a href="ch03.html#settings-usb" title="3.11.1. USB Settings">Section 3.11.1, &#8220;USB Settings&#8221;</a>.
+          For instance, in addition to reading and writing the content
+          of the partitions of an external USB disk the guest will be
+          also able to read and write the partition table and hardware
+          data of that disk.
+        </p></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="auth-config-using"></a>13.3.3. Configuring and Using Authentication</h3></div></div></div><p>
+        The following components of Oracle VM VirtualBox can use passwords for
+        authentication:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            When using remote iSCSI storage and the storage server
+            requires authentication, an initiator secret can optionally
+            be supplied with the <span><strong class="command">VBoxManage
+            storageattach</strong></span> command. As long as no settings
+            password is provided, by using the command line option
+            <code class="option">--settingspwfile</code>, then this secret is
+            stored <span class="emphasis"><em>unencrypted</em></span> in the machine
+            configuration and is therefore potentially readable on the
+            host. See <a href="ch05.html#storage-iscsi" title="5.10. iSCSI Servers">Section 5.10, &#8220;iSCSI Servers&#8221;</a> and
+            <a href="ch08.html#vboxmanage-storageattach" title="8.17. VBoxManage storageattach">Section 8.17, &#8220;VBoxManage storageattach&#8221;</a>.
+          </p></li><li><p>
+            When using the Oracle VM VirtualBox web service to control an
+            Oracle VM VirtualBox host remotely, connections to the web service
+            are authenticated in various ways. This is described in
+            detail in the Oracle VM VirtualBox Software Development Kit (SDK)
+            reference. See <a href="ch11.html" title="Chapter 11. Oracle VM VirtualBox Programming Interfaces">Chapter 11, <i>Oracle VM VirtualBox Programming Interfaces</i></a>.
+          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pot-insecure"></a>13.3.4. Potentially Insecure Operations</h3></div></div></div><p>
+        The following features of Oracle VM VirtualBox can present security
+        problems:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            Enabling 3D graphics using the Guest Additions exposes the
+            host to additional security risks. See
+            <a href="ch04.html#guestadd-3d" title="4.5.1. Hardware 3D Acceleration (OpenGL and Direct3D 8/9)">Section 4.5.1, &#8220;Hardware 3D Acceleration (OpenGL and Direct3D 8/9)&#8221;</a>.
+          </p></li><li><p>
+            When teleporting a machine, the data stream through which
+            the machine's memory contents are transferred from one host
+            to another is not encrypted. A third party with access to
+            the network through which the data is transferred could
+            therefore intercept that data. An SSH tunnel could be used
+            to secure the connection between the two hosts. But when
+            considering teleporting a VM over an untrusted network the
+            first question to answer is how both VMs can securely access
+            the same virtual disk image with a reasonable performance.
+          </p></li><li><p>
+            When Page Fusion, see <a href="ch04.html#guestadd-pagefusion" title="4.10.2. Page Fusion">Section 4.10.2, &#8220;Page Fusion&#8221;</a>,
+            is enabled, it is possible that a side-channel opens up that
+            enables a malicious guest to determine the address space of
+            another VM running on the same host layout. For example,
+            where DLLs are typically loaded. This information leak in
+            itself is harmless, however the malicious guest may use it
+            to optimize attack against that VM through unrelated attack
+            vectors. It is recommended to only enable Page Fusion if you
+            do not think this is a concern in your setup.
+          </p></li><li><p>
+            When using the Oracle VM VirtualBox web service to control an
+            Oracle VM VirtualBox host remotely, connections to the web
+            service, over which the API calls are transferred using SOAP
+            XML, are not encrypted. They use plain HTTP by default. This
+            is a potential security risk. For details about the web
+            service, see <a href="ch11.html" title="Chapter 11. Oracle VM VirtualBox Programming Interfaces">Chapter 11, <i>Oracle VM VirtualBox Programming Interfaces</i></a>.
+          </p><p>
+            The web services are not started by default. See
+            <a href="ch09.html#vboxwebsrv-daemon" title="9.18. Starting the Oracle VM VirtualBox Web Service Automatically">Section 9.18, &#8220;Starting the Oracle VM VirtualBox Web Service Automatically&#8221;</a> to find out how to start
+            this service and how to enable SSL/TLS support. It has to be
+            started as a regular user and only the VMs of that user can
+            be controlled. By default, the service binds to localhost
+            preventing any remote connection.
+          </p></li><li><p>
+            Traffic sent over a UDP Tunnel network attachment is not
+            encrypted. You can either encrypt it on the host network
+            level, with IPsec, or use encrypted protocols in the guest
+            network, such as SSH. The security properties are similar to
+            bridged Ethernet.
+          </p></li><li><p>
+            Because of shortcomings in older Windows versions, using
+            Oracle VM VirtualBox on Windows versions older than Vista with
+            Service Pack 1 is not recommended.
+          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="security-encryption"></a>13.3.5. Encryption</h3></div></div></div><p>
+        The following components of Oracle VM VirtualBox use encryption to
+        protect sensitive data:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            When using the Oracle VM VirtualBox Extension Pack provided by
+            Oracle for VRDP remote desktop support, RDP data can
+            optionally be encrypted. See <a href="ch07.html#vrde-crypt" title="7.1.6. RDP Encryption">Section 7.1.6, &#8220;RDP Encryption&#8221;</a>.
+            Only the Enhanced RDP Security method (RDP5.2) with TLS
+            protocol provides a secure connection. Standard RDP Security
+            (RDP4 and RDP5.1) is vulnerable to a man-in-the-middle
+            attack.
+          </p></li><li><p>
+            When using the Oracle VM VirtualBox Extension Pack provided by
+            Oracle for disk encryption, the data stored in disk images
+            can optionally be encrypted. See
+            <a href="ch09.html#diskencryption" title="9.28. Encryption of Disk Images">Section 9.28, &#8220;Encryption of Disk Images&#8221;</a>. This feature covers disk
+            image content only. All other data for a virtual machine is
+            stored unencrypted, including the VM's memory and device
+            state which is stored as part of a saved state, both when
+            created explicitly or part of a snapshot of a running VM.
+          </p></li></ul></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="security-recommendations"></a>13.4. Security Recommendations</h2></div></div></div><p>
+      This section contains security recommendations for specific
+      issues. By default VirtualBox will configure the VMs to run in a
+      secure manner, however this may not always be possible without
+      additional user actions such as host OS or firmware configuration
+      changes.
+    </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="sec-rec-cve-2018-3646"></a>13.4.1. CVE-2018-3646</h3></div></div></div><p>
+        This security issue affect a range of Intel CPUs with nested
+        paging. AMD CPUs are expected not to be impacted (pending direct
+        confirmation by AMD). Also the issue does not affect VMs running
+        with hardware virtualization disabled or with nested paging
+        disabled.
+      </p><p>
+        For more information about nested paging, see
+        <a href="ch10.html#nestedpaging" title="10.6. Nested Paging and VPIDs">Section 10.6, &#8220;Nested Paging and VPIDs&#8221;</a>.
+      </p><p>
+        The following mitigation options are available.
+      </p><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="idp14216080"></a>13.4.1.1. Disable Nested Paging</h4></div></div></div><p>
+          By disabling nested paging (EPT), the VMM will construct page
+          tables shadowing the ones in the guest. It is no possible for
+          the guest to insert anything fishy into the page tables, since
+          the VMM carefully validates each entry before shadowing it.
+        </p><p>
+          As a side effect of disabling nested paging, several CPU
+          features will not be made available to the guest. Among these
+          features are AVX, AVX2, XSAVE, AESNI, and POPCNT. Not all
+          guests may be able to cope with dropping these features after
+          installation. Also, for some guests, especially in SMP
+          configurations, there could be stability issues arising from
+          disabling nested paging. Finally, some workloads may
+          experience a performance degradation.
+        </p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="idp12077376"></a>13.4.1.2. Flushing the Level 1 Data Cache</h4></div></div></div><p>
+          This aims at removing potentially sensitive data from the
+          level 1 data cache when running guest code. However, it is
+          made difficult by hyper-threading setups sharing the level 1
+          cache and thereby potentially letting the other thread in a
+          pair refill the cache with data the user does not want the
+          guest to see. In addition, flushing the level 1 data cache is
+          usually not without performance side effects.
+        </p><p>
+          Up to date CPU microcode is a prerequisite for the cache
+          flushing mitigations. Some host OSes may install these
+          automatically, though it has traditionally been a task best
+          performed by the system firmware. So, please check with your
+          system / mainboard manufacturer for the latest firmware
+          update.
+        </p><p>
+          We recommend disabling hyper threading on the host. This is
+          traditionally done from the firmware setup, but some OSes also
+          offers ways disable HT. In some cases it may be disabled by
+          default, but please verify as the effectiveness of the
+          mitigation depends on it.
+        </p><p>
+          The default action taken by VirtualBox is to flush the level 1
+          data cache when a thread is scheduled to execute guest code,
+          rather than on each VM entry. This reduces the performance
+          impact, while making the assumption that the host OS will not
+          handle security sensitive data from interrupt handlers and
+          similar without taking precautions.
+        </p><p>
+          A more aggressive flushing option is provided via the
+          <span><strong class="command">VBoxManage modifyvm</strong></span>
+          <code class="option">--l1d-flush-on-vm-entry</code> option. When enabled
+          the level 1 data cache will be flushed on every VM entry. The
+          performance impact is greater than with the default option,
+          though this of course depends on the workload. Workloads
+          producing a lot of VM exits (like networking, VGA access, and
+          similiar) will probably be most impacted.
+        </p><p>
+          For users not concerned by this security issue, the default
+          mitigation can be disabled using the <span><strong class="command">VBoxManage
+          modifyvm name --l1d-flush-on-sched off</strong></span> command.
+        </p></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="sec-rec-cve-2018-12126-et-al"></a>13.4.2. CVE-2018-12126, CVE-2018-12127, CVE-2018-12130, CVE-2019-11091</h3></div></div></div><p>
+        These security issues affect a range of Intel CPUs starting with
+        Nehalem. The CVE-2018-12130 also affects some Atom Silvermont,
+        Atom Airmont, and Knights family CPUs, however the scope is so
+        limited that the host OS should deal with it and Oracle VM VirtualBox
+        is therefore not affected. Leaks only happens when entering and
+        leaving C states.
+      </p><p>
+        The following mitigation option is available.
+      </p><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="idp15257184"></a>13.4.2.1. Buffer Overwriting and Disabling Hyper-Threading</h4></div></div></div><p>
+          First, up to date CPU microcode is a prerequisite for the
+          buffer overwriting (clearing) mitigations. Some host OSes may
+          install these automatically, though it has traditionally been
+          a task best performed by the system firmware. Please check
+          with your system or mainboard manufacturer for the latest
+          firmware update.
+        </p><p>
+          This mitigation aims at removing potentially sensitive data
+          from the affected buffers before running guest code. Since
+          this means additional work each time the guest is scheduled,
+          there might be some performance side effects.
+        </p><p>
+          We recommend disabling hyper-threading (HT) on hosts affected
+          by CVE-2018-12126 and CVE-2018-12127, because the affected
+          sets of buffers are normally shared between thread pairs and
+          therefore cause leaks between the threads. This is
+          traditionally done from the firmware setup, but some OSes also
+          offers ways disable HT. In some cases it may be disabled by
+          default, but please verify as the effectiveness of the
+          mitigation depends on it.
+        </p><p>
+          The default action taken by Oracle VM VirtualBox is to clear the
+          affected buffers when a thread is scheduled to execute guest
+          code, rather than on each VM entry. This reduces the
+          performance impact, while making the assumption that the host
+          OS will not handle security sensitive data from interrupt
+          handlers and similar without taking precautions.
+        </p><p>
+          The <span><strong class="command">VBoxManage modifyvm</strong></span> command provides a
+          more aggressive flushing option is provided by means of the
+          <code class="option">--mds-clear-on-vm-entry</code> option. When enabled
+          the affected buffers will be cleared on every VM entry. The
+          performance impact is greater than with the default option,
+          though this of course depends on the workload. Workloads
+          producing a lot of VM exits (like networking, VGA access, and
+          similiar) will probably be most impacted.
+        </p><p>
+          For users not concerned by this security issue, the default
+          mitigation can be disabled using the <span><strong class="command">VBoxManage
+          modifyvm name --mds-clear-on-sched off</strong></span> command.
+        </p></div></div></div></div></body></html>

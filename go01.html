@@ -1,0 +1,271 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Glossary</title><meta name="generator" content="DocBook XSL Stylesheets V1.69.1"><link rel="start" href="index.html" title="Oracle® VM VirtualBox®"><link rel="up" href="index.html" title="Oracle® VM VirtualBox®"><link rel="prev" href="apb.html" title="Appendix B. Oracle VM VirtualBox Privacy Information"><style type="text/css"><!--
+   body
+   {
+     font-family:  Verdana, Sans-serif, Arial, 'Trebuchet MS', 'Times New Roman';
+     font-size: small;
+   }
+   h2.title
+   {
+     font-family: Verdana, Sans-serif, Arial, 'Trebuchet MS', 'Times New Roman';
+     margin: 5px 0 0;
+     padding: 1px 5px 1px;
+     border: 1px solid #6b89d4;
+     -moz-border-radius: 0.3em;
+     background: #e6edff;
+   }
+   .titlepage
+   {
+     text-align: center;
+   }
+   .refsynopsisdiv, .refsect1, .refsect2, .refsect3
+   {
+     text-align: left;
+   }
+   .warning
+   {
+     padding: 5px;
+     border: 1px solid #ff0011;
+     -moz-border-radius: 0.3em;
+     background: #ffbbbb;
+   }
+   .warning .title { margin: 0px 0px 5px 0px; }
+   .warning p { margin: 1px; }
+   .note
+   {
+     padding: 1px 5px 1px;
+     border: 1px solid #84c43b;
+     -moz-border-radius: 0.3em;
+     background: #d7e9a7;
+   }
+   .note .title { margin: 0px 0px 5px 0px; }
+   .note p { margin: 1px; }
+   .cmdsynopsis
+   {
+     font-family: monospace;
+   }
+   .refsynopsisdiv        > .cmdsynopsis p, .refsect1        > .cmdsynopsis p,
+   .refsynopsisdiv .sect2 > .cmdsynopsis p, .refsect1 .sect2 > .cmdsynopsis p
+   {
+     margin-top: 0px;
+     margin-bottom: 0px;
+   }
+   .cmdsynopsis p
+   {
+     padding-left: 3.4em;
+     text-indent: -2.2em;
+   }
+   p.nextcommand
+   {
+     margin-top:    0px;
+     margin-bottom: 0px;
+   }
+   p.lastcommand
+   {
+     margin-top:    0px;
+   }
+   .refentry * h3
+   {
+     font-size: large;
+   }
+   .refentry * h4
+   {
+     font-size: larger;
+   }
+   .refentry * h5
+   {
+     font-size: larger;
+   }
+
+  --></style></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="glossary"><div class="titlepage"><div><div><h2 class="title"><a name="Glossary"></a>Glossary</h2></div></div></div><div class="glossdiv"><h3 class="title">A</h3><dl><dt>ACPI</dt><dd><p>
+          Advanced Configuration and Power Interface, an industry
+          specification for BIOS and hardware extensions to configure PC
+          hardware and perform power management. Windows 2000 and later,
+          as well as Linux 2.4 and later support ACPI. Windows can only
+          enable or disable ACPI support at installation time.
+        </p></dd><dt>AHCI</dt><dd><p>
+          Advanced Host Controller Interface, the interface that
+          supports SATA devices such as hard disks. See
+          <a href="ch05.html#harddiskcontrollers" title="5.1. Hard Disk Controllers">Section 5.1, &#8220;Hard Disk Controllers&#8221;</a>.
+        </p></dd><dt>AMD-V</dt><dd><p>
+          The hardware virtualization features built into modern AMD
+          processors. See <a href="ch10.html#hwvirt" title="10.3. Hardware Virtualization">Section 10.3, &#8220;Hardware Virtualization&#8221;</a>.
+        </p></dd><dt>API</dt><dd><p>
+          Application Programming Interface.
+        </p></dd><dt>APIC</dt><dd><p>
+          Advanced Programmable Interrupt Controller, a newer version of
+          the original PC PIC (programmable interrupt controller). Most
+          modern CPUs contain an on-chip APIC, called a local APIC. Many
+          systems also contain an I/O APIC (input output APIC) as a
+          separate chip which provides more than 16 IRQs. Windows 2000
+          and later use a different kernel if they detect an I/O APIC
+          during installation. Therefore, an I/O APIC must not be
+          removed after installation.
+        </p></dd><dt>ATA</dt><dd><p>
+          Advanced Technology Attachment, an industry standard for hard
+          disk interfaces which is synonymous with IDE. See
+          <a href="ch05.html#harddiskcontrollers" title="5.1. Hard Disk Controllers">Section 5.1, &#8220;Hard Disk Controllers&#8221;</a>.
+        </p></dd></dl></div><div class="glossdiv"><h3 class="title">B</h3><dl><dt>BIOS</dt><dd><p>
+          Basic Input/Output System, the firmware built into most
+          personal computers which is responsible of initializing the
+          hardware after the computer has been turned on and then
+          booting an operating system. Oracle VM VirtualBox ships with its own
+          virtual BIOS that runs when a virtual machine is started.
+        </p></dd></dl></div><div class="glossdiv"><h3 class="title">C</h3><dl><dt>COM</dt><dd><p>
+          Microsoft Component Object Model, a programming infrastructure
+          for modular software. COM enables applications to provide
+          application programming interfaces which can be accessed from
+          various other programming languages and applications.
+          Oracle VM VirtualBox makes use of COM both internally and externally
+          to provide a comprehensive API to 3rd party developers.
+        </p></dd></dl></div><div class="glossdiv"><h3 class="title">D</h3><dl><dt>DHCP</dt><dd><p>
+          Dynamic Host Configuration Protocol. This enables a networking
+          device in a network to acquire its IP address and other
+          networking details automatically, in order to avoid having to
+          configure all devices in a network with fixed IP addresses.
+          Oracle VM VirtualBox has a built-in DHCP server that delivers an IP
+          addresses to a virtual machine when networking is configured
+          to NAT. See <a href="ch06.html" title="Chapter 6. Virtual Networking">Chapter 6, <i>Virtual Networking</i></a>.
+        </p></dd></dl></div><div class="glossdiv"><h3 class="title">E</h3><dl><dt>EFI</dt><dd><p>
+          Extensible Firmware Interface, a firmware built into computers
+          which is designed to replace the aging BIOS. Originally
+          designed by Intel, most modern operating systems can now boot
+          on computers which have EFI instead of a BIOS built into them.
+          See <a href="ch03.html#efi" title="3.14. Alternative Firmware (EFI)">Section 3.14, &#8220;Alternative Firmware (EFI)&#8221;</a>.
+        </p></dd><dt>EHCI</dt><dd><p>
+          Enhanced Host Controller Interface, the interface that
+          implements the USB 2.0 standard.
+        </p></dd></dl></div><div class="glossdiv"><h3 class="title">G</h3><dl><dt>GUI</dt><dd><p>
+          Graphical User Interface. Commonly used as an antonym to a
+          "command line interface". In the context of Oracle VM VirtualBox, we
+          sometimes refer to the main graphical
+          <span><strong class="command">VirtualBox</strong></span> program as the "GUI", to
+          differentiate it from the <span><strong class="command">VBoxManage</strong></span>
+          interface.
+        </p></dd><dt>GUID</dt><dd><p>
+          See UUID.
+        </p></dd></dl></div><div class="glossdiv"><h3 class="title">I</h3><dl><dt>IDE</dt><dd><p>
+          Integrated Drive Electronics, an industry standard for hard
+          disk interfaces. See <a href="ch05.html#harddiskcontrollers" title="5.1. Hard Disk Controllers">Section 5.1, &#8220;Hard Disk Controllers&#8221;</a>.
+        </p></dd><dt>I/O APIC</dt><dd><p>
+          See APIC.
+        </p></dd><dt>iSCSI</dt><dd><p>
+          Internet SCSI. See <a href="ch05.html#storage-iscsi" title="5.10. iSCSI Servers">Section 5.10, &#8220;iSCSI Servers&#8221;</a>.
+        </p></dd></dl></div><div class="glossdiv"><h3 class="title">M</h3><dl><dt>MAC</dt><dd><p>
+          Media Access Control, a part of an Ethernet network card. A
+          MAC address is a 6-byte number which identifies a network
+          card. It is typically written in hexadecimal notation where
+          the bytes are separated by colons, such as
+          <code class="literal">00:17:3A:5E:CB:08</code>.
+        </p></dd><dt>MSI</dt><dd><p>
+          Message Signaled Interrupts, as supported by modern chipsets
+          such as the ICH9. See <a href="ch03.html#settings-motherboard" title="3.5.1. Motherboard Tab">Section 3.5.1, &#8220;Motherboard Tab&#8221;</a>.
+          As opposed to traditional pin-based interrupts, with MSI, a
+          small amount of data can accompany the actual interrupt
+          message. This reduces the amount of hardware pins required and
+          allows for more interrupts and better performance.
+        </p></dd></dl></div><div class="glossdiv"><h3 class="title">N</h3><dl><dt>NAT</dt><dd><p>
+          Network Address Translation. A technique to share networking
+          interfaces by which an interface modifies the source and/or
+          target IP addresses of network packets according to specific
+          rules. Commonly employed by routers and firewalls to shield an
+          internal network from the Internet, Oracle VM VirtualBox can use NAT
+          to easily share a host's physical networking hardware with its
+          virtual machines. See <a href="ch06.html#network_nat" title="6.3. Network Address Translation (NAT)">Section 6.3, &#8220;Network Address Translation (NAT)&#8221;</a>.
+        </p></dd></dl></div><div class="glossdiv"><h3 class="title">O</h3><dl><dt>OVF</dt><dd><p>
+          Open Virtualization Format, a cross-platform industry standard
+          to exchange virtual appliances between virtualization
+          products. See <a href="ch01.html#ovf" title="1.14. Importing and Exporting Virtual Machines">Section 1.14, &#8220;Importing and Exporting Virtual Machines&#8221;</a>.
+        </p></dd></dl></div><div class="glossdiv"><h3 class="title">P</h3><dl><dt>PAE</dt><dd><p>
+          Physical Address Extension. This enables access to more than 4
+          GB of RAM, even in 32-bit environments. See
+          <a href="ch03.html#settings-general-advanced" title="3.4.2. Advanced Tab">Section 3.4.2, &#8220;Advanced Tab&#8221;</a>.
+        </p></dd><dt>PIC</dt><dd><p>
+          See APIC.
+        </p></dd><dt>PXE</dt><dd><p>
+          Preboot Execution Environment, an industry standard for
+          booting PC systems from remote network locations. It includes
+          DHCP for IP configuration and TFTP for file transfer. Using
+          UNDI, a hardware independent driver stack for accessing the
+          network card from bootstrap code is available.
+        </p></dd></dl></div><div class="glossdiv"><h3 class="title">R</h3><dl><dt>RDP</dt><dd><p>
+          Remote Desktop Protocol, a protocol developed by Microsoft as
+          an extension to the ITU T.128 and T.124 video conferencing
+          protocol. With RDP, a PC system can be controlled from a
+          remote location using a network connection over which data is
+          transferred in both directions. Typically graphics updates and
+          audio are sent from the remote machine and keyboard and mouse
+          input events are sent from the client. An Oracle VM VirtualBox
+          extension package by Oracle provides VRDP, an enhanced
+          implementation of the relevant standards which is largely
+          compatible with Microsoft's RDP implementation. See
+          <a href="ch07.html#vrde" title="7.1. Remote Display (VRDP Support)">Section 7.1, &#8220;Remote Display (VRDP Support)&#8221;</a> for details.
+        </p></dd></dl></div><div class="glossdiv"><h3 class="title">S</h3><dl><dt>SAS</dt><dd><p>
+          Serial Attached SCSI, an industry standard for hard disk
+          interfaces. See <a href="ch05.html#harddiskcontrollers" title="5.1. Hard Disk Controllers">Section 5.1, &#8220;Hard Disk Controllers&#8221;</a>.
+        </p></dd><dt>SATA</dt><dd><p>
+          Serial ATA, an industry standard for hard disk interfaces. See
+          <a href="ch05.html#harddiskcontrollers" title="5.1. Hard Disk Controllers">Section 5.1, &#8220;Hard Disk Controllers&#8221;</a>.
+        </p></dd><dt>SCSI</dt><dd><p>
+          Small Computer System Interface. An industry standard for data
+          transfer between devices, especially for storage. See
+          <a href="ch05.html#harddiskcontrollers" title="5.1. Hard Disk Controllers">Section 5.1, &#8220;Hard Disk Controllers&#8221;</a>.
+        </p></dd><dt>SMP</dt><dd><p>
+          Symmetrical Multiprocessing, meaning that the resources of a
+          computer are shared between several processors. These can
+          either be several processor chips or, as is more common with
+          modern hardware, multiple CPU cores in one processor.
+        </p></dd><dt>SSD</dt><dd><p>
+          Solid-state drive, uses microchips for storing data in a
+          computer system. Compared to classical hard-disks they are
+          having no mechanical components like spinning disks.
+        </p></dd></dl></div><div class="glossdiv"><h3 class="title">T</h3><dl><dt>TAR</dt><dd><p>
+          A widely used file format for archiving. Originally, this
+          stood for Tape ARchive and was already supported by very early
+          UNIX versions for backing up data on tape. The file format is
+          still widely used today. For example, with OVF archives using
+          an <code class="filename">.ova</code> file extension. See
+          <a href="ch01.html#ovf" title="1.14. Importing and Exporting Virtual Machines">Section 1.14, &#8220;Importing and Exporting Virtual Machines&#8221;</a>.
+        </p></dd></dl></div><div class="glossdiv"><h3 class="title">U</h3><dl><dt>UUID</dt><dd><p>
+          A Universally Unique Identifier, often also called GUID
+          (Globally Unique Identifier). A UUID is a string of numbers
+          and letters which can be computed dynamically and is
+          guaranteed to be unique. Generally, it is used as a global
+          handle to identify entities. Oracle VM VirtualBox makes use of UUIDs
+          to identify VMs, Virtual Disk Images (VDI files), and other
+          entities.
+        </p></dd></dl></div><div class="glossdiv"><h3 class="title">V</h3><dl><dt>VM</dt><dd><p>
+          Virtual Machine. A virtual computer that Oracle VM VirtualBox
+          enables you to run on top of your actual hardware. See
+          <a href="ch01.html#virtintro" title="1.2. Some Terminology">Section 1.2, &#8220;Some Terminology&#8221;</a> for details.
+        </p></dd><dt>VMM</dt><dd><p>
+          Virtual Machine Manager. The component of Oracle VM VirtualBox that
+          controls VM execution. See
+          <a href="ch10.html#technical-components" title="10.2. Oracle VM VirtualBox Executables and Components">Section 10.2, &#8220;Oracle VM VirtualBox Executables and Components&#8221;</a> for a list of
+          Oracle VM VirtualBox components.
+        </p></dd><dt>VRDE</dt><dd><p>
+          VirtualBox Remote Desktop Extension. This interface is built
+          into Oracle VM VirtualBox to allow Oracle VM VirtualBox extension packages
+          to supply remote access to virtual machines. An Oracle VM VirtualBox
+          extension package by Oracle provides VRDP support. See
+          <a href="ch07.html#vrde" title="7.1. Remote Display (VRDP Support)">Section 7.1, &#8220;Remote Display (VRDP Support)&#8221;</a>.
+        </p></dd><dt>VRDP</dt><dd><p>
+          See RDP.
+        </p></dd><dt>VT-x</dt><dd><p>
+          The hardware virtualization features built into modern Intel
+          processors. See <a href="ch10.html#hwvirt" title="10.3. Hardware Virtualization">Section 10.3, &#8220;Hardware Virtualization&#8221;</a>.
+        </p></dd></dl></div><div class="glossdiv"><h3 class="title">X</h3><dl><dt>xHCI</dt><dd><p>
+          eXtended Host Controller Interface, the interface that
+          implements the USB 3.0 standard.
+        </p></dd><dt>XML</dt><dd><p>
+          The eXtensible Markup Language, a metastandard for all kinds
+          of textual information. XML only specifies how data in the
+          document is organized generally and does not prescribe how to
+          semantically organize content.
+        </p></dd><dt>XPCOM</dt><dd><p>
+          Mozilla Cross Platform Component Object Model, a programming
+          infrastructure developed by the Mozilla browser project which
+          is similar to Microsoft COM and enables applications to
+          provide a modular programming interface. Oracle VM VirtualBox makes
+          use of XPCOM on Linux both internally and externally to
+          provide a comprehensive API to third-party developers.
+        </p></dd></dl></div></div></body></html>

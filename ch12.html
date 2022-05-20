@@ -1,0 +1,1101 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter 12. Troubleshooting</title><meta name="generator" content="DocBook XSL Stylesheets V1.69.1"><link rel="start" href="index.html" title="Oracle® VM VirtualBox®"><link rel="up" href="index.html" title="Oracle® VM VirtualBox®"><link rel="prev" href="ch11.html" title="Chapter 11. Oracle VM VirtualBox Programming Interfaces"><link rel="next" href="ch13.html" title="Chapter 13. Security Guide"><style type="text/css"><!--
+   body
+   {
+     font-family:  Verdana, Sans-serif, Arial, 'Trebuchet MS', 'Times New Roman';
+     font-size: small;
+   }
+   h2.title
+   {
+     font-family: Verdana, Sans-serif, Arial, 'Trebuchet MS', 'Times New Roman';
+     margin: 5px 0 0;
+     padding: 1px 5px 1px;
+     border: 1px solid #6b89d4;
+     -moz-border-radius: 0.3em;
+     background: #e6edff;
+   }
+   .titlepage
+   {
+     text-align: center;
+   }
+   .refsynopsisdiv, .refsect1, .refsect2, .refsect3
+   {
+     text-align: left;
+   }
+   .warning
+   {
+     padding: 5px;
+     border: 1px solid #ff0011;
+     -moz-border-radius: 0.3em;
+     background: #ffbbbb;
+   }
+   .warning .title { margin: 0px 0px 5px 0px; }
+   .warning p { margin: 1px; }
+   .note
+   {
+     padding: 1px 5px 1px;
+     border: 1px solid #84c43b;
+     -moz-border-radius: 0.3em;
+     background: #d7e9a7;
+   }
+   .note .title { margin: 0px 0px 5px 0px; }
+   .note p { margin: 1px; }
+   .cmdsynopsis
+   {
+     font-family: monospace;
+   }
+   .refsynopsisdiv        > .cmdsynopsis p, .refsect1        > .cmdsynopsis p,
+   .refsynopsisdiv .sect2 > .cmdsynopsis p, .refsect1 .sect2 > .cmdsynopsis p
+   {
+     margin-top: 0px;
+     margin-bottom: 0px;
+   }
+   .cmdsynopsis p
+   {
+     padding-left: 3.4em;
+     text-indent: -2.2em;
+   }
+   p.nextcommand
+   {
+     margin-top:    0px;
+     margin-bottom: 0px;
+   }
+   p.lastcommand
+   {
+     margin-top:    0px;
+   }
+   .refentry * h3
+   {
+     font-size: large;
+   }
+   .refentry * h4
+   {
+     font-size: larger;
+   }
+   .refentry * h5
+   {
+     font-size: larger;
+   }
+
+  --></style></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="Troubleshooting"></a>Chapter 12. Troubleshooting</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="ch12.html#ts_procs-tools">12.1. Procedures and Tools</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch12.html#ts_categorize-isolate">12.1.1. Categorizing and Isolating Problems</a></span></dt><dt><span class="sect2"><a href="ch12.html#collect-debug-info">12.1.2. Collecting Debugging Information</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_vboxbugreport">12.1.3. Using the VBoxBugReport Command to Collect Debug Information
+        Automatically</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_debugger">12.1.4. The Built-In VM Debugger</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_guest-core-format">12.1.5. VM Core Format</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch12.html#ts_general">12.2. General Troubleshooting</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch12.html#ts_config-periodic-flush">12.2.1. Guest Shows IDE/SATA Errors for File-Based Images on Slow Host File
+        System</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_ide-sata-flush">12.2.2. Responding to Guest IDE/SATA Flush Requests</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_host-freq-boost">12.2.3. Performance Variation with Frequency Boosting</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_host-freq-scaling">12.2.4. Frequency Scaling Effect on CPU Usage</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_win-cpu-usage-rept">12.2.5. Inaccurate Windows CPU Usage Reporting</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_host-powermgmt">12.2.6. Poor Performance Caused by Host Power Management</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_gui-2d-grayed-out">12.2.7. GUI: 2D Video Acceleration Option is Grayed Out</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch12.html#ts_win-guests">12.3. Windows Guests</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch12.html#ts_win7-guest-usb3-support">12.3.1. No USB 3.0 Support in Windows 7 Guests</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_win-guest-bluescreen">12.3.2. Windows Bluescreens After Changing VM Configuration</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_win-guest-bluescreen-smp">12.3.3. Windows 0x101 Bluescreens with SMP Enabled (IPI Timeout)</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_win2k-guest-install">12.3.4. Windows 2000 Installation Failures</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_win-guest-bluescreen-record-info">12.3.5. How to Record Bluescreen Information from Windows Guests</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_win-vista-guest-networking">12.3.6. No Networking in Windows Vista Guests</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_win-guest-high-cpu">12.3.7. Windows Guests may Cause a High CPU Load</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_win-guest-shared-folders-access-delay">12.3.8. Long Delays When Accessing Shared Folders</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_win98-guest-usb-tablet-coordinates">12.3.9. USB Tablet Coordinates Wrong in Windows 98 Guests</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_win-guest-active-dir-domain">12.3.10. Windows Guests are Removed From an Active Directory Domain After
+        Restoring a Snapshot</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_win31-ram-limitations">12.3.11. Windows 3.x Limited to 64 MB RAM</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch12.html#ts_lin-x11-guests">12.4. Linux and X11 Guests</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch12.html#ts_linux-guest-high-cpu">12.4.1. Linux Guests May Cause a High CPU load</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_linux-buggy">12.4.2. Buggy Linux 2.6 Kernel Versions</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_linux-guest-x11-services">12.4.3. Shared Clipboard, Auto-Resizing, and Seamless Desktop in X11 Guests</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch12.html#ts_sol-guests">12.5. Oracle Solaris Guests</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch12.html#ts_solaris-10-guest-slow-boot-smp">12.5.1. Certain Oracle Solaris 10 Releases May Take a Long Time to Boot with SMP</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch12.html#ts_win-hosts">12.6. Windows Hosts</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch12.html#ts_win-host-com-server">12.6.1. VBoxSVC Out-of-Process COM Server Issues</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_win-host-cd-dvd-changes">12.6.2. CD and DVD Changes Not Recognized</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_win-host-rdp-client">12.6.3. Sluggish Response When Using Microsoft RDP Client</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_win-host-iscsi">12.6.4. Running an iSCSI Initiator and Target on a Single System</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_win-host-bridged-network-adapters">12.6.5. Bridged Networking Adapters Missing</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_win-host-host-only-network-adapters">12.6.6. Host-Only Networking Adapters Cannot be Created</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch12.html#ts_lin-hosts">12.7. Linux Hosts</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch12.html#ts_linux-kernelmodule-fails-to-load">12.7.1. Linux Kernel Module Refuses to Load</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_linux-host-cd-dvd-not-found">12.7.2. Linux Host CD/DVD or Floppy Disk Drive Not Found</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_linux-host-ide-messages">12.7.3. Strange Guest IDE Error Messages When Writing to CD or DVD</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_linux-host-vboxsvc">12.7.4. VBoxSVC IPC Issues</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_usb-linux">12.7.5. USB Not Working</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_linux-host-grsec">12.7.6. PAX/grsec Kernels</a></span></dt><dt><span class="sect2"><a href="ch12.html#ts_linux-host-malloc">12.7.7. Linux Kernel vmalloc Pool Exhausted</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch12.html#ts_sol-hosts">12.8. Oracle Solaris Hosts</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch12.html#ts_sol-host-zfs">12.8.1. Cannot Start VM, Not Enough Contiguous Memory</a></span></dt></dl></dd></dl></div><p>
+    This chapter provides answers to commonly asked questions. In order
+    to improve your user experience with Oracle VM VirtualBox, it is
+    recommended to read this section to learn more about common pitfalls
+    and get recommendations on how to use the product.
+  </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ts_procs-tools"></a>12.1. Procedures and Tools</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_categorize-isolate"></a>12.1.1. Categorizing and Isolating Problems</h3></div></div></div><p>
+        More often than not, a virtualized guest behaves like a physical
+        system. Any problems that a physical machine would encounter, a
+        virtual machine will encounter as well. If, for example,
+        Internet connectivity is lost due to external issues, virtual
+        machines will be affected just as much as physical ones.
+      </p><p>
+        If a true Oracle VM VirtualBox problem is encountered, it helps to
+        categorize and isolate the problem first. Here are some of the
+        questions that should be answered before reporting a problem:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            Is the problem specific to a certain guest OS? Or a specific
+            release of a guest OS? Especially with Linux guest related
+            problems, the issue may be specific to a certain
+            distribution and version of Linux.
+          </p></li><li><p>
+            Is the problem specific to a certain host OS? Problems are
+            usually not host OS specific, because most of the
+            Oracle VM VirtualBox code base is shared across all supported
+            platforms, but especially in the areas of networking and USB
+            support, there are significant differences between host
+            platforms. Some GUI related issues are also host specific.
+          </p></li><li><p>
+            Is the problem specific to certain host hardware? This
+            category of issues is typically related to the host CPU.
+            Because of significant differences between VT-x and AMD-V,
+            problems may be specific to one or the other technology. The
+            exact CPU model may also make a difference because different
+            CPUs support different features, which may affect certain
+            aspects of guest CPU operation.
+          </p></li><li><p>
+            Is the problem specific to guest SMP? That is, is it related
+            to the number of virtual CPUs (VCPUs) in the guest? Using
+            more than one CPU usually significantly affects the internal
+            operation of a guest OS.
+          </p></li><li><p>
+            Is the problem specific to the Guest Additions? In some
+            cases, this is obvious, such as a shared folders problem. In
+            other cases such as display problems, it may be less
+            obvious. If the problem is Guest Additions specific, is it
+            also specific to a certain version of the Guest Additions?
+          </p></li><li><p>
+            Is the problem specific to a certain environment? Some
+            problems are related to a particular environment external to
+            the VM. This usually involves network setup. Certain
+            configurations of external servers such as DHCP or PXE may
+            expose problems which do not occur with other, similar
+            servers.
+          </p></li><li><p>
+            Is the problem a regression? Knowing that an issue is a
+            regression usually makes it significantly easier to find the
+            solution. In this case, it is crucial to know which version
+            is affected and which is not.
+          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="collect-debug-info"></a>12.1.2. Collecting Debugging Information</h3></div></div></div><p>
+        For problem determination, it is often important to collect
+        debugging information which can be analyzed by Oracle VM VirtualBox
+        support. This section contains information about what kind of
+        information can be obtained.
+      </p><p>
+        Every time Oracle VM VirtualBox starts up a VM, a so-called
+        <span class="emphasis"><em>release log file</em></span> is created, containing
+        lots of information about the VM configuration and runtime
+        events. The log file is called <code class="filename">VBox.log</code> and
+        resides in the VM log file folder, which is
+        <code class="filename">$HOME/VirtualBox
+        VMs/<em class="replaceable"><code>VM-name</code></em>/Logs</code> by
+        default.
+      </p><p>
+        When starting a VM, the configuration file of the last run will
+        be renamed to <code class="filename">.1</code>, up to
+        <code class="filename">.3</code>. Sometimes when there is a problem, it
+        is useful to have a look at the logs. Also when requesting
+        support for Oracle VM VirtualBox, supplying the corresponding log file
+        is mandatory.
+      </p><p>
+        For convenience, for each virtual machine, the VirtualBox
+        Manager window can show these logs in a window. To access it,
+        select a virtual machine from the list on the left and select
+        <span class="bold"><strong>Show Log</strong></span> from the
+        <span class="bold"><strong>Machine</strong></span> menu.
+      </p><p>
+        The release log file, <code class="filename">VBox.log</code>, contains a
+        wealth of diagnostic information, such as Host OS type and
+        version, Oracle VM VirtualBox version and build. It also includes a
+        complete dump of the guest's configuration (CFGM), detailed
+        information about the host CPU type and supported features,
+        whether hardware virtualization is enabled, information about
+        VT-x/AMD-V setup, state transitions (such as creating, running,
+        paused, stopping), guest BIOS messages, Guest Additions
+        messages, device-specific log entries and, at the end of
+        execution, final guest state and condensed statistics.
+      </p><p>
+        In case of crashes, it is very important to collect
+        <span class="emphasis"><em>crash dumps</em></span>. This is true for both host and
+        guest crashes. For information about enabling core dumps on
+        Linux, Oracle Solaris, and Mac OS X systems, refer to the
+        following core dump article on the Oracle VM VirtualBox website:
+      </p><p>
+        <a href="http://www.virtualbox.org/wiki/Core_dump" target="_top">http://www.virtualbox.org/wiki/Core_dump</a>.
+      </p><p>
+        You can also use <span><strong class="command">VBoxManage debugvm</strong></span> to create
+        a dump of a complete virtual machine. See
+        <a href="ch08.html#vboxmanage-debugvm" title="8.43. VBoxManage debugvm">Section 8.43, &#8220;VBoxManage debugvm&#8221;</a>.
+      </p><p>
+        For network related problems, it is often helpful to capture a
+        trace of network traffic. If the traffic is routed through an
+        adapter on the host, it is possible to use Wireshark or a
+        similar tool to capture the traffic there. However, this often
+        also includes a lot of traffic unrelated to the VM.
+      </p><p>
+        Oracle VM VirtualBox provides an ability to capture network traffic
+        only on a specific VM's network adapter. Refer to the following
+        network tracing article on the Oracle VM VirtualBox website for
+        information on enabling this capture:
+      </p><p>
+        <a href="http://www.virtualbox.org/wiki/Network_tips" target="_top">http://www.virtualbox.org/wiki/Network_tips</a>.
+      </p><p>
+        The trace files created by Oracle VM VirtualBox are in
+        <code class="filename">.pcap</code> format and can be easily analyzed
+        with Wireshark.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_vboxbugreport"></a>12.1.3. Using the VBoxBugReport Command to Collect Debug Information
+        Automatically</h3></div></div></div><p>
+        The <span><strong class="command">VBoxBugReport</strong></span> command is used to collect
+        debug information automatically for an Oracle VM VirtualBox
+        installation. This command can be useful when you need to gather
+        information to send to Oracle Support.
+      </p><p>
+        The following examples show how to use
+        <span><strong class="command">VBoxBugReport</strong></span>.
+      </p><p>
+        By default, the command collects <span><strong class="command">VBoxSVC</strong></span>
+        process logs, device settings, and global configuration data for
+        an Oracle VM VirtualBox host.
+      </p><pre class="screen">$ VBoxBugReport
+  ...
+  0% - collecting VBoxSVC.log.10...
+  7% - collecting VBoxSVC.log.9...
+  ...
+ 64% - collecting VBoxSVC.log.1...
+ 71% - collecting VBoxSVC.log...
+ 78% - collecting VirtualBox.xml...
+ 85% - collecting HostUsbDevices...
+ 92% - collecting HostUsbFilters...
+100% - compressing...
+
+Report was written to '2019-03-26-13-32-02-bugreport.tgz'</pre><p>
+        The results are saved as a compressed tar file archive in the
+        same directory where the command is run.
+      </p><p>
+        To specify a different output file location:
+      </p><pre class="screen">$ VBoxBugReport --output ~/debug/bug004.tgz</pre><p>
+        To output all debug information to a single text file, rather
+        than a <code class="filename">tgz</code> file:
+      </p><pre class="screen">$ VBoxBugReport --text</pre><p>
+        To collect information for a specific VM, called
+        <code class="literal">Windows_10</code>:
+      </p><pre class="screen">$ VBoxBugReport Windows_10</pre><p>
+        This command collects machine settings, guest properties, and
+        log files for the specified VM. Global configuration information
+        for the host is also included.
+      </p><p>
+        To collect information for several VMs, called
+        <code class="literal">Windows_7</code>, <code class="literal">Windows_8</code>, and
+        <code class="literal">Windows_10</code>:
+      </p><pre class="screen">$ VBoxBugReport Windows_7 Windows_8 Windows_10</pre><p>
+        To collect information for all VMs:
+      </p><pre class="screen">$ VBoxBugReport --all</pre><p>
+        To show a full list of the available command options, run
+        <span><strong class="command">VBoxBugReport --help</strong></span>.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_debugger"></a>12.1.4. The Built-In VM Debugger</h3></div></div></div><p>
+        Oracle VM VirtualBox includes a built-in VM debugger, which advanced
+        users may find useful. This debugger enables you to examine and,
+        to some extent, control the VM state.
+      </p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>
+          Use the VM debugger at your own risk. There is no support for
+          it, and the following documentation is only made available for
+          advanced users with a very high level of familiarity with the
+          x86/AMD64 machine instruction set, as well as detailed
+          knowledge of the PC architecture. A degree of familiarity with
+          the internals of the guest OS in question may also be very
+          helpful.
+        </p></div><p>
+        The VM debugger is available in all regular production versions
+        of Oracle VM VirtualBox, but it is disabled by default because the
+        average user will have little use for it. There are two ways to
+        access the debugger:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            Using a debugger console window displayed alongside the VM
+          </p></li><li><p>
+            Using the <span><strong class="command">telnet</strong></span> protocol on port 5000
+          </p></li></ul></div><p>
+        The debugger can be enabled in the following ways:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            Start the VM directly using <span><strong class="command">VirtualBoxVM
+            --startvm</strong></span>, with an additional
+            <code class="option">--dbg</code>, <code class="option">--debug</code>, or
+            <code class="option">--debug-command-line</code> argument. See the
+            <span><strong class="command">VirtualBoxVM --help</strong></span> command usage help
+            for details.
+          </p></li><li><p>
+            Set the <code class="literal">VBOX_GUI_DBG_ENABLED</code> or
+            <code class="literal">VBOX_GUI_DBG_AUTO_SHOW</code> environment
+            variable to <code class="literal">true</code> before launching the
+            Oracle VM VirtualBox process. Setting these variables, only their
+            presence is checked, is effective even when the first
+            Oracle VM VirtualBox process is the VM selector window. VMs
+            subsequently launched from the selector will have the
+            debugger enabled.
+          </p></li><li><p>
+            Set the <code class="literal">GUI/Dbg/Enabled</code> extra data item
+            to <code class="literal">true</code> before launching the VM. This can
+            be set globally or on a per VM basis.
+          </p></li></ul></div><p>
+        A new <span class="bold"><strong>Debug</strong></span> menu entry is added
+        to the Oracle VM VirtualBox application. This menu enables the user to
+        open the debugger console.
+      </p><p>
+        The VM debugger command syntax is loosely modeled on Microsoft
+        and IBM debuggers used on DOS, OS/2, and Windows. Users familiar
+        with symdeb, CodeView, or the OS/2 kernel debugger will find the
+        Oracle VM VirtualBox VM debugger familiar.
+      </p><p>
+        The most important command is <span><strong class="command">help</strong></span>. This will
+        print brief usage help for all debugger commands. The set of
+        commands supported by the VM debugger changes frequently and the
+        <span><strong class="command">help</strong></span> command is always up-to-date.
+      </p><p>
+        A brief summary of frequently used commands is as follows:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            <span><strong class="command">stop</strong></span>: Stops the VM execution and enables
+            single stepping
+          </p></li><li><p>
+            <span><strong class="command">g</strong></span>: Continue VM execution
+          </p></li><li><p>
+            <span><strong class="command">t</strong></span>: Single step an instruction
+          </p></li><li><p>
+            <span><strong class="command">rg</strong></span>, <span><strong class="command">rh</strong></span>, and
+            <span><strong class="command">r</strong></span>: Print the guest, hypervisor, and
+            current registers
+          </p></li><li><p>
+            <span><strong class="command">kg</strong></span>, <span><strong class="command">kh</strong></span>, and
+            <span><strong class="command">k</strong></span>: Print the guest, hypervisor, and
+            current call stack
+          </p></li><li><p>
+            <span><strong class="command">da</strong></span>, <span><strong class="command">db</strong></span>,
+            <span><strong class="command">dw</strong></span>, <span><strong class="command">dd</strong></span>,
+            <span><strong class="command">dq</strong></span>: Print memory contents as ASCII,
+            bytes, words, dwords, and qwords
+          </p></li><li><p>
+            <span><strong class="command">u</strong></span>: Unassemble memory
+          </p></li><li><p>
+            <span><strong class="command">dg</strong></span>: Print the guest's GDT
+          </p></li><li><p>
+            <span><strong class="command">di</strong></span>: Print the guest's IDT
+          </p></li><li><p>
+            <span><strong class="command">dl</strong></span>: Print the guest's LDT
+          </p></li><li><p>
+            <span><strong class="command">dt</strong></span>: Print the guest's TSS
+          </p></li><li><p>
+            <span><strong class="command">dp*</strong></span>: Print the guest's page table
+            structures
+          </p></li><li><p>
+            <span><strong class="command">bp</strong></span> and <span><strong class="command">br</strong></span>: Set a
+            normal and recompiler breakpoint
+          </p></li><li><p>
+            <span><strong class="command">bl</strong></span>: List breakpoints
+          </p></li><li><p>
+            <span><strong class="command">bc</strong></span>: Clear a breakpoint
+          </p></li><li><p>
+            <span><strong class="command">writecore</strong></span>: Write a VM core file to disk.
+            See <a href="ch12.html#ts_guest-core-format" title="12.1.5. VM Core Format">Section 12.1.5, &#8220;VM Core Format&#8221;</a>
+          </p></li></ul></div><p>
+        See the built-in <span><strong class="command">help</strong></span> for other available
+        commands.
+      </p><p>
+        The VM debugger supports symbolic debugging, although symbols
+        for guest code are often not available. For Oracle Solaris
+        guests, the <span><strong class="command">detect</strong></span> command automatically
+        determines the guest OS version and locates kernel symbols in
+        guest's memory. Symbolic debugging is then available. For Linux
+        guests, the <span><strong class="command">detect</strong></span> commands also determines
+        the guest OS version, but there are no symbols in the guest's
+        memory. Kernel symbols are available in the file
+        <code class="filename">/proc/kallsyms</code> on Linux guests. This file
+        must be copied to the host, for example using
+        <span><strong class="command">scp</strong></span>. The <span><strong class="command">loadmap</strong></span> debugger
+        command can be used to make the symbol information available to
+        the VM debugger. Note that the <code class="filename">kallsyms</code>
+        file contains the symbols for the currently loaded modules. If
+        the guest's configuration changes, the symbols will change as
+        well and must be updated.
+      </p><p>
+        For all guests, a simple way to verify that the correct symbols
+        are loaded is the <span><strong class="command">k</strong></span> command. The guest is
+        normally idling and it should be clear from the symbolic
+        information that the guest operating system's idle loop is being
+        executed.
+      </p><p>
+        Another group of debugger commands is the set of
+        <span><strong class="command">info</strong></span> commands. Running <span><strong class="command">info
+        help</strong></span> provides complete usage information. The
+        information commands provide ad-hoc data pertinent to various
+        emulated devices and aspects of the VMM. There is no general
+        guideline for using the <span><strong class="command">info</strong></span> commands, the
+        right command to use depends entirely on the problem being
+        investigated. Some of the <span><strong class="command">info</strong></span> commands are
+        as follows:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            <span><strong class="command">cfgm</strong></span>: Print a branch of the configuration
+            tree
+          </p></li><li><p>
+            <span><strong class="command">cpuid</strong></span>: Display the guest CPUID leaves
+          </p></li><li><p>
+            <span><strong class="command">ioport</strong></span>: Print registered I/O port ranges
+          </p></li><li><p>
+            <span><strong class="command">mmio</strong></span>: Print registered MMIO ranges
+          </p></li><li><p>
+            <span><strong class="command">mode</strong></span>: Print the current paging mode
+          </p></li><li><p>
+            <span><strong class="command">pit</strong></span>: Print the i8254 PIT state
+          </p></li><li><p>
+            <span><strong class="command">pic</strong></span>: Print the i8259A PIC state
+          </p></li><li><p>
+            <span><strong class="command">ohci</strong></span>, <span><strong class="command">ehci</strong></span>,
+            <span><strong class="command">xhci</strong></span>: Print a subset of the OHCI, EHCI,
+            and xHCI USB controller state
+          </p></li><li><p>
+            <span><strong class="command">pcnet0</strong></span>: Print the PCnet state
+          </p></li><li><p>
+            <span><strong class="command">vgatext</strong></span>: Print the contents of the VGA
+            framebuffer formatted as standard text mode
+          </p></li><li><p>
+            <span><strong class="command">timers</strong></span>: Print all VM timers
+          </p></li></ul></div><p>
+        The output of the <span><strong class="command">info</strong></span> commands generally
+        requires in-depth knowledge of the emulated device or
+        Oracle VM VirtualBox VMM internals. However, when used properly, the
+        information provided can be invaluable.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_guest-core-format"></a>12.1.5. VM Core Format</h3></div></div></div><p>
+        Oracle VM VirtualBox uses the 64-bit ELF format for its VM core files
+        created by <span><strong class="command">VBoxManage debugvm</strong></span>, see
+        <a href="ch08.html#vboxmanage-debugvm" title="8.43. VBoxManage debugvm">Section 8.43, &#8220;VBoxManage debugvm&#8221;</a>. The VM core file contain
+        the memory and CPU dumps of the VM and can be useful for
+        debugging your guest OS. The 64-bit ELF object format
+        specification can be obtained at:
+      </p><p>
+        <a href="http://downloads.openwatcom.org/ftp/devel/docs/elf-64-gen.pdf" target="_top">http://downloads.openwatcom.org/ftp/devel/docs/elf-64-gen.pdf</a>.
+      </p><p>
+        The overall layout of the VM core format is as follows:
+      </p><pre class="screen">[ ELF 64 Header]
+[ Program Header, type PT_NOTE ]
+  &#8594; offset to COREDESCRIPTOR
+[ Program Header, type PT_LOAD ] - one for each contiguous physical memory range
+  &#8594; Memory offset of range
+  &#8594; File offset
+[ Note Header, type NT_VBOXCORE ]
+[ COREDESCRIPTOR ]
+  &#8594; Magic
+  &#8594; VM core file version
+  &#8594; VBox version
+  &#8594; Number of vCPUs etc.
+[ Note Header, type NT_VBOXCPU ] - one for each vCPU
+[ vCPU 1 Note Header ]
+  [ DBGFCORECPU - vCPU 1 dump ]
+[ Additional Notes + Data ] - currently unused
+[ Memory dump ]</pre><p>
+        The memory descriptors contain physical addresses relative to
+        the guest and not virtual addresses. Regions of memory such as
+        MMIO regions are not included in the core file.
+      </p><p>
+        The relevant data structures and definitions can be found in the
+        Oracle VM VirtualBox sources under the following header files:
+        <code class="filename">include/VBox/dbgfcorefmt.h</code>,
+        <code class="filename">include/iprt/x86.h</code> and
+        <code class="filename">src/VBox/Runtime/include/internal/ldrELFCommon.h</code>.
+      </p><p>
+        The VM core file can be inspected using
+        <span><strong class="command">elfdump</strong></span> and GNU <span><strong class="command">readelf</strong></span> or
+        other similar utilities.
+      </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ts_general"></a>12.2. General Troubleshooting</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_config-periodic-flush"></a>12.2.1. Guest Shows IDE/SATA Errors for File-Based Images on Slow Host File
+        System</h3></div></div></div><p>
+        Occasionally, some host file systems provide very poor writing
+        performance and as a consequence cause the guest to time out
+        IDE/SATA commands. This is normal behavior and should normally
+        cause no real problems, as the guest should repeat commands that
+        have timed out. However, guests such as some Linux versions have
+        severe problems if a write to an image file takes longer than
+        about 15 seconds. Some file systems however require more than a
+        minute to complete a single write, if the host cache contains a
+        large amount of data that needs to be written.
+      </p><p>
+        The symptom for this problem is that the guest can no longer
+        access its files during large write or copying operations,
+        usually leading to an immediate hang of the guest.
+      </p><p>
+        In order to work around this problem, the true fix is to use a
+        faster file system that does not exhibit such unacceptable write
+        performance, it is possible to flush the image file after a
+        certain amount of data has been written. This interval is
+        normally infinite, but can be configured individually for each
+        disk of a VM.
+      </p><p>
+        For IDE disks use the following command:
+      </p><pre class="screen">VBoxManage setextradata <em class="replaceable"><code>VM-name</code></em>
+"VBoxInternal/Devices/piix3ide/0/LUN#[<em class="replaceable"><code>x</code></em>]/Config/FlushInterval" [<em class="replaceable"><code>b</code></em>]</pre><p>
+        For SATA disks use the following command:
+      </p><pre class="screen">VBoxManage setextradata <em class="replaceable"><code>VM-name</code></em>
+"VBoxInternal/Devices/ahci/0/LUN#[<em class="replaceable"><code>x</code></em>]/Config/FlushInterval" [<em class="replaceable"><code>b</code></em>]</pre><p>
+        <code class="literal">[<em class="replaceable"><code>x</code></em>]</code> specifies the
+        disk. For IDE, <code class="literal">0</code> represents device 0 on the
+        primary channel, <code class="literal">1</code> represents device 1 on the
+        primary channel, <code class="literal">2</code> represents device 0 on the
+        secondary channel, and <code class="literal">3</code> represents device 1
+        on the secondary channel. For SATA, use values between
+        <code class="literal">0</code> and <code class="literal">29</code>. This
+        configuration option applies to disks only. Do not use this
+        option for CD or DVD drives.
+      </p><p>
+        The unit of the interval
+        (<code class="literal">[<em class="replaceable"><code>b</code></em>]</code>) is the
+        number of bytes written since the last flush. The value for it
+        must be selected so that the occasional long write delays do not
+        occur. Since the proper flush interval depends on the
+        performance of the host and the host filesystem, finding the
+        optimal value that makes the problem disappear requires some
+        experimentation. Values between 1000000 and 10000000 (1 to 10
+        megabytes) are a good starting point. Decreasing the interval
+        both decreases the probability of the problem and the write
+        performance of the guest. Setting the value unnecessarily low
+        will cost performance without providing any benefits. An
+        interval of 1 will cause a flush for each write operation and
+        should solve the problem in any case, but has a severe write
+        performance penalty.
+      </p><p>
+        Providing a value of <code class="literal">0</code> for
+        <code class="literal">[<em class="replaceable"><code>b</code></em>]</code> is treated as
+        an infinite flush interval, effectively disabling this
+        workaround. Removing the extra data key by specifying no value
+        for <code class="literal">[<em class="replaceable"><code>b</code></em>]</code> has the
+        same effect.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_ide-sata-flush"></a>12.2.2. Responding to Guest IDE/SATA Flush Requests</h3></div></div></div><p>
+        If desired, the virtual disk images can be flushed when the
+        guest issues the IDE FLUSH CACHE command. Normally these
+        requests are ignored for improved performance. The parameters
+        below are only accepted for disk drives. They must not be set
+        for DVD drives.
+      </p><p>
+        To enable flushing for IDE disks, issue the following command:
+      </p><pre class="screen">$ VBoxManage setextradata <em class="replaceable"><code>VM-name</code></em> "VBoxInternal/Devices/piix3ide/0/LUN#[<em class="replaceable"><code>x</code></em>]/Config/IgnoreFlush" 0</pre><p>
+        <code class="literal">[<em class="replaceable"><code>x</code></em>]</code> specifies the
+        disk. Enter <code class="literal">0</code> for device 0 on the primary
+        channel, <code class="literal">1</code> for device 1 on the primary
+        channel, <code class="literal">2</code> for device 0 on the secondary
+        channel, or <code class="literal">3</code> for device 1 on the secondary
+        channel.
+      </p><p>
+        To enable flushing for SATA disks, issue the following command:
+      </p><pre class="screen">$ VBoxManage setextradata <em class="replaceable"><code>VM-name</code></em> "VBoxInternal/Devices/ahci/0/LUN#[x]/Config/IgnoreFlush" 0</pre><p>
+        The value [x] that selects the disk can be a value between 0 and
+        29.
+      </p><p>
+        Note that this does not affect the flushes performed according
+        to the configuration described in
+        <a href="ch12.html#ts_config-periodic-flush" title="12.2.1. Guest Shows IDE/SATA Errors for File-Based Images on Slow Host File
+        System">Section 12.2.1, &#8220;Guest Shows IDE/SATA Errors for File-Based Images on Slow Host File
+        System&#8221;</a>. Restoring the
+        default of ignoring flush commands is possible by setting the
+        value to 1 or by removing the key.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_host-freq-boost"></a>12.2.3. Performance Variation with Frequency Boosting</h3></div></div></div><p>
+        Many multicore processors support some form of frequency
+        boosting, which means that if only one core is utilized, it can
+        run possibly 50% faster or even more than the rated CPU
+        frequency. This causes measured performance to vary somewhat as
+        a function of the momentary overall system load. The exact
+        behavior depends strongly on the specific processor model.
+      </p><p>
+        As a consequence, benchmarking on systems which utilize
+        frequency boosting may produce unstable and non-repeatable
+        results. This is especially true if benchmark runs are short, of
+        the order of seconds. To obtain stable results, benchmarks must
+        be run over longer periods of time and with a constant system
+        load apart from the VM being tested.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_host-freq-scaling"></a>12.2.4. Frequency Scaling Effect on CPU Usage</h3></div></div></div><p>
+        On some hardware platforms and operating systems, CPU frequency
+        scaling may cause CPU usage reporting to be highly misleading.
+        This happens in situations when the host CPU load is significant
+        but not heavy, such as between 15% to 30% of the maximum.
+      </p><p>
+        Most operating systems determine CPU usage in terms of time
+        spent, measuring for example how many nanoseconds the systems or
+        a process was active within one second. However, in order to
+        save energy, systems can significantly scale down CPU speed when
+        the system is not fully loaded. When the CPU is running at for
+        example one half of its maximum speed, the same number of
+        instructions will take roughly twice as long to execute compared
+        to running at full speed.
+      </p><p>
+        Depending on the specific hardware and host OS, this effect can
+        very significantly skew the CPU usage reported by the OS. The
+        reported CPU usage can be several times higher than what it
+        would have been had the CPU been running at full speed. The
+        effect can be observed both on the host OS and in a guest OS.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win-cpu-usage-rept"></a>12.2.5. Inaccurate Windows CPU Usage Reporting</h3></div></div></div><p>
+        CPU usage reporting tools which come with Windows, such as Task
+        Manager or Resource Monitor, do not take the time spent
+        processing hardware interrupts into account. If the interrupt
+        load is heavy, with thousands of interrupts per second, CPU
+        usage may be significantly underreported.
+      </p><p>
+        This problem affects Windows as both host and guest OS.
+        Sysinternals tools, such as Process Explorer, do not suffer from
+        this problem.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_host-powermgmt"></a>12.2.6. Poor Performance Caused by Host Power Management</h3></div></div></div><p>
+        On some hardware platforms and operating systems, virtualization
+        performance is negatively affected by host CPU power management.
+        The symptoms may be choppy audio in the guest or erratic guest
+        clock behavior.
+      </p><p>
+        Some of the problems may be caused by firmware and/or host
+        operating system bugs. Therefore, updating the firmware and
+        applying operating systems fixes is recommended.
+      </p><p>
+        For optimal virtualization performance, the C1E power state
+        support in the system's BIOS should be disabled, if such a
+        setting is available. Not all systems support the C1E power
+        state. On Intel systems, the <code class="literal">Intel C State</code>
+        setting should be disabled. Disabling other power management
+        settings may also improve performance. However, a balance
+        between performance and power consumption must always be
+        considered.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_gui-2d-grayed-out"></a>12.2.7. GUI: 2D Video Acceleration Option is Grayed Out</h3></div></div></div><p>
+        To use 2D Video Acceleration within Oracle VM VirtualBox, your host's
+        video card should support certain OpenGL extensions. On startup,
+        Oracle VM VirtualBox checks for those extensions, and, if the test
+        fails, this option is silently grayed out.
+      </p><p>
+        To find out why it has failed, you can manually execute the
+        following command:
+      </p><pre class="screen">$ VBoxTestOGL --log "log_file_name" --test 2D</pre><p>
+        It will list the required OpenGL extensions one by one and will
+        show you which one failed the test. This usually means that you
+        are running an outdated or misconfigured OpenGL driver on your
+        host. It can also mean that your video chip is lacking required
+        functionality.
+      </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ts_win-guests"></a>12.3. Windows Guests</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win7-guest-usb3-support"></a>12.3.1. No USB 3.0 Support in Windows 7 Guests</h3></div></div></div><p>
+        If a Windows 7 or Windows Server 2008 R2 guest is configured for
+        USB 3.0 (xHCI) support, the guest OS will not have any USB
+        support at all. This happens because Windows 7 predates USB 3.0
+        and therefore does not ship with any xHCI drivers. Microsoft
+        also does not offer any vendor-provided xHCI drivers through
+        Windows Update.
+      </p><p>
+        To solve this problem, it is necessary to download and install
+        the Intel xHCI driver in the guest. Intel offers the driver as
+        the USB 3.0 eXtensible Host Controller (xHCI) driver for Intel 7
+        Series/C216 chipsets.
+      </p><p>
+        Note that the driver only supports Windows 7 and Windows Server
+        2008 R2. The driver package includes support for both 32-bit and
+        64-bit OS variants.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win-guest-bluescreen"></a>12.3.2. Windows Bluescreens After Changing VM Configuration</h3></div></div></div><p>
+        Changing certain virtual machine settings can cause Windows
+        guests to fail during start up with a bluescreen. This may
+        happen if you change VM settings after installing Windows, or if
+        you copy a disk image with an already installed Windows to a
+        newly created VM which has settings that differ from the
+        original machine.
+      </p><p>
+        This applies in particular to the following settings:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            The ACPI and I/O APIC settings should never be changed after
+            installing Windows. Depending on the presence of these
+            hardware features, the Windows installation program chooses
+            special kernel and device driver versions and will fail to
+            startup should these hardware features be removed. Enabling
+            them for a Windows VM which was installed without them does
+            not cause any harm. However, Windows will not use these
+            features in this case.
+          </p></li><li><p>
+            Changing the storage controller hardware will cause bootup
+            failures as well. This might also apply to you if you copy a
+            disk image from an older version of Oracle VM VirtualBox to a new
+            virtual machine. The default subtype of IDE controller
+            hardware used by Oracle VM VirtualBox is PIIX4. Make sure that the
+            storage controller settings are identical.
+          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win-guest-bluescreen-smp"></a>12.3.3. Windows 0x101 Bluescreens with SMP Enabled (IPI Timeout)</h3></div></div></div><p>
+        If a VM is configured to have more than one processor
+        (symmetrical multiprocessing, SMP), some configurations of
+        Windows guests crash with an 0x101 error message, indicating a
+        timeout for interprocessor interrupts (IPIs). These interrupts
+        synchronize memory management between processors.
+      </p><p>
+        According to Microsoft, this is due to a race condition in
+        Windows. A hotfix is available from Microsoft.
+      </p><p>
+        If this does not help, please reduce the number of virtual
+        processors to 1.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win2k-guest-install"></a>12.3.4. Windows 2000 Installation Failures</h3></div></div></div><p>
+        When installing Windows 2000 guests, you might run into one of
+        the following issues:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            Installation reboots, usually during component registration.
+          </p></li><li><p>
+            Installation fills the whole hard disk with empty log files.
+          </p></li><li><p>
+            Installation complains about a failure installing
+            <code class="filename">msgina.dll</code>.
+          </p></li></ul></div><p>
+        These problems are all caused by a bug in the hard disk driver
+        of Windows 2000. After issuing a hard disk request, there is a
+        race condition in the Windows driver code which leads to
+        corruption if the operation completes too fast. For example, the
+        hardware interrupt from the IDE controller arrives too soon.
+        With physical hardware, there is a guaranteed delay in most
+        systems so the problem is usually hidden there. However, it
+        should be possible to also reproduce it on physical hardware. In
+        a virtual environment, it is possible for the operation to be
+        done immediately, especially on very fast systems with multiple
+        CPUs, and the interrupt is signaled sooner than on a physical
+        system. The solution is to introduce an artificial delay before
+        delivering such interrupts. This delay can be configured for a
+        VM using the following command:
+      </p><pre class="screen">$ VBoxManage setextradata <em class="replaceable"><code>VM-name</code></em> "VBoxInternal/Devices/piix3ide/0/Config/IRQDelay" 1</pre><p>
+        This sets the delay to one millisecond. In case this does not
+        help, increase it to a value between 1 and 5 milliseconds.
+        Please note that this slows down disk performance. After
+        installation, you should be able to remove the key, or set it to
+        0.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win-guest-bluescreen-record-info"></a>12.3.5. How to Record Bluescreen Information from Windows Guests</h3></div></div></div><p>
+        When Windows guests run into a kernel crash, they display a
+        bluescreen error. Depending on how Windows is configured, the
+        information will remain on the screen until the machine is
+        restarted or it will reboot automatically. During installation,
+        Windows is usually configured to reboot automatically. With
+        automatic reboots, there is no chance to record the bluescreen
+        information which might be important for problem determination.
+      </p><p>
+        Oracle VM VirtualBox provides a method of halting a guest when it
+        wants to perform a reset. In order to enable this feature, use
+        the following command:
+      </p><pre class="screen">$ VBoxManage setextradata <em class="replaceable"><code>VM-name</code></em> "VBoxInternal/PDM/HaltOnReset" 1</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win-vista-guest-networking"></a>12.3.6. No Networking in Windows Vista Guests</h3></div></div></div><p>
+        With Windows Vista, Microsoft dropped support for the AMD PCNet
+        card that legacy versions of Oracle VM VirtualBox used to provide as
+        the default virtual network card. For Windows Vista guests,
+        Oracle VM VirtualBox now uses an Intel E1000 card by default.
+      </p><p>
+        If, for some reason, you still want to use the AMD card, you
+        need to download the PCNet driver from the AMD website. This
+        driver is available for 32-bit Windows only. You can transfer it
+        into the virtual machine using a shared folder. See
+        <a href="ch04.html#sharedfolders" title="4.3. Shared Folders">Section 4.3, &#8220;Shared Folders&#8221;</a>.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win-guest-high-cpu"></a>12.3.7. Windows Guests may Cause a High CPU Load</h3></div></div></div><p>
+        Several background applications of Windows guests, especially
+        virus scanners, are known to increase the CPU load notably even
+        if the guest appears to be idle. We recommend to deactivate
+        virus scanners within virtualized guests if possible.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win-guest-shared-folders-access-delay"></a>12.3.8. Long Delays When Accessing Shared Folders</h3></div></div></div><p>
+        The performance for accesses to shared folders from a Windows
+        guest might be decreased due to delays during the resolution of
+        the Oracle VM VirtualBox shared folders name service. To fix these
+        delays, add the following entries to the file
+        <code class="filename">\windows\system32\drivers\etc\lmhosts</code> of
+        the Windows guest:
+      </p><pre class="screen">255.255.255.255        VBOXSVR #PRE
+255.255.255.255        VBOXSRV #PRE</pre><p>
+        After doing this change, a reboot of the guest is required.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win98-guest-usb-tablet-coordinates"></a>12.3.9. USB Tablet Coordinates Wrong in Windows 98 Guests</h3></div></div></div><p>
+        If a Windows 98 VM is configured to use the emulated USB tablet
+        (absolute pointing device), the coordinate translation may be
+        incorrect and the pointer is restricted to the upper left
+        quarter of the guest's screen.
+      </p><p>
+        The USB HID (Human Interface Device) drivers in Windows 98 are
+        very old and do not handle tablets in the same way as modern
+        operating systems do. To work around the problem, use the
+        following command:
+      </p><pre class="screen">$ VBoxManage setextradata <em class="replaceable"><code>VM-name</code></em> "VBoxInternal/USB/HidMouse/0/Config/CoordShift" 0</pre><p>
+        To restore the default behavior, remove the key or set its value
+        to 1.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win-guest-active-dir-domain"></a>12.3.10. Windows Guests are Removed From an Active Directory Domain After
+        Restoring a Snapshot</h3></div></div></div><p>
+        If a Windows guest is a member of an Active Directory domain and
+        the snapshot feature of Oracle VM VirtualBox is used, it could be
+        removed from the Active Direcory domain after you restore an
+        older snapshot.
+      </p><p>
+        This is caused by automatic machine password changes performed
+        by Windows at regular intervals for security purposes. You can
+        disable this feature as shown in the following article from
+        Microsoft:
+        <a href="http://support.microsoft.com/kb/154501" target="_top">http://support.microsoft.com/kb/154501</a>.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win31-ram-limitations"></a>12.3.11. Windows 3.x Limited to 64 MB RAM</h3></div></div></div><p>
+        Windows 3.x guests are typically limited to 64 MB RAM, even if a
+        VM is assigned much more memory. While Windows 3.1 is
+        theoretically capable of using up to 512 MB RAM, it only uses
+        memory available through the XMS interface. Versions of
+        HIMEM.SYS, the Microsoft XMS manager, shipped with MS-DOS and
+        Microsoft Windows 3.x can only use up to 64 MB on standard PCs.
+      </p><p>
+        This is a known HIMEM.SYS limitation. Windows 3.1 memory limits
+        are described in detail in Microsoft Knowledge base article KB
+        84388.
+      </p><p>
+        It is possible for Windows 3.x guests to utilize more than 64 MB
+        RAM if a different XMS provider is used. That could be a newer
+        HIMEM.SYS version, such as that shipped with Windows 98, or a
+        more capable third-party memory manager, such as QEMM.
+      </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ts_lin-x11-guests"></a>12.4. Linux and X11 Guests</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_linux-guest-high-cpu"></a>12.4.1. Linux Guests May Cause a High CPU load</h3></div></div></div><p>
+        Some Linux guests may cause a high CPU load even if the guest
+        system appears to be idle. This can be caused by a high timer
+        frequency of the guest kernel. Some Linux distributions, for
+        example Fedora, ship a Linux kernel configured for a timer
+        frequency of 1000Hz. We recommend to recompile the guest kernel
+        and to select a timer frequency of 100Hz.
+      </p><p>
+        Linux kernels shipped with Red Hat Enterprise Linux, as well as
+        kernels of related Linux distributions, such as CentOS and
+        Oracle Linux, support a kernel parameter
+        <span class="emphasis"><em>divider=N</em></span>. Hence, such kernels support a
+        lower timer frequency without recompilation. We suggest you add
+        the kernel parameter <span class="emphasis"><em>divider=10</em></span> to select a
+        guest kernel timer frequency of 100Hz.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_linux-buggy"></a>12.4.2. Buggy Linux 2.6 Kernel Versions</h3></div></div></div><p>
+        The following bugs in Linux kernels prevent them from executing
+        correctly in Oracle VM VirtualBox, causing VM boot crashes:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            The Linux kernel version 2.6.18, and some 2.6.17 versions,
+            introduced a race condition that can cause boot crashes in
+            Oracle VM VirtualBox. Please use a kernel version 2.6.19 or later.
+          </p></li><li><p>
+            With hardware virtualization and the I/O APIC enabled,
+            kernels before 2.6.24-rc6 may panic on boot with the
+            following message:
+          </p><pre class="screen">Kernel panic - not syncing: IO-APIC + timer doesn't work!  Boot with
+apic=debug and send a report.  Then try booting with the 'noapic' option</pre><p>
+            If you see this message, either disable hardware
+            virtualization or the I/O APIC as described in
+            <a href="ch03.html#settings-system" title="3.5. System Settings">Section 3.5, &#8220;System Settings&#8221;</a>, or upgrade the guest to
+            a newer kernel.
+          </p><p>
+            See
+            <a href="http://www.mail-archive.com/git-commits-head@vger.kernel.org/msg30813.html" target="_top">http://www.mail-archive.com/git-commits-head@vger.kernel.org/msg30813.html</a>
+            for details about the kernel fix.
+          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_linux-guest-x11-services"></a>12.4.3. Shared Clipboard, Auto-Resizing, and Seamless Desktop in X11 Guests</h3></div></div></div><p>
+        Guest desktop services in guests running the X11 window system
+        such as Oracle Solaris and Linux, are provided by a guest
+        service called <span><strong class="command">VBoxClient</strong></span>, which runs under
+        the ID of the user who started the desktop session and is
+        automatically started using the following command lines when
+        your X11 user session is started if you are using a common
+        desktop environment such as Gnome or KDE.
+      </p><pre class="screen">$ VBoxClient --clipboard
+$ VBoxClient --display
+$ VBoxClient --seamless</pre><p>
+        If a particular desktop service is not working correctly, it is
+        worth checking whether the process which should provide it is
+        running.
+      </p><p>
+        The <span><strong class="command">VBoxClient</strong></span> processes create files in the
+        user's home directory with names of the form
+        <code class="filename">.vboxclient-*.pid</code> when they are running in
+        order to prevent a given service from being started twice. It
+        can happen due to misconfiguration that these files are created
+        owned by root and not deleted when the services are stopped,
+        which will prevent them from being started in future sessions.
+        If the services cannot be started, you may wish to check whether
+        these files still exist.
+      </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ts_sol-guests"></a>12.5. Oracle Solaris Guests</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_solaris-10-guest-slow-boot-smp"></a>12.5.1. Certain Oracle Solaris 10 Releases May Take a Long Time to Boot with SMP</h3></div></div></div><p>
+        When using more than one CPU, Oracle Solaris 10 10/08, and
+        Oracle Solaris 10 5/09 may take a long time to boot and may
+        print warnings on the system console regarding failures to read
+        from disk. This is a bug in Oracle Solaris 10 which affects
+        specific physical and virtual configurations. It is caused by
+        trying to read microcode updates from the boot disk when the
+        disk interrupt is reassigned to a not yet fully initialized
+        secondary CPU. Disk reads will time out and fail, triggering
+        delays of about 45 seconds and warnings.
+      </p><p>
+        The recommended solution is upgrading to at least Oracle Solaris
+        10 10/09 which includes a fix for this problem. Alternative
+        solutions include restricting the number of virtual CPUs to one
+        or possibly using a different storage controller.
+      </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ts_win-hosts"></a>12.6. Windows Hosts</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win-host-com-server"></a>12.6.1. VBoxSVC Out-of-Process COM Server Issues</h3></div></div></div><p>
+        Oracle VM VirtualBox makes use of the Microsoft Component Object Model
+        (COM) for interprocess and intraprocess communication. This
+        enables Oracle VM VirtualBox to share a common configuration among
+        different virtual machine processes and provide several user
+        interface options based on a common architecture. All global
+        status information and configuration is maintained by the
+        process <code class="filename">VBoxSVC.exe</code>, which is an
+        out-of-process COM server. Whenever an Oracle VM VirtualBox process is
+        started, it requests access to the COM server and Windows
+        automatically starts the process. Note that it should never be
+        started by the end user.
+      </p><p>
+        When the last process disconnects from the COM server, it will
+        terminate itself after some seconds. The Oracle VM VirtualBox
+        configuration XML files are maintained and owned by the COM
+        server and the files are locked whenever the server runs.
+      </p><p>
+        In some cases, such as when a virtual machine is terminated
+        unexpectedly, the COM server will not notice that the client is
+        disconnected and stay active for a longer period of 10 minutes
+        or so, keeping the configuration files locked. In other rare
+        cases the COM server might experience an internal error and
+        subsequently other processes fail to initialize it. In these
+        situations, it is recommended to use the Windows task manager to
+        kill the process <code class="filename">VBoxSVC.exe</code>.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win-host-cd-dvd-changes"></a>12.6.2. CD and DVD Changes Not Recognized</h3></div></div></div><p>
+        In case you have assigned a physical CD or DVD drive to a guest
+        and the guest does not notice when the medium changes, make sure
+        that the Windows media change notification (MCN) feature is not
+        turned off. This is represented by the following key in the
+        Windows registry:
+      </p><pre class="screen">HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Cdrom\Autorun</pre><p>
+        Certain applications may disable this key against Microsoft's
+        advice. If it is set to 0, change it to 1 and reboot your
+        system. Oracle VM VirtualBox relies on Windows notifying it of media
+        changes.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win-host-rdp-client"></a>12.6.3. Sluggish Response When Using Microsoft RDP Client</h3></div></div></div><p>
+        If connecting to a Virtual Machine using the Microsoft RDP
+        client, called a Remote Desktop Connection, there can be large
+        delays between input such as moving the mouse over a menu and
+        output. This is because this RDP client collects input for a
+        certain time before sending it to the RDP server.
+      </p><p>
+        The interval can be decreased by setting a Windows registry key
+        to smaller values than the default of 100. The key does not
+        exist initially and must be of type DWORD. The unit for its
+        values is milliseconds. Values around 20 are suitable for
+        low-bandwidth connections between the RDP client and server.
+        Values around 4 can be used for a gigabit Ethernet connection.
+        Generally values below 10 achieve a performance that is very
+        close to that of the local input devices and screen of the host
+        on which the Virtual Machine is running.
+      </p><p>
+        Depending whether the setting should be changed for an
+        individual user or for the system, set either of the following.
+      </p><pre class="screen">HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Min Send Interval</pre><pre class="screen">HKEY_LOCAL_MACHINE\Software\Microsoft\Terminal Server Client\Min Send Interval</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win-host-iscsi"></a>12.6.4. Running an iSCSI Initiator and Target on a Single System</h3></div></div></div><p>
+        Deadlocks can occur on a Windows host when attempting to access
+        an iSCSI target running in a guest virtual machine with an iSCSI
+        initiator, such as a Microsoft iSCSI Initiator, that is running
+        on the host. This is caused by a flaw in the Windows cache
+        manager component, and causes sluggish host system response for
+        several minutes, followed by a "Delayed Write Failed" error
+        message in the system tray or in a separate message window. The
+        guest is blocked during that period and may show error messages
+        or become unstable.
+      </p><p>
+        Setting the <code class="literal">VBOX_DISABLE_HOST_DISK_CACHE</code>
+        environment variable to <code class="literal">1</code> enables a
+        workaround for this problem until Microsoft addresses the issue.
+        For example, open a command prompt window and start
+        Oracle VM VirtualBox like this:
+      </p><pre class="screen">set VBOX_DISABLE_HOST_DISK_CACHE=1
+VirtualBox</pre><p>
+        While this will decrease guest disk performance, especially
+        writes, it does not affect the performance of other applications
+        running on the host.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win-host-bridged-network-adapters"></a>12.6.5. Bridged Networking Adapters Missing</h3></div></div></div><p>
+        If no bridged adapters show up in the
+        <span class="bold"><strong>Networking</strong></span> section of the VM
+        settings, this typically means that the bridged networking
+        driver was not installed properly on your host. This could be
+        due to the following reasons:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            The maximum allowed filter count was reached on the host. In
+            this case, the MSI log would mention the
+            <code class="literal">0x8004a029</code> error code returned on NetFlt
+            network component install, as follows:
+          </p><pre class="screen">VBoxNetCfgWinInstallComponent: Install failed, hr (0x8004a029)</pre><p>
+            You can try to increase the maximum filter count in the
+            Windows registry using the following key:
+          </p><pre class="screen">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Network\MaxNumFilters</pre><p>
+            The maximum number allowed is 14. After a reboot, try to
+            reinstall Oracle VM VirtualBox.
+          </p></li><li><p>
+            The INF cache is corrupt. In this case, the install log at
+            <code class="filename">%windir%\inf\setupapi.dev.log</code> would
+            typically mention the failure to find a suitable driver
+            package for either the <span><strong class="command">sun_VBoxNetFlt</strong></span> or
+            <span><strong class="command">sun_VBoxNetFltmp</strong></span> components. The solution
+            then is to uninstall Oracle VM VirtualBox, remove the INF cache
+            (<code class="filename">%windir%\inf\INFCACHE.1</code>), reboot and
+            try to reinstall Oracle VM VirtualBox.
+          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_win-host-host-only-network-adapters"></a>12.6.6. Host-Only Networking Adapters Cannot be Created</h3></div></div></div><p>
+        If a host-only adapter cannot be created, either with the
+        VirtualBox Manager or the <span><strong class="command">VBoxManage</strong></span> command,
+        then the INF cache is probably corrupt. In this case, the
+        install log at
+        <code class="filename">%windir%\inf\setupapi.dev.log</code> would
+        typically mention the failure to find a suitable driver package
+        for the <code class="filename">sun_VBoxNetAdp</code> component. Again, as
+        with the bridged networking problem described above, the
+        solution is to uninstall Oracle VM VirtualBox, remove the INF cache
+        (<code class="filename">%windir%\inf\INFCACHE.1</code>), reboot and try
+        to reinstall Oracle VM VirtualBox.
+      </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ts_lin-hosts"></a>12.7. Linux Hosts</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_linux-kernelmodule-fails-to-load"></a>12.7.1. Linux Kernel Module Refuses to Load</h3></div></div></div><p>
+        If the Oracle VM VirtualBox kernel module, <span><strong class="command">vboxdrv</strong></span>,
+        refuses to load you may see an <code class="literal">Error inserting vboxdrv:
+        Invalid argument</code> message. As root, check the output of
+        the <span><strong class="command">dmesg</strong></span> command to find out why the load
+        failed. Most probably the kernel disagrees with the version of
+        <span><strong class="command">gcc</strong></span> used to compile the module. Make sure
+        that you use the same compiler that was used to build the
+        kernel.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_linux-host-cd-dvd-not-found"></a>12.7.2. Linux Host CD/DVD or Floppy Disk Drive Not Found</h3></div></div></div><p>
+        If you have configured a virtual machine to use the host's CD or
+        DVD drive or floppy disk drive, but this does not appear to
+        work, make sure that the current user has permission to access
+        the corresponding Linux device file. For example, for a CD or
+        DVD drive this may be <code class="filename">/dev/hdc</code>,
+        <code class="filename">/dev/scd0</code>, <code class="filename">/dev/cdrom</code>
+        or similar. On most distributions, the user must be added to a
+        corresponding group, usually called <span><strong class="command">cdrom</strong></span> or
+        <span><strong class="command">cdrw</strong></span> or <span><strong class="command">floppy</strong></span>.
+      </p><p>
+        On supported Linux distributions, Oracle VM VirtualBox uses
+        <span><strong class="command">udev</strong></span> to locate hardware such as CD/DVD drives
+        and floppy disk drives.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_linux-host-ide-messages"></a>12.7.3. Strange Guest IDE Error Messages When Writing to CD or DVD</h3></div></div></div><p>
+        If the experimental CD or DVD writer support is enabled with an
+        incorrect host or guest configuration, it is possible that any
+        attempt to access the CD or DVD writer fails and simply results
+        in guest kernel error messages for Linux guests or application
+        error messages for Windows guests. Oracle VM VirtualBox performs the
+        usual consistency checks when a VM is powered up. In particular,
+        it aborts with an error message if the device for the CD or DVD
+        writer is not writable by the user starting the VM. But
+        Oracle VM VirtualBox cannot detect all misconfigurations. The
+        necessary host and guest OS configuration is not specific for
+        Oracle VM VirtualBox, but a few frequent problems are listed here
+        which occurred in connection with Oracle VM VirtualBox.
+      </p><p>
+        Special care must be taken to use the correct device. The
+        configured host CD or DVD device file name, in most cases
+        <code class="filename">/dev/cdrom</code>, must point to the device that
+        allows writing to the CD or DVD unit. For CD or DVD writer units
+        connected to a SCSI controller or to a IDE controller that
+        interfaces to the Linux SCSI subsystem, common for some SATA
+        controllers, this must refer to the SCSI device node, such as
+        <code class="filename">/dev/scd0</code>. Even for IDE CD or DVD writer
+        units this must refer to the appropriate SCSI CD-ROM device
+        node, such as <code class="filename">/dev/scd0</code>, if the
+        <span><strong class="command">ide-scsi</strong></span> kernel module is loaded. This module
+        is required for CD or DVD writer support with some early 2.6
+        kernels. Many Linux distributions load this module whenever a CD
+        or DVD writer is detected in the system, even if the kernel
+        would support CD or DVD writers without the module.
+        Oracle VM VirtualBox supports the use of IDE device files, such as
+        <code class="filename">/dev/hdc</code>, provided the kernel supports this
+        and the <span><strong class="command">ide-scsi</strong></span> module is not loaded.
+      </p><p>
+        Similar rules, except that within the guest the CD or DVD writer
+        is always an IDE device, apply to the guest configuration. Since
+        this setup is very common, it is likely that the default
+        configuration of the guest works as expected.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_linux-host-vboxsvc"></a>12.7.4. VBoxSVC IPC Issues</h3></div></div></div><p>
+        On Linux, Oracle VM VirtualBox makes use of a custom version of
+        Mozilla XPCOM (cross platform component object model) for
+        interprocess and intraprocess communication (IPC). The process
+        <span><strong class="command">VBoxSVC</strong></span> serves as a communication hub between
+        different Oracle VM VirtualBox processes and maintains the global
+        configuration, such as the XML database. When starting an
+        Oracle VM VirtualBox component, the processes
+        <span><strong class="command">VBoxSVC</strong></span> and <span><strong class="command">VBoxXPCOMIPCD</strong></span>
+        are started automatically. They are only accessible from the
+        user account they are running under. <span><strong class="command">VBoxSVC</strong></span>
+        owns the Oracle VM VirtualBox configuration database which normally
+        resides in <code class="filename">~/.config/VirtualBox</code>, or the
+        appropriate configuration directory for your operating system.
+        While it is running, the configuration files are locked.
+        Communication between the various Oracle VM VirtualBox components and
+        <span><strong class="command">VBoxSVC</strong></span> is performed through a local domain
+        socket residing in
+        <code class="filename">/tmp/.vbox-<em class="replaceable"><code>username</code></em>-ipc</code>.
+        In case there are communication problems, such as an
+        Oracle VM VirtualBox application cannot communicate with
+        <span><strong class="command">VBoxSVC</strong></span>, terminate the daemons and remove the
+        local domain socket directory.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_usb-linux"></a>12.7.5. USB Not Working</h3></div></div></div><p>
+        If USB is not working on your Linux host, make sure that the
+        current user is a member of the <code class="literal">vboxusers</code>
+        group. Please keep in mind that group membership does not take
+        effect immediately but rather at the next login. If available,
+        the <span><strong class="command">newgrp</strong></span> command may avoid the need for a
+        logout and login.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_linux-host-grsec"></a>12.7.6. PAX/grsec Kernels</h3></div></div></div><p>
+        Linux kernels including the grsec patch, see
+        <a href="http://www.grsecurity.net/" target="_top">http://www.grsecurity.net/</a>, and derivates have
+        to disable PAX_MPROTECT for the <span><strong class="command">VBox</strong></span> binaries
+        to be able to start a VM. The reason is that Oracle VM VirtualBox has
+        to create executable code on anonymous memory.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_linux-host-malloc"></a>12.7.7. Linux Kernel vmalloc Pool Exhausted</h3></div></div></div><p>
+        When running a large number of VMs with a lot of RAM on a Linux
+        system, say 20 VMs with 1 GB of RAM each, additional VMs might
+        fail to start with a kernel error saying that the vmalloc pool
+        is exhausted and should be extended. The error message also
+        tells you to specify <code class="literal">vmalloc=256MB</code> in your
+        kernel parameter list. If adding this parameter to your GRUB or
+        LILO configuration makes the kernel fail to boot, with an error
+        message such as <code class="literal">failed to mount the root
+        partition</code>, then you have probably run into a memory
+        conflict of your kernel and initial RAM disk. This can be solved
+        by adding the following parameter to your GRUB configuration:
+      </p><pre class="screen">uppermem 524288</pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ts_sol-hosts"></a>12.8. Oracle Solaris Hosts</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ts_sol-host-zfs"></a>12.8.1. Cannot Start VM, Not Enough Contiguous Memory</h3></div></div></div><p>
+        The ZFS file system is known to use nearly all available RAM as
+        cache if the default system settings are not changed. This may
+        lead to a heavy fragmentation of the host memory preventing
+        Oracle VM VirtualBox VMs from being started. We recommend to limit the
+        ZFS cache by adding the following line to
+        <code class="filename">/etc/system</code>, where
+        <em class="replaceable"><code>xxxx</code></em> bytes is the amount of memory
+        usable for the ZFS cache.
+      </p><pre class="screen">set zfs:zfs_arc_max = xxxx</pre></div></div></div></body></html>

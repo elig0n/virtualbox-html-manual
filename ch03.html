@@ -1,0 +1,1579 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter 3. Configuring Virtual Machines</title><meta name="generator" content="DocBook XSL Stylesheets V1.69.1"><link rel="start" href="index.html" title="Oracle® VM VirtualBox®"><link rel="up" href="index.html" title="Oracle® VM VirtualBox®"><link rel="prev" href="ch02.html" title="Chapter 2. Installation Details"><link rel="next" href="ch04.html" title="Chapter 4. Guest Additions"><style type="text/css"><!--
+   body
+   {
+     font-family:  Verdana, Sans-serif, Arial, 'Trebuchet MS', 'Times New Roman';
+     font-size: small;
+   }
+   h2.title
+   {
+     font-family: Verdana, Sans-serif, Arial, 'Trebuchet MS', 'Times New Roman';
+     margin: 5px 0 0;
+     padding: 1px 5px 1px;
+     border: 1px solid #6b89d4;
+     -moz-border-radius: 0.3em;
+     background: #e6edff;
+   }
+   .titlepage
+   {
+     text-align: center;
+   }
+   .refsynopsisdiv, .refsect1, .refsect2, .refsect3
+   {
+     text-align: left;
+   }
+   .warning
+   {
+     padding: 5px;
+     border: 1px solid #ff0011;
+     -moz-border-radius: 0.3em;
+     background: #ffbbbb;
+   }
+   .warning .title { margin: 0px 0px 5px 0px; }
+   .warning p { margin: 1px; }
+   .note
+   {
+     padding: 1px 5px 1px;
+     border: 1px solid #84c43b;
+     -moz-border-radius: 0.3em;
+     background: #d7e9a7;
+   }
+   .note .title { margin: 0px 0px 5px 0px; }
+   .note p { margin: 1px; }
+   .cmdsynopsis
+   {
+     font-family: monospace;
+   }
+   .refsynopsisdiv        > .cmdsynopsis p, .refsect1        > .cmdsynopsis p,
+   .refsynopsisdiv .sect2 > .cmdsynopsis p, .refsect1 .sect2 > .cmdsynopsis p
+   {
+     margin-top: 0px;
+     margin-bottom: 0px;
+   }
+   .cmdsynopsis p
+   {
+     padding-left: 3.4em;
+     text-indent: -2.2em;
+   }
+   p.nextcommand
+   {
+     margin-top:    0px;
+     margin-bottom: 0px;
+   }
+   p.lastcommand
+   {
+     margin-top:    0px;
+   }
+   .refentry * h3
+   {
+     font-size: large;
+   }
+   .refentry * h4
+   {
+     font-size: larger;
+   }
+   .refentry * h5
+   {
+     font-size: larger;
+   }
+
+  --></style></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="BasicConcepts"></a>Chapter 3. Configuring Virtual Machines</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="ch03.html#guestossupport">3.1. Supported Guest Operating Systems</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch03.html#intro-macosxguests">3.1.1. Mac OS X Guests</a></span></dt><dt><span class="sect2"><a href="ch03.html#intro-64bitguests">3.1.2. 64-bit Guests</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch03.html#basic-unattended">3.2. Unattended Guest Installation</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch03.html#unattended-guest-install-example">3.2.1. An Example of Unattended Guest Installation</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch03.html#emul-hardware">3.3. Emulated Hardware</a></span></dt><dt><span class="sect1"><a href="ch03.html#generalsettings">3.4. General Settings</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch03.html#settings-basic">3.4.1. Basic Tab</a></span></dt><dt><span class="sect2"><a href="ch03.html#settings-general-advanced">3.4.2. Advanced Tab</a></span></dt><dt><span class="sect2"><a href="ch03.html#settings-description">3.4.3. Description Tab</a></span></dt><dt><span class="sect2"><a href="ch03.html#settings-disk-encryption">3.4.4. Disk Encryption Tab</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch03.html#settings-system">3.5. System Settings</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch03.html#settings-motherboard">3.5.1. Motherboard Tab</a></span></dt><dt><span class="sect2"><a href="ch03.html#settings-processor">3.5.2. Processor Tab</a></span></dt><dt><span class="sect2"><a href="ch03.html#settings-acceleration">3.5.3. Acceleration Tab</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch03.html#settings-display">3.6. Display Settings</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch03.html#settings-screen">3.6.1. Screen Tab</a></span></dt><dt><span class="sect2"><a href="ch03.html#settings-remote-display">3.6.2. Remote Display Tab</a></span></dt><dt><span class="sect2"><a href="ch03.html#settings-capture">3.6.3. Recording Tab</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch03.html#settings-storage">3.7. Storage Settings</a></span></dt><dt><span class="sect1"><a href="ch03.html#settings-audio">3.8. Audio Settings</a></span></dt><dt><span class="sect1"><a href="ch03.html#settings-network">3.9. Network Settings</a></span></dt><dt><span class="sect1"><a href="ch03.html#serialports">3.10. Serial Ports</a></span></dt><dt><span class="sect1"><a href="ch03.html#usb-support">3.11. USB Support</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch03.html#settings-usb">3.11.1. USB Settings</a></span></dt><dt><span class="sect2"><a href="ch03.html#usb-implementation-notes">3.11.2. Implementation Notes for Windows and Linux Hosts</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch03.html#shared-folders">3.12. Shared Folders</a></span></dt><dt><span class="sect1"><a href="ch03.html#user-interface">3.13. User Interface</a></span></dt><dt><span class="sect1"><a href="ch03.html#efi">3.14. Alternative Firmware (EFI)</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch03.html#efividmode">3.14.1. Video Modes in EFI</a></span></dt><dt><span class="sect2"><a href="ch03.html#efibootargs">3.14.2. Specifying Boot Arguments</a></span></dt></dl></dd></dl></div><p>
+    This chapter provides detailed steps for configuring an
+    Oracle VM VirtualBox virtual machine (VM). For an introduction to
+    Oracle VM VirtualBox and steps to get your first virtual machine running,
+    see <a href="ch01.html" title="Chapter 1. First Steps">Chapter 1, <i>First Steps</i></a>.
+  </p><p>
+    You have considerable latitude when deciding what virtual hardware
+    to provide to the guest. Use virtual hardware to communicate with
+    the host system or with other guests. For example, you can use
+    virtual hardware in the following ways:
+  </p><div class="itemizedlist"><ul type="disc"><li><p>
+        Have Oracle VM VirtualBox present an ISO CD-ROM image to a guest
+        system as if it were a physical CD-ROM.
+      </p></li><li><p>
+        Provide a guest system access to the physical network through
+        its virtual network card.
+      </p></li><li><p>
+        Provide the host system, other guests, and computers on the
+        Internet access to the guest system.
+      </p></li></ul></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="guestossupport"></a>3.1. Supported Guest Operating Systems</h2></div></div></div><p>
+      Because Oracle VM VirtualBox is designed to provide a generic
+      virtualization environment for x86 systems, it can run guest
+      operating systems (OSes) of any kind.
+    </p><p>
+      The following guest OS platforms are supported:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          <span class="bold"><strong>Platforms With Full Support.</strong></span>
+          These guest OS platforms qualify for Oracle Premier Support.
+          See <a href="ch03.html#table-premier-support" title="Table 3.1. Guest Operating Systems With Full Support">Table 3.1, &#8220;Guest Operating Systems With Full Support&#8221;</a>.
+        </p></li><li><p>
+          <span class="bold"><strong>Platforms With Limited
+          Support.</strong></span> These legacy guest OS platforms can be
+          used with Oracle VM VirtualBox, but only qualify for <span class="emphasis"><em>best
+          effort</em></span> support. Therefore, resolution of customer
+          issues is not guaranteed. See
+          <a href="ch03.html#table-limited-support" title="Table 3.2. Legacy Guest Operating Systems With Limited Support">Table 3.2, &#8220;Legacy Guest Operating Systems With Limited Support&#8221;</a>.
+        </p></li></ul></div><div class="oracle-all"><a name="table-premier-support"></a><p class="title"><b>Table 3.1. Guest Operating Systems With Full Support</b></p><table summary="Guest Operating Systems With Full Support" border="1"><colgroup><col><col></colgroup><thead><tr><th><p>
+                <span class="bold"><strong>Operating System</strong></span>
+              </p></th><th><p>
+                <span class="bold"><strong>Comments</strong></span>
+              </p></th></tr></thead><tbody><tr><td><p>
+                Windows 10 (32-bit and 64-bit)
+              </p></td><td><p>
+                Insider preview builds are not supported
+              </p></td></tr><tr><td><p>
+                Windows 8 and 8.1 (32-bit and 64-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                Windows Server 2019 (64-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                Windows Server 2016 (64-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                Windows Server 2012 and 2012 R2 (64-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                Solaris 11 (32-bit and 64-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                Solaris 10 8/11 Update 10 and later (32-bit and 64-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                Oracle Linux 8 (64-bit)
+              </p></td><td><p>
+                Includes Red Hat Enterprise Linux 8, CentOS 8
+              </p></td></tr><tr><td><p>
+                Oracle Linux 7 (64-bit)
+              </p></td><td><p>
+                Includes Red Hat Enterprise Linux 7, CentOS 7
+              </p></td></tr><tr><td><p>
+                Oracle Linux 6 (32-bit and 64-bit)
+              </p></td><td><p>
+                Includes Red Hat Enterprise Linux 6, CentOS 6
+              </p></td></tr><tr><td><p>
+                Ubuntu 16.04 LTS (Xenial Xerus) (32-bit and 64-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                Ubuntu 18.04 LTS (Bionic Beaver) (64-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                Ubuntu 20.04 LTS (Focal Fossa) (64-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                SUSE Linux Enterprise Server 15 (64-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                SUSE Linux Enterprise Server 12 (64-bit)
+              </p></td><td><p></p></td></tr></tbody></table></div><div class="oracle-all"><a name="table-limited-support"></a><p class="title"><b>Table 3.2. Legacy Guest Operating Systems With Limited Support</b></p><table summary="Legacy Guest Operating Systems With Limited Support" border="1"><colgroup><col><col></colgroup><thead><tr><th><p>
+                <span class="bold"><strong>Operating System</strong></span>
+              </p></th><th><p>
+                <span class="bold"><strong>Comments</strong></span>
+              </p></th></tr></thead><tbody><tr><td><p>
+                Windows 7 (32-bit and 64-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                Windows Vista SP2 and later (32-bit and 64-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                Windows XP (32-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                Windows Vista (32-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                Windows Server 2008 and 2008 R2 (32-bit and 64-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                Windows Server 2003 (32-bit and 64-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                Oracle Linux 5 (32-bit and 64-bit)
+              </p></td><td><p>
+                Includes Red Hat Enterprise Linux 5, CentOS 5
+              </p></td></tr><tr><td><p>
+                Ubuntu 14.04.5 LTS (Trusty Tahr) (32-bit and 64-bit)
+              </p></td><td><p></p></td></tr><tr><td><p>
+                OS/2 Warp 4.5
+              </p></td><td><p></p></td></tr></tbody></table></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="intro-macosxguests"></a>3.1.1. Mac OS X Guests</h3></div></div></div><p>
+        Oracle VM VirtualBox enables you to install and execute unmodified
+        versions of Mac OS X guests on supported host hardware. Note
+        that this feature is experimental and thus unsupported.
+      </p><p>
+        Oracle VM VirtualBox is the first product to provide the modern PC
+        architecture expected by OS X without requiring any of the
+        modifications used by competing virtualization solutions. For
+        example, some competing solutions perform modifications to the
+        Mac OS X install DVDs, such as a different boot loader and
+        replaced files.
+      </p><p>
+        Be aware of the following important issues before you attempt to
+        install a Mac OS X guest:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            Mac OS X is commercial, licensed software and contains
+            <span class="bold"><strong>both license and technical
+            restrictions</strong></span> that limit its use to certain
+            hardware and usage scenarios. You must understand and comply
+            with these restrictions.
+          </p><p>
+            In particular, Apple prohibits the installation of most
+            versions of Mac OS X on non-Apple hardware.
+          </p><p>
+            These license restrictions are also enforced on a technical
+            level. Mac OS X verifies that it is running on Apple
+            hardware. Most DVDs that accompany Apple hardware check for
+            the exact model. These restrictions are
+            <span class="emphasis"><em>not</em></span> circumvented by Oracle VM VirtualBox and
+            continue to apply.
+          </p></li><li><p>
+            Only <span class="bold"><strong>CPUs</strong></span> that are known
+            and tested by Apple are supported. As a result, if your
+            Intel CPU is newer than the Mac OS X build, or if you have a
+            non-Intel CPU, you will likely encounter a panic during
+            bootup with an "Unsupported CPU" exception.
+          </p><p>
+            Ensure that you use the Mac OS X DVD that comes with your
+            Apple hardware.
+          </p></li><li><p>
+            The Mac OS X installer expects the hard disk to be
+            <span class="emphasis"><em>partitioned</em></span>. So, the installer will not
+            offer a partition selection to you. Before you can install
+            the software successfully, start the Disk Utility from the
+            Tools menu and partition the hard disk. Close the Disk
+            Utility and proceed with the installation.
+          </p></li><li><p>
+            In addition, Mac OS X support in Oracle VM VirtualBox is an
+            experimental feature. See <a href="ch14.html" title="Chapter 14. Known Limitations">Chapter 14, <i>Known Limitations</i></a>.
+          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="intro-64bitguests"></a>3.1.2. 64-bit Guests</h3></div></div></div><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>
+          Be sure to enable <span class="bold"><strong>I/O APIC</strong></span>
+          for virtual machines that you intend to use in 64-bit mode.
+          This is especially true for 64-bit Windows VMs. See
+          <a href="ch03.html#settings-general-advanced" title="3.4.2. Advanced Tab">Section 3.4.2, &#8220;Advanced Tab&#8221;</a>. For 64-bit
+          Windows guests, ensure that the VM uses the
+          <span class="bold"><strong>Intel networking device</strong></span>
+          because there is no 64-bit driver support for the AMD PCNet
+          card. See <a href="ch06.html#nichardware" title="6.1. Virtual Networking Hardware">Section 6.1, &#8220;Virtual Networking Hardware&#8221;</a>.
+        </p></div><p>
+        If you use the <span class="bold"><strong>Create VM</strong></span> wizard
+        of the VirtualBox Manager, Oracle VM VirtualBox automatically uses the
+        correct settings for each selected 64-bit OS type. See
+        <a href="ch01.html#gui-createvm" title="1.7. Creating Your First Virtual Machine">Section 1.7, &#8220;Creating Your First Virtual Machine&#8221;</a>.
+      </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="basic-unattended"></a>3.2. Unattended Guest Installation</h2></div></div></div><p>
+      Oracle VM VirtualBox can install a guest OS automatically. You only need
+      to provide the installation medium and a few other parameters,
+      such as the name of the default user.
+    </p><p>
+      Performing an unattended guest installation involves the following
+      steps:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          <span class="bold"><strong>Create a new VM.</strong></span> Use one of
+          the following methods:
+        </p><div class="itemizedlist"><ul type="circle"><li><p>
+              The VirtualBox Manager, see
+              <a href="ch01.html#gui-createvm" title="1.7. Creating Your First Virtual Machine">Section 1.7, &#8220;Creating Your First Virtual Machine&#8221;</a>.
+            </p></li><li><p>
+              The <span><strong class="command">VBoxManage createvm</strong></span> command, see
+              <a href="ch08.html#vboxmanage-createvm" title="8.7. VBoxManage createvm">Section 8.7, &#8220;VBoxManage createvm&#8221;</a>.
+            </p></li></ul></div><p>
+          For the new VM, choose the guest OS type and accept the
+          default settings for that OS. The following sections in this
+          chapter describe how to change the settings for a VM.
+        </p></li><li><p>
+          <span class="bold"><strong>Prepare the VM for unattended guest
+          installation.</strong></span> Use the <span><strong class="command">VBoxManage
+          unattended</strong></span> command, see
+          <a href="ch08.html#vboxmanage-unattended" title="8.37. VBoxManage unattended">Section 8.37, &#8220;VBoxManage unattended&#8221;</a>.
+        </p><p>
+          During this step, Oracle VM VirtualBox scans the installation medium
+          and changes certain parameters to ensure a seamless
+          installation as a guest running on Oracle VM VirtualBox.
+        </p></li><li><p>
+          <span class="bold"><strong>Start the VM.</strong></span> Use the
+          VirtualBox Manager or the <span><strong class="command">VBoxManage
+          startvm</strong></span> command.
+        </p><p>
+          When you start the VM, the unattended installation is
+          performed automatically.
+        </p><p>
+          The installation operation changes the boot device order to
+          boot the virtual hard disk first and then the virtual DVD
+          drive. If the virtual hard disk is empty prior to the
+          automatic installation, the VM boots from the virtual DVD
+          drive and begins the installation.
+        </p><p>
+          If the virtual hard disk contains a bootable OS, the
+          installation operation exits. In this case, change the boot
+          device order manually by pressing F12 during the BIOS splash
+          screen.
+        </p></li></ul></div><p>
+      <a href="ch03.html#unattended-guest-install-example" title="3.2.1. An Example of Unattended Guest Installation">Section 3.2.1, &#8220;An Example of Unattended Guest Installation&#8221;</a> describes how
+      to perform an unattended guest installation for an Oracle Linux
+      guest.
+    </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="unattended-guest-install-example"></a>3.2.1. An Example of Unattended Guest Installation</h3></div></div></div><p>
+        The following example shows how to perform an unattended guest
+        installation for an Oracle Linux VM. The example uses various
+        <span><strong class="command">VBoxManage</strong></span> commands to prepare the guest VM.
+        The <span><strong class="command">VBoxManage unattended install</strong></span> command is
+        then used to install and configure the guest OS.
+      </p><div class="orderedlist"><ol type="1"><li><p>
+            Create the virtual machine.
+          </p><pre class="screen"># VM="ol7-autoinstall"
+# VBoxManage list ostypes
+# VBoxManage createvm --name $VM --ostype "Oracle_64" --register</pre><p>
+            Note the following:
+          </p><div class="itemizedlist"><ul type="disc"><li><p>
+                The $VM variable represents the name of the VM.
+              </p></li><li><p>
+                The <span><strong class="command">VBoxManage list ostypes</strong></span> command
+                lists the guest OSes supported by Oracle VM VirtualBox,
+                including the name used for each OS in the
+                <span><strong class="command">VBoxManage</strong></span> commands.
+              </p></li><li><p>
+                A 64-bit Oracle Linux 7 VM is created and registered
+                with Oracle VM VirtualBox.
+              </p></li><li><p>
+                The VM has a unique UUID.
+              </p></li><li><p>
+                An XML settings file is generated.
+              </p></li></ul></div></li><li><p>
+            Create a virtual hard disk and storage devices for the VM.
+          </p><pre class="screen"># VBoxManage createhd --filename /VirtualBox/$VM/$VM.vdi --size 32768
+# VBoxManage storagectl $VM --name "SATA Controller" --add sata --controller IntelAHCI
+# VBoxManage storageattach $VM --storagectl "SATA Controller" --port 0 --device 0 \
+--type hdd --medium /VirtualBox/$VM/$VM.vdi
+# VBoxManage storagectl $VM --name "IDE Controller" --add ide
+# VBoxManage storageattach $VM --storagectl "IDE Controller" --port 0 --device 0 \
+--type dvddrive --medium /u01/Software/OL/OracleLinux-R7-U6-Server-x86_64-dvd.iso</pre><p>
+            The previous commands do the following:
+          </p><div class="itemizedlist"><ul type="disc"><li><p>
+                Create a 32768 MB virtual hard disk.
+              </p></li><li><p>
+                Create a SATA storage controller and attach the virtual
+                hard disk.
+              </p></li><li><p>
+                Create an IDE storage controller for a virtual DVD drive
+                and attach an Oracle Linux installation ISO.
+              </p></li></ul></div></li><li><p>
+            (Optional) Configure some settings for the VM.
+          </p><pre class="screen"># VBoxManage modifyvm $VM --ioapic on
+# VBoxManage modifyvm $VM --boot1 dvd --boot2 disk --boot3 none --boot4 none
+# VBoxManage modifyvm $VM --memory 8192 --vram 128</pre><p>
+            The previous commands do the following:
+          </p><div class="itemizedlist"><ul type="disc"><li><p>
+                Enable I/O APIC for the motherboard of the VM.
+              </p></li><li><p>
+                Configure the boot device order for the VM.
+              </p></li><li><p>
+                Allocate 8192 MB of RAM and 128 MB of video RAM to the
+                VM.
+              </p></li></ul></div></li><li><p>
+            Perform an unattended install of the OS.
+          </p><pre class="screen"># VBoxManage unattended install $VM \
+--iso=/u01/Software/OL/OracleLinux-R7-U6-Server-x86_64-dvd.iso \
+--user=<em class="replaceable"><code>login</code></em> --full-user-name=<em class="replaceable"><code>name</code></em> --password <em class="replaceable"><code>password</code></em> \
+--install-additions --time-zone=CET</pre><p>
+            The previous command does the following:
+          </p><div class="itemizedlist"><ul type="disc"><li><p>
+                Specifies an Oracle Linux ISO as the installation ISO.
+              </p></li><li><p>
+                Specifies a login name, full name, and login password
+                for a default user on the guest OS.
+              </p><p>
+                Note that the specified password is also used for the
+                root user account on the guest.
+              </p></li><li><p>
+                Installs the Guest Additions on the VM.
+              </p></li><li><p>
+                Sets the time zone for the guest OS to Central European
+                Time (CET).
+              </p></li></ul></div></li><li><p>
+            Start the virtual machine.
+          </p><p>
+            This step completes the unattended installation process.
+          </p><pre class="screen"># VBoxManage startvm $VM --type headless</pre><p>
+            The VM starts in headless mode, which means that the
+            VirtualBox Manager window does not open.
+          </p></li><li><p>
+            (Optional) Update the guest OS to use the latest Oracle
+            Linux packages.
+          </p><p>
+            On the guest VM, run the following command:
+          </p><pre class="screen"># yum update</pre></li></ol></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="emul-hardware"></a>3.3. Emulated Hardware</h2></div></div></div><p>
+      Oracle VM VirtualBox virtualizes nearly all hardware of the host.
+      Depending on a VM's configuration, the guest will see the
+      following virtual hardware:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          <span class="bold"><strong>Input devices.</strong></span> Oracle VM VirtualBox
+          can emulate a standard PS/2 keyboard and mouse. These devices
+          are supported by most guest OSes.
+        </p><p>
+          In addition, Oracle VM VirtualBox can provide virtual USB input
+          devices to avoid having to capture mouse and keyboard, as
+          described in <a href="ch01.html#keyb_mouse_normal" title="1.8.2. Capturing and Releasing Keyboard and Mouse">Section 1.8.2, &#8220;Capturing and Releasing Keyboard and Mouse&#8221;</a>.
+        </p></li><li><p>
+          <span class="bold"><strong>Graphics.</strong></span> The default
+          Oracle VM VirtualBox graphics device for Windows guests is an SVGA
+          device. For Linux guests, the default graphics device emulates
+          a VMware SVGA graphics device. See
+          <a href="ch03.html#settings-screen" title="3.6.1. Screen Tab">Section 3.6.1, &#8220;Screen Tab&#8221;</a>.
+        </p><p>
+          For legacy guest OSes, a VGA-compatible graphics device is
+          available.
+        </p></li><li><p>
+          <span class="bold"><strong>Storage.</strong></span> Oracle VM VirtualBox
+          emulates the most common types of hard disk controllers. See
+          <a href="ch05.html#harddiskcontrollers" title="5.1. Hard Disk Controllers">Section 5.1, &#8220;Hard Disk Controllers&#8221;</a>. Whereas supporting
+          only one of these controllers would be enough for
+          Oracle VM VirtualBox by itself, this multitude of storage adapters
+          is required for compatibility with other hypervisors. Windows
+          is very selective about its boot devices, and migrating VMs
+          between hypervisors is very difficult or impossible if the
+          storage controllers are different.
+        </p></li><li><p>
+          <span class="bold"><strong>Networking.</strong></span> See
+          <a href="ch06.html#nichardware" title="6.1. Virtual Networking Hardware">Section 6.1, &#8220;Virtual Networking Hardware&#8221;</a>.
+        </p></li><li><p>
+          <span class="bold"><strong>USB.</strong></span> Oracle VM VirtualBox emulates
+          these types of USB host controllers: xHCI, EHCI, and OHCI.
+          While xHCI handles all USB transfer speeds, some legacy guest
+          OSes may not support xHCI. Note that for some legacy Windows
+          guests, third party drivers must be installed for xHCI
+          support.
+        </p><p>
+          Legacy guest OSes typically support OHCI and EHCI. These two
+          controllers are needed because OHCI only handles USB low-speed
+          and full-speed devices (both USB 1.x and 2.0), while EHCI only
+          handles high-speed devices (USB 2.0 only).
+        </p><p>
+          The emulated USB controllers do not communicate directly with
+          devices on the host. Instead they communicate with a virtual
+          USB layer which abstracts the USB protocol and enables the use
+          of remote USB devices.
+        </p></li><li><p>
+          <span class="bold"><strong>Audio.</strong></span> See
+          <a href="ch03.html#settings-audio" title="3.8. Audio Settings">Section 3.8, &#8220;Audio Settings&#8221;</a>.
+        </p></li></ul></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="generalsettings"></a>3.4. General Settings</h2></div></div></div><p>
+      In the <span class="bold"><strong>Settings</strong></span> window, under
+      <span class="bold"><strong>General</strong></span>, you can configure the
+      most fundamental aspects of the virtual machine such as memory and
+      essential hardware. The following tabs are available.
+    </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="settings-basic"></a>3.4.1. Basic Tab</h3></div></div></div><p>
+        In the <span class="bold"><strong>Basic</strong></span> tab of the
+        <span class="bold"><strong>General</strong></span> settings category, you
+        can find these settings:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            <span class="bold"><strong>Name:</strong></span> The name of the the
+            VM, as shown in the list of VMs in the main VirtualBox
+            Manager window. Using this name, Oracle VM VirtualBox also saves
+            the VM's configuration files. If you change the name,
+            Oracle VM VirtualBox renames these files as well. As a result, you
+            can only use characters which are allowed for file names on
+            your host OS.
+          </p><p>
+            Note that internally, Oracle VM VirtualBox uses unique identifiers
+            (UUIDs) to identify virtual machines. You can display these
+            using the <span><strong class="command">VBoxManage</strong></span> commands.
+          </p></li><li><p>
+            <span class="bold"><strong>Type:</strong></span> The type of the guest
+            OS for the VM. This is the same setting that is specified in
+            the <span class="bold"><strong>New Virtual Machine</strong></span>
+            wizard. See <a href="ch01.html#gui-createvm" title="1.7. Creating Your First Virtual Machine">Section 1.7, &#8220;Creating Your First Virtual Machine&#8221;</a>.
+          </p><p>
+            Whereas the default settings of a newly created VM depend on
+            the selected OS type, changing the type later has no effect
+            on VM settings. This value is purely informational and
+            decorative.
+          </p></li><li><p>
+            <span class="bold"><strong>Version:</strong></span> The version of the
+            guest OS for the VM. This is the same setting that is
+            specified in the <span class="bold"><strong>New Virtual
+            Machine</strong></span> wizard. See
+            <a href="ch01.html#gui-createvm" title="1.7. Creating Your First Virtual Machine">Section 1.7, &#8220;Creating Your First Virtual Machine&#8221;</a>.
+          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="settings-general-advanced"></a>3.4.2. Advanced Tab</h3></div></div></div><p>
+        The following settings are available in the
+        <span class="bold"><strong>Advanced</strong></span> tab:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            <span class="bold"><strong>Snapshot Folder:</strong></span> By
+            default, Oracle VM VirtualBox saves snapshot data together with
+            your other Oracle VM VirtualBox configuration data. See
+            <a href="ch10.html#vboxconfigdata" title="10.1. Where Oracle VM VirtualBox Stores its Files">Section 10.1, &#8220;Where Oracle VM VirtualBox Stores its Files&#8221;</a>. With this setting, you
+            can specify any other folder for each VM.
+          </p></li><li><p>
+            <span class="bold"><strong>Shared Clipboard:</strong></span> You can
+            select here whether the clipboard of the guest OS should be
+            shared with that of your host. If you select
+            <span class="bold"><strong>Bidirectional</strong></span>, then
+            Oracle VM VirtualBox will always make sure that both clipboards
+            contain the same data. If you select
+            <span class="bold"><strong>Host to Guest</strong></span> or
+            <span class="bold"><strong>Guest to Host</strong></span>, then
+            Oracle VM VirtualBox will only ever copy clipboard data in one
+            direction.
+          </p><p>
+            Clipboard sharing requires that the Oracle VM VirtualBox Guest
+            Additions be installed. In such a case, this setting has no
+            effect. See <a href="ch04.html" title="Chapter 4. Guest Additions">Chapter 4, <i>Guest Additions</i></a>.
+          </p><p>
+            For security reasons, the shared clipboard is disabled by
+            default. This setting can be changed at any time using the
+            <span class="bold"><strong>Shared Clipboard</strong></span> menu item
+            in the <span class="bold"><strong>Devices</strong></span> menu of the
+            virtual machine.
+          </p></li><li><p>
+            <span class="bold"><strong>Drag and Drop:</strong></span> This setting
+            enables support for drag and drop. Select an object, such as
+            a file, from the host or guest and directly copy or open it
+            on the guest or host. Multiple drag and drop modes for a VM
+            enable restricting of access in either direction.
+          </p><p>
+            For drag and drop to work the Guest Additions need to be
+            installed on the guest.
+          </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+              Drag and drop is disabled by default. This setting can be
+              changed at any time using the <span class="bold"><strong>Drag
+              and Drop</strong></span> menu item in the
+              <span class="bold"><strong>Devices</strong></span> menu of the
+              virtual machine.
+            </p></div><p>
+            See <a href="ch04.html#guestadd-dnd" title="4.4. Drag and Drop">Section 4.4, &#8220;Drag and Drop&#8221;</a>.
+          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="settings-description"></a>3.4.3. Description Tab</h3></div></div></div><p>
+        On the <span class="bold"><strong>Description</strong></span> tab you can
+        enter a description for your virtual machine. This has no effect
+        on the functionality of the machine, but you may find this space
+        useful to note down things such as the configuration of a
+        virtual machine and the software that has been installed into
+        it.
+      </p><p>
+        To insert a line break into the
+        <span class="bold"><strong>Description</strong></span> text field, press
+        Shift+Enter.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="settings-disk-encryption"></a>3.4.4. Disk Encryption Tab</h3></div></div></div><p>
+        The <span class="bold"><strong>Disk Encryption</strong></span> tab enables
+        you to encrypt disks that are attached to the virtual machine.
+      </p><p>
+        To enable disk encryption, select the
+        <span class="bold"><strong>Enable Disk Encryption</strong></span> check
+        box.
+      </p><p>
+        Settings are available to configure the cipher used for
+        encryption and the encryption password.
+      </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+          All files related to the virtual machine except disk images
+          are stored unencrypted.
+        </p></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="settings-system"></a>3.5. System Settings</h2></div></div></div><p>
+      The <span class="bold"><strong>System</strong></span> category groups
+      various settings that are related to the basic hardware that is
+      presented to the virtual machine.
+    </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+        As the activation mechanism of Microsoft Windows is sensitive to
+        hardware changes, if you are changing hardware settings for a
+        Windows guest, some of these changes may trigger a request for
+        another activation with Microsoft.
+      </p></div><p>
+      The following tabs are available.
+    </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="settings-motherboard"></a>3.5.1. Motherboard Tab</h3></div></div></div><p>
+        On the <span class="bold"><strong>Motherboard</strong></span> tab, you can
+        configure virtual hardware that would normally be on the
+        motherboard of a real computer.
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            <span class="bold"><strong>Base Memory:</strong></span> Sets the
+            amount of RAM that is allocated and given to the VM when it
+            is running. The specified amount of memory will be requested
+            from the host OS, so it must be available or made available
+            as free memory on the host when attempting to start the VM
+            and will not be available to the host while the VM is
+            running. This is the same setting that was specified in the
+            <span class="bold"><strong>New Virtual Machine</strong></span> wizard,
+            as described in <a href="ch01.html#gui-createvm" title="1.7. Creating Your First Virtual Machine">Section 1.7, &#8220;Creating Your First Virtual Machine&#8221;</a>.
+          </p><p>
+            Generally, it is possible to change the memory size after
+            installing the guest OS. But you must not reduce the memory
+            to an amount where the OS would no longer boot.
+          </p></li><li><p>
+            <span class="bold"><strong>Boot Order:</strong></span> Determines the
+            order in which the guest OS will attempt to boot from the
+            various virtual boot devices. Analogous to a real PC's BIOS
+            setting, Oracle VM VirtualBox can tell a guest OS to start from
+            the virtual floppy, the virtual CD/DVD drive, the virtual
+            hard drive (each of these as defined by the other VM
+            settings), the network, or none of these.
+          </p><p>
+            If you select <span class="bold"><strong>Network</strong></span>, the
+            VM will attempt to boot from a network using the PXE
+            mechanism. This needs to be configured in detail on the
+            command line. See <a href="ch08.html#vboxmanage-modifyvm" title="8.8. VBoxManage modifyvm">Section 8.8, &#8220;VBoxManage modifyvm&#8221;</a>.
+          </p></li><li><p>
+            <span class="bold"><strong>Chipset:</strong></span> You can select
+            which chipset will be presented to the virtual machine.
+            PIIX3 is the default chipset for most guests. For some guest
+            OSes such as Mac OS X, the PIIX3 chipset is not well
+            supported. As a result, Oracle VM VirtualBox supports an emulation
+            of the ICH9 chipset, which supports PCI express, three PCI
+            buses, PCI-to-PCI bridges and Message Signaled Interrupts
+            (MSI). This enables modern OSes to address more PCI devices
+            and no longer requires IRQ sharing. Using the ICH9 chipset
+            it is also possible to configure up to 36 network cards,
+            compared to a maximum of eight network adapters with PIIX3.
+            Note that ICH9 support is experimental and not recommended
+            for guest OSes which do not require it.
+          </p></li><li><p>
+            <span class="bold"><strong>Pointing Device:</strong></span> The
+            default virtual pointing device for some guest OSes is the
+            traditional PS/2 mouse. If set to <span class="bold"><strong>USB
+            Tablet</strong></span>, Oracle VM VirtualBox reports to the virtual
+            machine that a USB tablet device is present and communicates
+            mouse events to the virtual machine through this device.
+            Another setting is <span class="bold"><strong>USB Multi-Touch
+            Tablet</strong></span>, which is suitable for guests running
+            Windows 8 or later.
+          </p><p>
+            Using the virtual USB tablet has the advantage that
+            movements are reported in absolute coordinates, instead of
+            as relative position changes. This enables Oracle VM VirtualBox to
+            translate mouse events over the VM window into tablet events
+            without having to "capture" the mouse in the guest as
+            described in <a href="ch01.html#keyb_mouse_normal" title="1.8.2. Capturing and Releasing Keyboard and Mouse">Section 1.8.2, &#8220;Capturing and Releasing Keyboard and Mouse&#8221;</a>. This
+            makes using the VM less tedious even if Guest Additions are
+            not installed.
+          </p></li><li><p>
+            <span class="bold"><strong>Enable I/O APIC:</strong></span> Advanced
+            Programmable Interrupt Controllers (APICs) are an x86
+            hardware feature that have replaced Programmable Interrupt
+            Controllers (PICs). With an I/O APIC, OSes can use more than
+            16 interrupt requests (IRQs) and therefore avoid IRQ sharing
+            for improved reliability.
+          </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+              Enabling the I/O APIC is <span class="emphasis"><em>required</em></span>,
+              especially for 64-bit Windows guest OSes. It is also
+              required if you want to use more than one virtual CPU in a
+              virtual machine.
+            </p></div><p>
+            However, software support for I/O APICs has been unreliable
+            with some OSes other than Windows. Also, the use of an I/O
+            APIC slightly increases the overhead of virtualization and
+            therefore slows down the guest OS a little.
+          </p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>
+              All Windows OSes install different kernels, depending on
+              whether an I/O APIC is available. As with ACPI, the I/O
+              APIC therefore <span class="emphasis"><em>must not be turned off after
+              installation</em></span> of a Windows guest OS. Turning it
+              on after installation will have no effect however.
+            </p></div></li><li><p>
+            <span class="bold"><strong>Enable EFI:</strong></span> Enables
+            Extensible Firmware Interface (EFI), which replaces the
+            legacy BIOS and may be useful for certain advanced use
+            cases. See <a href="ch03.html#efi" title="3.14. Alternative Firmware (EFI)">Section 3.14, &#8220;Alternative Firmware (EFI)&#8221;</a>.
+          </p></li><li><p>
+            <span class="bold"><strong>Hardware Clock in UTC Time:</strong></span>
+            If selected, Oracle VM VirtualBox will report the system time in
+            UTC format to the guest instead of the local (host) time.
+            This affects how the virtual real-time clock (RTC) operates
+            and may be useful for UNIX-like guest OSes, which typically
+            expect the hardware clock to be set to UTC.
+          </p></li></ul></div><p>
+        In addition, you can turn off the <span class="bold"><strong>Advanced
+        Configuration and Power Interface (ACPI)</strong></span> which
+        Oracle VM VirtualBox presents to the guest OS by default.
+      </p><p>
+        ACPI is the current industry standard to allow OSes to recognize
+        hardware, configure motherboards and other devices and manage
+        power. As most computers contain this feature and Windows and
+        Linux support ACPI, it is also enabled by default in
+        Oracle VM VirtualBox. ACPI can only be turned off using the command
+        line. See <a href="ch08.html#vboxmanage-modifyvm" title="8.8. VBoxManage modifyvm">Section 8.8, &#8220;VBoxManage modifyvm&#8221;</a>.
+      </p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>
+          All Windows OSes install different kernels, depending on
+          whether ACPI is available. This means that ACPI <span class="emphasis"><em>must
+          not be turned off</em></span> after installation of a Windows
+          guest OS. However, turning it on after installation will have
+          no effect.
+        </p></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="settings-processor"></a>3.5.2. Processor Tab</h3></div></div></div><p>
+        On the <span class="bold"><strong>Processor</strong></span> tab, you can
+        configure settings for the CPU used by the virtual machine.
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            <span class="bold"><strong>Processor(s):</strong></span> Sets the
+            number of virtual CPU cores the guest OSes can see.
+            Oracle VM VirtualBox supports symmetrical multiprocessing (SMP)
+            and can present up to 32 virtual CPU cores to each virtual
+            machine.
+          </p><p>
+            You should not configure virtual machines to use more CPU
+            cores than are available physically. This includes real
+            cores, with no hyperthreads.
+          </p></li><li><p>
+            <span class="bold"><strong>Execution Cap:</strong></span> Configures
+            the CPU execution cap. This limits the amount of time a host
+            CPU spends to emulate a virtual CPU. The default setting is
+            100%, meaning that there is no limitation. A setting of 50%
+            implies a single virtual CPU can use up to 50% of a single
+            host CPU. Note that limiting the execution time of the
+            virtual CPUs may cause guest timing problems.
+          </p><p>
+            A warning is displayed at the bottom of the Processor tab if
+            an Execution Cap setting is made that may affect system
+            performance.
+          </p></li><li><p>
+            <span class="bold"><strong>Enable PAE/NX:</strong></span> Determines
+            whether the PAE and NX capabilities of the host CPU will be
+            exposed to the virtual machine.
+          </p><p>
+            PAE stands for Physical Address Extension. Normally, if
+            enabled and supported by the OS, then even a 32-bit x86 CPU
+            can access more than 4 GB of RAM. This is made possible by
+            adding another 4 bits to memory addresses, so that with 36
+            bits, up to 64 GB can be addressed. Some OSes, such as
+            Ubuntu Server, require PAE support from the CPU and cannot
+            be run in a virtual machine without it.
+          </p></li><li><p>
+            <span class="bold"><strong>Enable Nested VT-x/AMD-V</strong></span>:
+            Enables nested virtualization, with passthrough of hardware
+            virtualization functions to the guest VM.
+          </p></li></ul></div><p>
+        With virtual machines running modern server OSes, Oracle VM VirtualBox
+        also supports CPU hot-plugging. For details, see
+        <a href="ch09.html#cpuhotplug" title="9.4. CPU Hot-Plugging">Section 9.4, &#8220;CPU Hot-Plugging&#8221;</a>.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="settings-acceleration"></a>3.5.3. Acceleration Tab</h3></div></div></div><p>
+        On this tab, you can configure Oracle VM VirtualBox to use hardware
+        virtualization extensions that your host CPU supports.
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            <span class="bold"><strong>Paravirtualization
+            Interface:</strong></span> Oracle VM VirtualBox provides
+            paravirtualization interfaces to improve time-keeping
+            accuracy and performance of guest OSes. The options
+            available are documented under the
+            <code class="option">--paravirtprovider</code> option in
+            <a href="ch08.html#vboxmanage-modifyvm" title="8.8. VBoxManage modifyvm">Section 8.8, &#8220;VBoxManage modifyvm&#8221;</a>. For further details
+            on the paravirtualization providers, see
+            <a href="ch10.html#gimproviders" title="10.5. Paravirtualization Providers">Section 10.5, &#8220;Paravirtualization Providers&#8221;</a>.
+          </p></li><li><p>
+            <span class="bold"><strong>Hardware Virtualization:</strong></span>
+            You can configure hardware virtualization features for each
+            virtual machine.
+          </p><div class="itemizedlist"><ul type="circle"><li><p>
+                <span class="bold"><strong>Enable Nested Paging:</strong></span>
+                If the host CPU supports the nested paging (AMD-V) or
+                EPT (Intel VT-x) features, then you can expect a
+                significant performance increase by enabling nested
+                paging in addition to hardware virtualization. For
+                technical details, see <a href="ch10.html#nestedpaging" title="10.6. Nested Paging and VPIDs">Section 10.6, &#8220;Nested Paging and VPIDs&#8221;</a>.
+                For Intel EPT security recommendations, see
+                <a href="ch13.html#sec-rec-cve-2018-3646" title="13.4.1. CVE-2018-3646">Section 13.4.1, &#8220;CVE-2018-3646&#8221;</a>.
+              </p></li></ul></div><p>
+            Advanced users may be interested in technical details about
+            hardware virtualization. See <a href="ch10.html#hwvirt" title="10.3. Hardware Virtualization">Section 10.3, &#8220;Hardware Virtualization&#8221;</a>.
+          </p></li></ul></div><p>
+        In most cases, the default settings on the
+        <span class="bold"><strong>Acceleration</strong></span> tab will work
+        well. Oracle VM VirtualBox selects sensible defaults, depending on the
+        OS that you selected when you created the virtual machine. In
+        certain situations, however, you may want to change the
+        preconfigured defaults.
+      </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="settings-display"></a>3.6. Display Settings</h2></div></div></div><p>
+      The following tabs are available for configuring the display for a
+      virtual machine.
+    </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="settings-screen"></a>3.6.1. Screen Tab</h3></div></div></div><div class="itemizedlist"><ul type="disc"><li><p>
+            <span class="bold"><strong>Video Memory:</strong></span> Sets the size
+            of the memory provided by the virtual graphics card
+            available to the guest, in MB. As with the main memory, the
+            specified amount will be allocated from the host's resident
+            memory. Based on the amount of video memory, higher
+            resolutions and color depths may be available.
+          </p><p>
+            The GUI will show a warning if the amount of video memory is
+            too small to be able to switch the VM into full screen mode.
+            The minimum value depends on the number of virtual monitors,
+            the screen resolution and the color depth of the host
+            display as well as on the use of <span class="emphasis"><em>3D
+            acceleration</em></span> and <span class="emphasis"><em>2D video
+            acceleration</em></span>. A rough estimate is
+            (<span class="emphasis"><em>color depth</em></span> / 8) x <span class="emphasis"><em>vertical
+            pixels</em></span> x <span class="emphasis"><em>horizontal pixels</em></span> x
+            <span class="emphasis"><em>number of screens</em></span> = <span class="emphasis"><em>number of
+            bytes</em></span>. Extra memory may be required if display
+            acceleration is used.
+          </p></li><li><p>
+            <span class="bold"><strong>Monitor Count:</strong></span> With this
+            setting, Oracle VM VirtualBox can provide more than one virtual
+            monitor to a virtual machine. If a guest OS supports
+            multiple attached monitors, Oracle VM VirtualBox can pretend that
+            multiple virtual monitors are present. Up to eight such
+            virtual monitors are supported.
+          </p><p>
+            The output of the multiple monitors are displayed on the
+            host in multiple VM windows which are running side by side.
+            However, in full screen and seamless mode, they use the
+            available physical monitors attached to the host. As a
+            result, for full screen and seamless modes to work with
+            multiple monitors, you will need at least as many physical
+            monitors as you have virtual monitors configured, or
+            Oracle VM VirtualBox will report an error.
+          </p><p>
+            You can configure the relationship between guest and host
+            monitors using the <span class="bold"><strong>View</strong></span>
+            menu by pressing Host key + Home when you are in full screen
+            or seamless mode.
+          </p><p>
+            See also <a href="ch14.html" title="Chapter 14. Known Limitations">Chapter 14, <i>Known Limitations</i></a>.
+          </p></li><li><p>
+            <span class="bold"><strong>Scale Factor:</strong></span> Enables
+            scaling of the display size. For multiple monitor displays,
+            you can set the scale factor for individual monitors, or
+            globally for all of the monitors. Use the slider to select a
+            scaling factor up to 200%.
+          </p><p>
+            You can set a default scale factor for all VMs. Use the
+            <span class="bold"><strong>Display</strong></span> tab in the Global
+            Settings dialogs.
+          </p></li><li><p>
+            <span class="bold"><strong>Graphics Controller:</strong></span>
+            Specifies the graphics adapter type used by the guest VM.
+            Note that you must install the Guest Additions on the guest
+            VM to specify the VBoxSVGA or VMSVGA graphics controller.
+            The following options are available:
+          </p><div class="itemizedlist"><ul type="circle"><li><p>
+                <span class="bold"><strong>VBoxSVGA:</strong></span> The default
+                graphics controller for new VMs that use Windows 7 or
+                later.
+              </p><p>
+                This graphics controller improves performance and 3D
+                support when compared to the legacy VBoxVGA option.
+              </p></li><li><p>
+                <span class="bold"><strong>VBoxVGA:</strong></span> Use this
+                graphics controller for legacy guest OSes. This is the
+                default graphics controller for Windows versions before
+                Windows 7 and for Oracle Solaris.
+              </p><p>
+                3D acceleration is not supported for this graphics
+                controller.
+              </p></li><li><p>
+                <span class="bold"><strong>VMSVGA:</strong></span> Use this
+                graphics controller to emulate a VMware SVGA graphics
+                device. This is the default graphics controller for
+                Linux guests.
+              </p></li><li><p>
+                <span class="bold"><strong>None:</strong></span> Does not emulate
+                a graphics adapter type.
+              </p></li></ul></div></li><li><p>
+            <span class="bold"><strong>Enable 3D Acceleration:</strong></span> If
+            a virtual machine has Guest Additions installed, you can
+            select here whether the guest should support accelerated 3D
+            graphics. See <a href="ch04.html#guestadd-3d" title="4.5.1. Hardware 3D Acceleration (OpenGL and Direct3D 8/9)">Section 4.5.1, &#8220;Hardware 3D Acceleration (OpenGL and Direct3D 8/9)&#8221;</a>.
+          </p></li><li><p>
+            <span class="bold"><strong>Enable 2D Video
+            Acceleration:</strong></span> If a virtual machine with Microsoft
+            Windows has Guest Additions installed, you can select here
+            whether the guest should support accelerated 2D video
+            graphics. See <a href="ch04.html#guestadd-2d" title="4.5.2. Hardware 2D Video Acceleration for Windows Guests">Section 4.5.2, &#8220;Hardware 2D Video Acceleration for Windows Guests&#8221;</a>.
+          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="settings-remote-display"></a>3.6.2. Remote Display Tab</h3></div></div></div><p>
+        On the <span class="bold"><strong>Remote Display</strong></span> tab, if
+        the VirtualBox Remote Display Extension (VRDE) is installed, you
+        can enable the VRDP server that is built into Oracle VM VirtualBox.
+        This enables you to connect to the console of the virtual
+        machine remotely with any standard RDP viewer, such as
+        <span><strong class="command">mstsc.exe</strong></span> that comes with Microsoft Windows.
+        On Linux and Oracle Solaris systems you can use the standard
+        open source <span><strong class="command">rdesktop</strong></span> program. These features
+        are described in <a href="ch07.html#vrde" title="7.1. Remote Display (VRDP Support)">Section 7.1, &#8220;Remote Display (VRDP Support)&#8221;</a>.
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            <span class="bold"><strong>Enable Server:</strong></span> Select this
+            check box and configure settings for the remote display
+            connection.
+          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="settings-capture"></a>3.6.3. Recording Tab</h3></div></div></div><p>
+        On the <span class="bold"><strong>Recording</strong></span> tab you can
+        enable video and audio recording for a virtual machine and
+        change related settings. Note that these features can be enabled
+        and disabled while a VM is running.
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            <span class="bold"><strong>Enable Recording:</strong></span> Select
+            this check box and select a <span class="bold"><strong>Recording
+            Mode</strong></span> option.
+          </p></li><li><p>
+            <span class="bold"><strong>Recording Mode:</strong></span> You can
+            choose to record video, audio, or both video and audio.
+          </p><p>
+            Some settings on the
+            <span class="bold"><strong>Recording</strong></span> tab may be grayed
+            out, depending on the <span class="bold"><strong>Recording
+            Mode</strong></span> setting.
+          </p></li><li><p>
+            <span class="bold"><strong>File Path:</strong></span> The file where
+            the recording is saved.
+          </p></li><li><p>
+            <span class="bold"><strong>Frame Size:</strong></span> The video
+            resolution of the recorded video, in pixels. The drop-down
+            list enables you to select from common frame sizes.
+          </p></li><li><p>
+            <span class="bold"><strong>Frame Rate:</strong></span> Use the slider
+            to set the maximum number of video frames per second (FPS)
+            to record. Frames that have a higher frequency are skipped.
+            Increasing this value reduces the number of skipped frames
+            and increases the file size.
+          </p></li><li><p>
+            <span class="bold"><strong>Video Quality:</strong></span> Use the
+            slider to set the the bit rate of the video in kilobits per
+            second. Increasing this value improves the appearance of the
+            video at the cost of an increased file size.
+          </p></li><li><p>
+            <span class="bold"><strong>Audio Quality:</strong></span> Use the
+            slider to set the quality of the audio recording. Increasing
+            this value improves the audio quality at the cost of an
+            increased file size.
+          </p></li><li><p>
+            <span class="bold"><strong>Screens:</strong></span> For a multiple
+            monitor display, you can select which screens to record
+            video from.
+          </p></li></ul></div><p>
+        As you adjust the video and audio recording settings, the
+        approximate output file size for a five minute video is shown.
+      </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="settings-storage"></a>3.7. Storage Settings</h2></div></div></div><p>
+      The <span class="bold"><strong>Storage</strong></span> category in the VM
+      settings enables you to connect virtual hard disk, CD/DVD, and
+      floppy images and drives to your virtual machine.
+    </p><p>
+      In a real computer, so-called <span class="emphasis"><em>storage
+      controllers</em></span> connect physical disk drives to the rest of
+      the computer. Similarly, Oracle VM VirtualBox presents virtual storage
+      controllers to a virtual machine. Under each controller, the
+      virtual devices, such as hard disks, CD/DVD or floppy drives,
+      attached to the controller are shown.
+    </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+        This section gives a quick introduction to the Oracle VM VirtualBox
+        storage settings. See <a href="ch05.html" title="Chapter 5. Virtual Storage">Chapter 5, <i>Virtual Storage</i></a> for a full
+        description of the available storage settings in Oracle VM VirtualBox.
+      </p></div><p>
+      If you have used the <span class="bold"><strong>Create VM</strong></span>
+      wizard to create a machine, you will normally see something like
+      the following:
+    </p><div class="figure"><a name="fig-storage-settings"></a><p class="title"><b>Figure 3.1. Storage Settings for a Virtual Machine</b></p><div class="mediaobject" align="center"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0" width="354"><tr><td align="center"><img src="images/vm-settings-harddisk.png" align="middle" width="354" alt="Storage Settings for a Virtual Machine"></td></tr></table></div></div><p>
+      Depending on the guest OS type that you selected when you created
+      the VM, a new VM includes the following storage devices:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          <span class="bold"><strong>IDE controller.</strong></span> A virtual
+          CD/DVD drive is attached to device 0 on the secondary channel
+          of the IDE controller.
+        </p></li><li><p>
+          <span class="bold"><strong>SATA controller.</strong></span> This is a
+          modern type of storage controller for higher hard disk data
+          throughput, to which the virtual hard disks are attached.
+          Initially you will normally have one such virtual disk, but as
+          shown in the previous screenshot, you can have more than one.
+          Each is represented by a disk image file, such as a VDI file
+          in this example.
+        </p></li></ul></div><p>
+      If you created your VM with an older version of Oracle VM VirtualBox,
+      the default storage layout may differ. You might then only have an
+      IDE controller to which both the CD/DVD drive and the hard disks
+      have been attached. This might also apply if you selected an older
+      OS type when you created the VM. Since older OSes do not support
+      SATA without additional drivers, Oracle VM VirtualBox will make sure
+      that no such devices are present initially. See
+      <a href="ch05.html#harddiskcontrollers" title="5.1. Hard Disk Controllers">Section 5.1, &#8220;Hard Disk Controllers&#8221;</a>.
+    </p><p>
+      Oracle VM VirtualBox also provides a <span class="emphasis"><em>floppy
+      controller</em></span>. You cannot add devices other than floppy
+      drives to this controller. Virtual floppy drives, like virtual
+      CD/DVD drives, can be connected to either a host floppy drive, if
+      you have one, or a disk image, which in this case must be in RAW
+      format.
+    </p><p>
+      You can modify these media attachments freely. For example, if you
+      wish to copy some files from another virtual disk that you
+      created, you can connect that disk as a second hard disk, as in
+      the above screenshot. You could also add a second virtual CD/DVD
+      drive, or change where these items are attached. The following
+      options are available:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          To <span class="bold"><strong>add another virtual hard disk, or a
+          CD/DVD or floppy drive</strong></span>, select the storage
+          controller to which it should be added (such as IDE, SATA,
+          SCSI, SAS, floppy controller) and then click the
+          <span class="bold"><strong>Add Disk</strong></span> button below the
+          tree. You can then either select <span class="bold"><strong>Optical
+          Drive</strong></span> or <span class="bold"><strong>Hard
+          Disk</strong></span>. If you clicked on a floppy controller, you
+          can add a floppy drive instead. Alternatively, right-click on
+          the storage controller and select a menu item there.
+        </p><p>
+          A dialog is displayed, enabling you to select an existing disk
+          image file or to create a new disk image file. Depending on
+          the type of disk image, the dialog is called
+          <span class="bold"><strong>Hard Disk Selector</strong></span>,
+          <span class="bold"><strong>Optical Disk Selector</strong></span>, or
+          <span class="bold"><strong>Floppy Disk Selector</strong></span>.
+        </p><p>
+          See <a href="ch05.html#vdidetails" title="5.2. Disk Image Files (VDI, VMDK, VHD, HDD)">Section 5.2, &#8220;Disk Image Files (VDI, VMDK, VHD, HDD)&#8221;</a> for information on the image
+          file types that are supported by Oracle VM VirtualBox.
+        </p><p>
+          For virtual CD/DVD drives, the image files will typically be
+          in the standard ISO format instead. Most commonly, you will
+          select this option when installing an OS from an ISO file that
+          you have obtained from the Internet. For example, most Linux
+          distributions are available in this way.
+        </p><p>
+          Depending on the type of disk image, you can set the following
+          <span class="bold"><strong>Attributes</strong></span> for the disk image
+          in the right part of the Storage settings page:
+        </p><div class="itemizedlist"><ul type="circle"><li><p>
+              The <span class="bold"><strong>device slot</strong></span> of the
+              controller that the virtual disk is connected to. IDE
+              controllers have four slots: primary device 0, primary
+              device 1, secondary device 0, and secondary device 1. By
+              contrast, SATA and SCSI controllers offer you up to 30
+              slots for attaching virtual devices.
+            </p></li><li><p>
+              <span class="bold"><strong>Solid-state Drive</strong></span>
+              presents a virtual disk to the guest as a solid-state
+              device.
+            </p></li><li><p>
+              <span class="bold"><strong>Hot-pluggable</strong></span> presents a
+              virtual disk to the guest as a hot-pluggable device.
+            </p></li><li><p>
+              For virtual CD/DVD drives, you can select
+              <span class="bold"><strong>Live CD/DVD</strong></span>. This means
+              that the virtual optical disk is not removed from when the
+              guest system ejects it.
+            </p></li></ul></div></li><li><p>
+          To <span class="bold"><strong>remove an attachment</strong></span>,
+          either select it and click on the
+          <span class="bold"><strong>Remove</strong></span> icon at the bottom, or
+          right-click on it and select the menu item.
+        </p></li></ul></div><p>
+      Removable media, such as CD/DVDs and floppies, can be changed
+      while the guest is running. Since the
+      <span class="bold"><strong>Settings</strong></span> dialog is not available
+      at that time, you can also access these settings from the
+      <span class="bold"><strong>Devices</strong></span> menu of your virtual
+      machine window.
+    </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="settings-audio"></a>3.8. Audio Settings</h2></div></div></div><p>
+      The <span class="bold"><strong>Audio</strong></span> section in a virtual
+      machine's <span class="bold"><strong>Settings</strong></span> window
+      determines whether the VM will detect a connected sound card, and
+      if the audio output should be played on the host system.
+    </p><p>
+      To enable audio for a guest, select the
+      <span class="bold"><strong>Enable Audio</strong></span> check box. The
+      following settings are available:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          <span class="bold"><strong>Host Audio Driver:</strong></span> The audio
+          driver that Oracle VM VirtualBox uses on the host. On a Linux host,
+          depending on your host configuration, you can select between
+          the OSS, ALSA, or the PulseAudio subsystem. On newer Linux
+          distributions, the PulseAudio subsystem is preferred.
+        </p><p>
+          Only OSS is supported on Oracle Solaris hosts. The Oracle
+          Solaris Audio audio backend is no longer supported on Oracle
+          Solaris hosts.
+        </p></li><li><p>
+          <span class="bold"><strong>Audio Controller:</strong></span> You can
+          choose between the emulation of an Intel AC'97 controller, an
+          Intel HD Audio controller, or a SoundBlaster 16 card.
+        </p></li><li><p>
+          <span class="bold"><strong>Enable Audio Output:</strong></span> Enables
+          audio output only for the VM.
+        </p></li><li><p>
+          <span class="bold"><strong>Enable Audio Input:</strong></span> Enables
+          audio input only for the VM.
+        </p></li></ul></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="settings-network"></a>3.9. Network Settings</h2></div></div></div><p>
+      The <span class="bold"><strong>Network</strong></span> section in a virtual
+      machine's <span class="bold"><strong>Settings</strong></span> window enables
+      you to configure how Oracle VM VirtualBox presents virtual network cards
+      to your VM, and how they operate.
+    </p><p>
+      When you first create a virtual machine, Oracle VM VirtualBox by default
+      enables one virtual network card and selects the Network Address
+      Translation (NAT) mode for it. This way the guest can connect to
+      the outside world using the host's networking and the outside
+      world can connect to services on the guest which you choose to
+      make visible outside of the virtual machine.
+    </p><p>
+      This default setup is good for the majority of Oracle VM VirtualBox
+      users. However, Oracle VM VirtualBox is extremely flexible in how it can
+      virtualize networking. It supports many virtual network cards per
+      virtual machine. The first four virtual network cards can be
+      configured in detail in the VirtualBox Manager window. Additional
+      network cards can be configured using the
+      <span><strong class="command">VBoxManage</strong></span> command.
+    </p><p>
+      Many networking options are available. See
+      <a href="ch06.html" title="Chapter 6. Virtual Networking">Chapter 6, <i>Virtual Networking</i></a> for more information.
+    </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="serialports"></a>3.10. Serial Ports</h2></div></div></div><p>
+      Oracle VM VirtualBox supports the use of virtual serial ports in a
+      virtual machine.
+    </p><p>
+      Ever since the original IBM PC, personal computers have been
+      equipped with one or two serial ports, also called COM ports by
+      DOS and Windows. Serial ports were commonly used with modems, and
+      some computer mice used to be connected to serial ports before USB
+      became commonplace.
+    </p><p>
+      While serial ports are no longer as common as they used to be,
+      there are still some important uses left for them. For example,
+      serial ports can be used to set up a primitive network over a
+      null-modem cable, in case Ethernet is not available. Also, serial
+      ports are indispensable for system programmers needing to do
+      kernel debugging, since kernel debugging software usually
+      interacts with developers over a serial port. With virtual serial
+      ports, system programmers can do kernel debugging on a virtual
+      machine instead of needing a real computer to connect to.
+    </p><p>
+      If a virtual serial port is enabled, the guest OS sees a standard
+      16550A compatible UART device. Other UART types can be configured
+      using the <span><strong class="command">VBoxManage modifyvm</strong></span> command. Both
+      receiving and transmitting data is supported. How this virtual
+      serial port is then connected to the host is configurable, and the
+      details depend on your host OS.
+    </p><p>
+      You can use either the Settings tabs or the
+      <span><strong class="command">VBoxManage</strong></span> command to set up virtual serial
+      ports. For the latter, see <a href="ch08.html#vboxmanage-modifyvm" title="8.8. VBoxManage modifyvm">Section 8.8, &#8220;VBoxManage modifyvm&#8221;</a>
+      for information on the <code class="option">--uart</code>,
+      <code class="option">--uartmode</code> and <code class="option">--uarttype</code>
+      options.
+    </p><p>
+      You can configure up to four virtual serial ports per virtual
+      machine. For each device, you must set the following:
+    </p><div class="orderedlist"><ol type="1"><li><p>
+          <span class="bold"><strong>Port Number:</strong></span> This determines
+          the serial port that the virtual machine should see. For best
+          results, use the traditional values as follows:
+        </p><div class="itemizedlist"><ul type="disc"><li><p>
+              COM1: I/O base 0x3F8, IRQ 4
+            </p></li><li><p>
+              COM2: I/O base 0x2F8, IRQ 3
+            </p></li><li><p>
+              COM3: I/O base 0x3E8, IRQ 4
+            </p></li><li><p>
+              COM4: I/O base 0x2E8, IRQ 3
+            </p></li></ul></div><p>
+          You can also configure a user-defined serial port. Enter an
+          I/O base address and interrupt (IRQ).
+        </p></li><li><p>
+          <span class="bold"><strong>Port Mode:</strong></span> What the virtual
+          port is connected to. For each virtual serial port, you have
+          the following options:
+        </p><div class="itemizedlist"><ul type="disc"><li><p>
+              <span class="bold"><strong>Disconnected:</strong></span> The guest
+              will see the device, but it will behave as if no cable had
+              been connected to it.
+            </p></li><li><p>
+              <span class="bold"><strong>Host Device:</strong></span> Connects the
+              virtual serial port to a physical serial port on your
+              host. On a Windows host, this will be a name like
+              <code class="literal">COM1</code>. On Linux or Oracle Solaris hosts,
+              it will be a device node like
+              <code class="filename">/dev/ttyS0</code>. Oracle VM VirtualBox will then
+              simply redirect all data received from and sent to the
+              virtual serial port to the physical device.
+            </p></li><li><p>
+              <span class="bold"><strong>Host Pipe:</strong></span> Configure
+              Oracle VM VirtualBox to connect the virtual serial port to a
+              software pipe on the host. This depends on your host OS,
+              as follows:
+            </p><div class="itemizedlist"><ul type="circle"><li><p>
+                  On a Windows host, data will be sent and received
+                  through a named pipe. The pipe name must be in the
+                  format
+                  <code class="filename">\\.\pipe\<em class="replaceable"><code>name</code></em></code>
+                  where <em class="replaceable"><code>name</code></em> should identify
+                  the virtual machine but may be freely chosen.
+                </p></li><li><p>
+                  On a Mac OS, Linux, or Oracle Solaris host, a local
+                  domain socket is used instead. The socket filename
+                  must be chosen such that the user running
+                  Oracle VM VirtualBox has sufficient privileges to create and
+                  write to it. The <code class="filename">/tmp</code> directory
+                  is often a good candidate.
+                </p><p>
+                  On Linux there are various tools which can connect to
+                  a local domain socket or create one in server mode.
+                  The most flexible tool is <span><strong class="command">socat</strong></span> and
+                  is available as part of many distributions.
+                </p></li></ul></div><p>
+              In this case, you can configure whether Oracle VM VirtualBox
+              should create the named pipe, or the local domain socket
+              non-Windows hosts, itself or whether Oracle VM VirtualBox should
+              assume that the pipe or socket exists already. With the
+              <span><strong class="command">VBoxManage</strong></span> command-line options, this
+              is referred to as server mode or client mode,
+              respectively.
+            </p><p>
+              For a direct connection between two virtual machines,
+              corresponding to a null-modem cable, simply configure one
+              VM to create a pipe or socket and another to attach to it.
+            </p></li><li><p>
+              <span class="bold"><strong>Raw File:</strong></span> Send the
+              virtual serial port output to a file. This option is very
+              useful for capturing diagnostic output from a guest. Any
+              file may be used for this purpose, as long as the user
+              running Oracle VM VirtualBox has sufficient privileges to create
+              and write to the file.
+            </p></li><li><p>
+              <span class="bold"><strong>TCP Socket:</strong></span> Useful for
+              forwarding serial traffic over TCP/IP, acting as a server,
+              or it can act as a TCP client connecting to other servers.
+              This option enables a remote machine to directly connect
+              to the guest's serial port using TCP.
+            </p><div class="itemizedlist"><ul type="circle"><li><p>
+                  <span class="bold"><strong>TCP Server:</strong></span> Deselect
+                  the <span class="bold"><strong>Connect to Existing
+                  Pipe/Socket</strong></span> check box and specify the port
+                  number in the
+                  <span class="bold"><strong>Path/Address</strong></span> field.
+                  This is typically 23 or 2023. Note that on UNIX-like
+                  systems you will have to use a port a number greater
+                  than 1024 for regular users.
+                </p><p>
+                  The client can use software such as
+                  <span><strong class="command">PuTTY</strong></span> or the
+                  <span><strong class="command">telnet</strong></span> command line tool to access
+                  the TCP Server.
+                </p></li><li><p>
+                  <span class="bold"><strong>TCP Client:</strong></span> To create
+                  a virtual null-modem cable over the Internet or LAN,
+                  the other side can connect using TCP by specifying
+                  <code class="literal"><em class="replaceable"><code>hostname</code></em>:<em class="replaceable"><code>port</code></em></code>
+                  in the <span class="bold"><strong>Path/Address</strong></span>
+                  field. The TCP socket will act in client mode if you
+                  select the <span class="bold"><strong>Connect to Existing
+                  Pipe/Socket</strong></span> check box.
+                </p></li></ul></div></li></ul></div></li></ol></div><p>
+      Up to four serial ports can be configured per virtual machine, but
+      you can pick any port numbers out of the above. However, serial
+      ports cannot reliably share interrupts. If both ports are to be
+      used at the same time, they must use different interrupt levels,
+      for example COM1 and COM2, but not COM1 and COM3.
+    </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="usb-support"></a>3.11. USB Support</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="settings-usb"></a>3.11.1. USB Settings</h3></div></div></div><p>
+        The <span class="bold"><strong>USB</strong></span> section in a virtual
+        machine's <span class="bold"><strong>Settings</strong></span> window
+        enables you to configure Oracle VM VirtualBox's sophisticated USB
+        support.
+      </p><p>
+        Oracle VM VirtualBox can enable virtual machines to access the USB
+        devices on your host directly. To achieve this, Oracle VM VirtualBox
+        presents the guest OS with a virtual USB controller. As soon as
+        the guest system starts using a USB device, it will appear as
+        unavailable on the host.
+      </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><div class="itemizedlist"><ul type="disc"><li><p>
+              Be careful with USB devices that are currently in use on
+              the host. For example, if you allow your guest to connect
+              to your USB hard disk that is currently mounted on the
+              host, when the guest is activated, it will be disconnected
+              from the host without a proper shutdown. This may cause
+              data loss.
+            </p></li><li><p>
+              Oracle Solaris hosts have a few known limitations
+              regarding USB support. See <a href="ch14.html" title="Chapter 14. Known Limitations">Chapter 14, <i>Known Limitations</i></a>.
+            </p></li></ul></div></div><p>
+        In addition to allowing a guest access to your local USB
+        devices, Oracle VM VirtualBox even enables your guests to connect to
+        remote USB devices by use of the VirtualBox Remote Desktop
+        Extension (VRDE). See <a href="ch07.html#usb-over-rdp" title="7.1.4. Remote USB">Section 7.1.4, &#8220;Remote USB&#8221;</a>.
+      </p><p>
+        To enable USB for a VM, select the <span class="bold"><strong>Enable
+        USB Controller</strong></span> check box. The following settings are
+        available:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            <span class="bold"><strong>USB Controller:</strong></span> Selects a
+            controller with the specified level of USB support, as
+            follows:
+          </p><div class="itemizedlist"><ul type="circle"><li><p>
+                OHCI for USB 1.1
+              </p></li><li><p>
+                EHCI for USB 2.0. This also enables OHCI.
+              </p></li><li><p>
+                xHCI for USB 3.0. This supports all USB speeds.
+              </p></li></ul></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+              The xHCI and EHCI controllers are shipped as an
+              Oracle VM VirtualBox extension package, which must be installed
+              separately. See <a href="ch01.html#intro-installing" title="1.5. Installing Oracle VM VirtualBox and Extension Packs">Section 1.5, &#8220;Installing Oracle VM VirtualBox and Extension Packs&#8221;</a>.
+            </p></div></li><li><p>
+            <span class="bold"><strong>USB Device Filters:</strong></span> When
+            USB support is enabled for a VM, you can determine in detail
+            which devices will be automatically attached to the guest.
+            For this, you can create filters by specifying certain
+            properties of the USB device. USB devices with a matching
+            filter will be automatically passed to the guest once they
+            are attached to the host. USB devices without a matching
+            filter can be passed manually to the guest, for example by
+            using the <span class="bold"><strong>Devices</strong></span>,
+            <span class="bold"><strong>USB</strong></span> menu.
+          </p><p>
+            Clicking on the <span class="bold"><strong>+</strong></span> button to
+            the right of the <span class="bold"><strong>USB Device
+            Filters</strong></span> window creates a new filter. You can give
+            the filter a name, for later reference, and specify the
+            filter criteria. The more criteria you specify, the more
+            precisely devices will be selected. For instance, if you
+            specify only a vendor ID of 046d, all devices produced by
+            Logitech will be available to the guest. If you fill in all
+            fields, on the other hand, the filter will only apply to a
+            particular device model from a particular vendor, and not
+            even to other devices of the same type with a different
+            revision and serial number.
+          </p><p>
+            In detail, the following criteria are available:
+          </p><div class="itemizedlist"><ul type="circle"><li><p>
+                <span class="bold"><strong>Vendor and Product ID.</strong></span>
+                With USB, each vendor of USB products carries an
+                identification number that is unique world-wide, called
+                the <span class="emphasis"><em>vendor ID</em></span>. Similarly, each line
+                of products is assigned a <span class="emphasis"><em>product
+                ID</em></span> number. Both numbers are commonly written
+                in hexadecimal, and a colon separates the vendor from
+                the product ID. For example,
+                <code class="literal">046d:c016</code> stands for Logitech as a
+                vendor, and the M-UV69a Optical Wheel Mouse product.
+              </p><p>
+                Alternatively, you can also specify
+                <span class="bold"><strong>Manufacturer</strong></span> and
+                <span class="bold"><strong>Product</strong></span> by name.
+              </p><p>
+                To list all the USB devices that are connected to your
+                host machine with their respective vendor IDs and
+                product IDs, use the following command:
+              </p><pre class="screen">VBoxManage list usbhost</pre><p>
+                On Windows, you can also see all USB devices that are
+                attached to your system in the Device Manager. On Linux,
+                you can use the <span><strong class="command">lsusb</strong></span> command.
+              </p></li><li><p>
+                <span class="bold"><strong>Serial Number.</strong></span> While
+                vendor ID and product ID are quite specific to identify
+                USB devices, if you have two identical devices of the
+                same brand and product line, you will also need their
+                serial numbers to filter them out correctly.
+              </p></li><li><p>
+                <span class="bold"><strong>Remote.</strong></span> This setting
+                specifies whether the device will be local only, remote
+                only, such as over VRDP, or either.
+              </p></li></ul></div><p>
+            On a Windows host, you will need to unplug and reconnect a
+            USB device to use it after creating a filter for it.
+          </p><p>
+            As an example, you could create a new USB filter and specify
+            a vendor ID of 046d for Logitech, Inc, a manufacturer index
+            of 1, and "not remote". Then any USB devices on the host
+            system produced by Logitech, Inc with a manufacturer index
+            of 1 will be visible to the guest system.
+          </p><p>
+            Several filters can select a single device. For example, a
+            filter which selects all Logitech devices, and one which
+            selects a particular webcam.
+          </p><p>
+            You can deactivate filters without deleting them by
+            deselecting the check box next to the filter name.
+          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="usb-implementation-notes"></a>3.11.2. Implementation Notes for Windows and Linux Hosts</h3></div></div></div><p>
+        On Windows hosts, a kernel mode device driver provides USB proxy
+        support. It implements both a USB monitor, which enables
+        Oracle VM VirtualBox to capture devices when they are plugged in, and
+        a USB device driver to claim USB devices for a particular
+        virtual machine. System reboots are not necessary after
+        installing the driver. Also, you do not need to replug devices
+        for Oracle VM VirtualBox to claim them.
+      </p><p>
+        On supported Linux hosts, Oracle VM VirtualBox accesses USB devices
+        through special files in the file system. When Oracle VM VirtualBox is
+        installed, these are made available to all users in the
+        <code class="literal">vboxusers</code> system group. In order to be able
+        to access USB from guest systems, make sure that you are a
+        member of this group.
+      </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="shared-folders"></a>3.12. Shared Folders</h2></div></div></div><p>
+      Shared folders enable you to easily exchange data between a
+      virtual machine and your host. This feature requires that the
+      Oracle VM VirtualBox Guest Additions be installed in a virtual machine
+      and is described in detail in <a href="ch04.html#sharedfolders" title="4.3. Shared Folders">Section 4.3, &#8220;Shared Folders&#8221;</a>.
+    </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="user-interface"></a>3.13. User Interface</h2></div></div></div><p>
+      The <span class="bold"><strong>User Interface</strong></span> section
+      enables you to change certain aspects of the user interface of
+      this VM.
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          <span class="bold"><strong>Menu Bar:</strong></span> This widget enables
+          you to disable menus by clicking on the menu to release it,
+          menu entries by deselecting the check box of the entry to
+          disable it and the complete menu bar by deselecting the
+          rightmost check box.
+        </p></li><li><p>
+          <span class="bold"><strong>Mini ToolBar:</strong></span> In full screen
+          or seamless mode, Oracle VM VirtualBox can display a small toolbar
+          that contains some of the items that are normally available
+          from the virtual machine's menu bar. This toolbar reduces
+          itself to a small gray line unless you move the mouse over it.
+          With the toolbar, you can return from full screen or seamless
+          mode, control machine execution or enable certain devices. If
+          you do not want to see the toolbar, disable this setting.
+        </p><p>
+          The second setting enables you to show the toolbar at the top
+          of the screen, instead of showing it at the bottom.
+        </p></li><li><p>
+          <span class="bold"><strong>Status Bar:</strong></span> This widget
+          enables you to disable icons on the status bar by deselecting
+          the check box of an icon to disable it, to rearrange icons by
+          dragging and dropping the icon, and to disable the complete
+          status bar by deselecting the leftmost check box.
+        </p></li></ul></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="efi"></a>3.14. Alternative Firmware (EFI)</h2></div></div></div><p>
+      Oracle VM VirtualBox includes experimental support for the Extensible
+      Firmware Interface (EFI), which is an industry standard intended
+      to replace the legacy BIOS as the primary interface for
+      bootstrapping computers and certain system services later.
+    </p><p>
+      By default, Oracle VM VirtualBox uses the BIOS firmware for virtual
+      machines. To use EFI for a given virtual machine, you can enable
+      EFI in the machine's <span class="bold"><strong>Settings</strong></span>
+      dialog. See <a href="ch03.html#settings-motherboard" title="3.5.1. Motherboard Tab">Section 3.5.1, &#8220;Motherboard Tab&#8221;</a>. Alternatively,
+      use the <span><strong class="command">VBoxManage</strong></span> command line interface as
+      follows:
+    </p><pre class="screen">VBoxManage modifyvm "VM name" --firmware efi</pre><p>
+      To switch back to using the BIOS:
+    </p><pre class="screen">VBoxManage modifyvm "VM name" --firmware bios</pre><p>
+      One notable user of EFI is Apple Mac OS X. More recent Linux
+      versions and Windows releases, starting with Vista, also offer
+      special versions that can be booted using EFI.
+    </p><p>
+      Another possible use of EFI in Oracle VM VirtualBox is development and
+      testing of EFI applications, without booting any OS.
+    </p><p>
+      Note that the Oracle VM VirtualBox EFI support is experimental and will
+      be enhanced as EFI matures and becomes more widespread. Mac OS X,
+      Linux, and newer Windows guests are known to work fine. Windows 7
+      guests are unable to boot with the Oracle VM VirtualBox EFI
+      implementation.
+    </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="efividmode"></a>3.14.1. Video Modes in EFI</h3></div></div></div><p>
+        EFI provides two distinct video interfaces: GOP (Graphics Output
+        Protocol) and UGA (Universal Graphics Adapter). Modern OSes,
+        such as Mac OS X, generally use GOP, while some older ones still
+        use UGA. Oracle VM VirtualBox provides a configuration option to
+        control the graphics resolution for both interfaces, making the
+        difference mostly irrelevant for users.
+      </p><p>
+        The default resolution is 1024x768. To select a graphics
+        resolution for EFI, use the following
+        <span><strong class="command">VBoxManage</strong></span> command:
+      </p><pre class="screen">VBoxManage setextradata "VM name" VBoxInternal2/EfiGraphicsResolution HxV</pre><p>
+        Determine the horizontal resolution H and the vertical
+        resolution V from the following list of default resolutions:
+      </p><div class="variablelist"><dl><dt><span class="term">
+            VGA
+          </span></dt><dd><p>
+              640x480, 32bpp, 4:3
+            </p></dd><dt><span class="term">
+            SVGA
+          </span></dt><dd><p>
+              800x600, 32bpp, 4:3
+            </p></dd><dt><span class="term">
+            XGA
+          </span></dt><dd><p>
+              1024x768, 32bpp, 4:3
+            </p></dd><dt><span class="term">
+            XGA+
+          </span></dt><dd><p>
+              1152x864, 32bpp, 4:3
+            </p></dd><dt><span class="term">
+            HD
+          </span></dt><dd><p>
+              1280x720, 32bpp, 16:9
+            </p></dd><dt><span class="term">
+            WXGA
+          </span></dt><dd><p>
+              1280x800, 32bpp, 16:10
+            </p></dd><dt><span class="term">
+            SXGA
+          </span></dt><dd><p>
+              1280x1024, 32bpp, 5:4
+            </p></dd><dt><span class="term">
+            SXGA+
+          </span></dt><dd><p>
+              1400x1050, 32bpp, 4:3
+            </p></dd><dt><span class="term">
+            WXGA+
+          </span></dt><dd><p>
+              1440x900, 32bpp, 16:10
+            </p></dd><dt><span class="term">
+            HD+
+          </span></dt><dd><p>
+              1600x900, 32bpp, 16:9
+            </p></dd><dt><span class="term">
+            UXGA
+          </span></dt><dd><p>
+              1600x1200, 32bpp, 4:3
+            </p></dd><dt><span class="term">
+            WSXGA+
+          </span></dt><dd><p>
+              1680x1050, 32bpp, 16:10
+            </p></dd><dt><span class="term">
+            Full HD
+          </span></dt><dd><p>
+              1920x1080, 32bpp, 16:9
+            </p></dd><dt><span class="term">
+            WUXGA
+          </span></dt><dd><p>
+              1920x1200, 32bpp, 16:10
+            </p></dd><dt><span class="term">
+            DCI 2K
+          </span></dt><dd><p>
+              2048x1080, 32bpp, 19:10
+            </p></dd><dt><span class="term">
+            Full HD+
+          </span></dt><dd><p>
+              2160x1440, 32bpp, 3:2
+            </p></dd><dt><span class="term">
+            Unnamed
+          </span></dt><dd><p>
+              2304x1440, 32bpp, 16:10
+            </p></dd><dt><span class="term">
+            QHD
+          </span></dt><dd><p>
+              2560x1440, 32bpp, 16:9
+            </p></dd><dt><span class="term">
+            WQXGA
+          </span></dt><dd><p>
+              2560x1600, 32bpp, 16:10
+            </p></dd><dt><span class="term">
+            QWXGA+
+          </span></dt><dd><p>
+              2880x1800, 32bpp, 16:10
+            </p></dd><dt><span class="term">
+            QHD+
+          </span></dt><dd><p>
+              3200x1800, 32bpp, 16:9
+            </p></dd><dt><span class="term">
+            WQSXGA
+          </span></dt><dd><p>
+              3200x2048, 32bpp, 16:10
+            </p></dd><dt><span class="term">
+            4K UHD
+          </span></dt><dd><p>
+              3840x2160, 32bpp, 16:9
+            </p></dd><dt><span class="term">
+            WQUXGA
+          </span></dt><dd><p>
+              3840x2400, 32bpp, 16:10
+            </p></dd><dt><span class="term">
+            DCI 4K
+          </span></dt><dd><p>
+              4096x2160, 32bpp, 19:10
+            </p></dd><dt><span class="term">
+            HXGA
+          </span></dt><dd><p>
+              4096x3072, 32bpp, 4:3
+            </p></dd><dt><span class="term">
+            UHD+
+          </span></dt><dd><p>
+              5120x2880, 32bpp, 16:9
+            </p></dd><dt><span class="term">
+            WHXGA
+          </span></dt><dd><p>
+              5120x3200, 32bpp, 16:10
+            </p></dd><dt><span class="term">
+            WHSXGA
+          </span></dt><dd><p>
+              6400x4096, 32bpp, 16:10
+            </p></dd><dt><span class="term">
+            HUXGA
+          </span></dt><dd><p>
+              6400x4800, 32bpp, 4:3
+            </p></dd><dt><span class="term">
+            8K UHD2
+          </span></dt><dd><p>
+              7680x4320, 32bpp, 16:9
+            </p></dd></dl></div><p>
+        If this list of default resolution does not cover your needs,
+        see <a href="ch09.html#customvesa" title="9.6.1. Custom VESA Resolutions">Section 9.6.1, &#8220;Custom VESA Resolutions&#8221;</a>. Note that the color depth
+        value specified in a custom video mode must be specified. Color
+        depths of 8, 16, 24, and 32 are accepted. EFI assumes a color
+        depth of 32 by default.
+      </p><p>
+        The EFI default video resolution settings can only be changed
+        when the VM is powered off.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="efibootargs"></a>3.14.2. Specifying Boot Arguments</h3></div></div></div><p>
+        It is currently not possible to manipulate EFI variables from
+        within a running guest. For example, setting the
+        <code class="literal">boot-args</code> variable by running the
+        <span><strong class="command">nvram</strong></span> tool in a Mac OS X guest will not work.
+        As an alternative method,
+        <code class="literal">VBoxInternal2/EfiBootArgs</code> extradata can be
+        passed to a VM in order to set the <code class="literal">boot-args</code>
+        variable. To change the <code class="literal">boot-args</code> EFI
+        variable, use the following command:
+      </p><pre class="screen">VBoxManage setextradata "VM name" VBoxInternal2/EfiBootArgs &lt;value&gt;</pre></div></div></div></body></html>

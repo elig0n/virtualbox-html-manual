@@ -1,0 +1,288 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter 14. Known Limitations</title><meta name="generator" content="DocBook XSL Stylesheets V1.69.1"><link rel="start" href="index.html" title="Oracle® VM VirtualBox®"><link rel="up" href="index.html" title="Oracle® VM VirtualBox®"><link rel="prev" href="ch13.html" title="Chapter 13. Security Guide"><link rel="next" href="ch15.html" title="Chapter 15. Change Log"><style type="text/css"><!--
+   body
+   {
+     font-family:  Verdana, Sans-serif, Arial, 'Trebuchet MS', 'Times New Roman';
+     font-size: small;
+   }
+   h2.title
+   {
+     font-family: Verdana, Sans-serif, Arial, 'Trebuchet MS', 'Times New Roman';
+     margin: 5px 0 0;
+     padding: 1px 5px 1px;
+     border: 1px solid #6b89d4;
+     -moz-border-radius: 0.3em;
+     background: #e6edff;
+   }
+   .titlepage
+   {
+     text-align: center;
+   }
+   .refsynopsisdiv, .refsect1, .refsect2, .refsect3
+   {
+     text-align: left;
+   }
+   .warning
+   {
+     padding: 5px;
+     border: 1px solid #ff0011;
+     -moz-border-radius: 0.3em;
+     background: #ffbbbb;
+   }
+   .warning .title { margin: 0px 0px 5px 0px; }
+   .warning p { margin: 1px; }
+   .note
+   {
+     padding: 1px 5px 1px;
+     border: 1px solid #84c43b;
+     -moz-border-radius: 0.3em;
+     background: #d7e9a7;
+   }
+   .note .title { margin: 0px 0px 5px 0px; }
+   .note p { margin: 1px; }
+   .cmdsynopsis
+   {
+     font-family: monospace;
+   }
+   .refsynopsisdiv        > .cmdsynopsis p, .refsect1        > .cmdsynopsis p,
+   .refsynopsisdiv .sect2 > .cmdsynopsis p, .refsect1 .sect2 > .cmdsynopsis p
+   {
+     margin-top: 0px;
+     margin-bottom: 0px;
+   }
+   .cmdsynopsis p
+   {
+     padding-left: 3.4em;
+     text-indent: -2.2em;
+   }
+   p.nextcommand
+   {
+     margin-top:    0px;
+     margin-bottom: 0px;
+   }
+   p.lastcommand
+   {
+     margin-top:    0px;
+   }
+   .refentry * h3
+   {
+     font-size: large;
+   }
+   .refentry * h4
+   {
+     font-size: larger;
+   }
+   .refentry * h5
+   {
+     font-size: larger;
+   }
+
+  --></style></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="KnownIssues"></a>Chapter 14. Known Limitations</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="ch14.html#ExperimentalFeatures">14.1. Experimental Features</a></span></dt><dt><span class="sect1"><a href="ch14.html#KnownProblems">14.2. Known Issues</a></span></dt></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ExperimentalFeatures"></a>14.1. Experimental Features</h2></div></div></div><p>
+      Some Oracle VM VirtualBox features are labeled as experimental. Such
+      features are provided on an "as-is" basis and are not formally
+      supported. However, feedback and suggestions about such features
+      are welcome. A comprehensive list of experimental features is as
+      follows:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          Hardware 3D acceleration support for Windows, Linux, and
+          Oracle Solaris guests
+        </p></li><li><p>
+          Hardware 2D video playback acceleration support for Windows
+          guests
+        </p></li><li><p>
+          Mac OS X guests (Mac OS X hosts only)
+        </p></li><li><p>
+          ICH9 chipset emulation
+        </p></li><li><p>
+          EFI firmware
+        </p></li><li><p>
+          Host CD/DVD drive passthrough
+        </p></li><li><p>
+          Support of iSCSI using internal networking
+        </p></li><li><p>
+          Using Oracle VM VirtualBox and Hyper-V on the same host
+        </p></li></ul></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="KnownProblems"></a>14.2. Known Issues</h2></div></div></div><p>
+      The following section describes known problems with this release
+      of Oracle VM VirtualBox. Unless marked otherwise, these issues are
+      planned to be fixed in later releases.
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          Poor performance when using Oracle VM VirtualBox and
+          <span class="bold"><strong>Hyper-V</strong></span> on the same host. To
+          fix this, certain Windows features like "Hyper-V Platform",
+          "Virtual Machine Platform" and "Windows Hypervisor Platform"
+          must be turned off, followed by a host reboot.
+        </p><p>
+          Additionally, the Microsoft Device Guard and Credential Guard
+          hardware readiness tool might have to be used in order to turn
+          off more features. For example, by running the following
+          command:
+        </p><pre class="screen">.\DG_Readiness_Tool_vX.X.ps1 -Disable -AutoReboot</pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+            Disabling Device Guard and Credential Guard features will
+            have an impact on the overall security of the host. Please
+            contact your Administrator beforehand regarding this.
+          </p></div></li><li><p>
+          The following <span class="bold"><strong>Guest SMP (multiprocessor)
+          limitations</strong></span> exist:
+        </p><div class="itemizedlist"><ul type="circle"><li><p>
+              <span class="bold"><strong>Poor performance</strong></span> with
+              32-bit guests on AMD CPUs. This affects mainly Windows and
+              Oracle Solaris guests, but possibly also some Linux kernel
+              revisions. Partially solved for 32-bit Windows NT, 2000,
+              XP, and 2003 guests. Requires the Guest Additions to be
+              installed.
+            </p></li><li><p>
+              <span class="bold"><strong>Poor performance</strong></span> with
+              32-bit guests on certain Intel CPU models that do not
+              include virtual APIC hardware optimization support. This
+              affects mainly Windows and Oracle Solaris guests, but
+              possibly also some Linux kernel revisions. Partially
+              solved for 32-bit Windows NT, 2000, XP, and 2003 guests.
+              Requires the Guest Additions to be installed.
+            </p></li></ul></div></li><li><p>
+          <span class="bold"><strong>NX (no execute, data execution
+          prevention)</strong></span> only works for guests running on 64-bit
+          hosts and requires that hardware virtualization be enabled.
+        </p></li><li><p>
+          <span class="bold"><strong>Guest control.</strong></span> On Windows
+          guests, a process started using the guest control execute
+          support will not be able to display a graphical user interface
+          <span class="emphasis"><em>unless</em></span> the user account under which it is
+          running is currently logged in and has a desktop session.
+        </p><p>
+          Also, to use accounts without or with an empty password, the
+          guest's group policy must be changed. To do so, open the group
+          policy editor on the command line by typing
+          <span><strong class="command">gpedit.msc</strong></span>, open the key <code class="literal">Computer
+          Configuration\Windows Settings\Security Settings\Local
+          Policies\Security Options</code> and change the value of
+          <code class="literal">Accounts: Limit local account use of blank passwords
+          to console logon only</code> to Disabled.
+        </p></li><li><p>
+          <span class="bold"><strong>Compacting virtual disk images is
+          limited to VDI files.</strong></span> The <span><strong class="command">VBoxManage
+          modifymedium --compact</strong></span> command is currently only
+          implemented for VDI files. At the moment the only way to
+          optimize the size of a virtual disk images in other formats,
+          such as VMDK or VHD, is to clone the image and then use the
+          cloned image in the VM configuration.
+        </p></li><li><p>
+          <span class="bold"><strong>OVF import/export:</strong></span>
+        </p><div class="itemizedlist"><ul type="circle"><li><p>
+              OVF localization, with multiple languages in a single OVF
+              file, is not yet supported.
+            </p></li><li><p>
+              Some OVF sections like StartupSection,
+              DeploymentOptionSection, and InstallSection are ignored.
+            </p></li><li><p>
+              OVF environment documents, including their property
+              sections and appliance configuration with ISO images, are
+              not yet supported.
+            </p></li><li><p>
+              Remote files using HTTP or other mechanisms are not yet
+              supported.
+            </p></li></ul></div></li><li><p>
+          Neither <span class="bold"><strong>scale mode</strong></span> nor
+          <span class="bold"><strong>seamless mode</strong></span> work correctly
+          with guests using OpenGL 3D features, such as with
+          Compiz-enabled window managers.
+        </p></li><li><p>
+          The RDP server in the Oracle VM VirtualBox extension pack supports
+          only audio streams in format 22.05kHz stereo 16-bit. If the
+          RDP client requests any other audio format there will be no
+          audio.
+        </p></li><li><p>
+          Preserving the aspect ratio in scale mode works only on
+          Windows hosts and on Mac OS X hosts.
+        </p></li><li><p>
+          On <span class="bold"><strong>Mac OS X hosts,</strong></span> the
+          following features are not yet implemented:
+        </p><div class="itemizedlist"><ul type="circle"><li><p>
+              Numlock emulation
+            </p></li><li><p>
+              CPU frequency metric
+            </p></li><li><p>
+              Memory ballooning
+            </p></li></ul></div></li><li><p>
+          <span class="bold"><strong>Mac OS X guests:</strong></span>
+        </p><div class="itemizedlist"><ul type="circle"><li><p>
+              Mac OS X guests can only run on a certain host hardware.
+              For details about license and host hardware limitations.
+              See <a href="ch03.html#intro-macosxguests" title="3.1.1. Mac OS X Guests">Section 3.1.1, &#8220;Mac OS X Guests&#8221;</a> and check the
+              Apple software license conditions.
+            </p></li><li><p>
+              Oracle VM VirtualBox does not provide Guest Additions for Mac OS
+              X at this time.
+            </p></li><li><p>
+              The graphics resolution currently defaults to 1024x768 as
+              Mac OS X falls back to the built-in EFI display support.
+              See <a href="ch03.html#efividmode" title="3.14.1. Video Modes in EFI">Section 3.14.1, &#8220;Video Modes in EFI&#8221;</a> for more information on
+              how to change EFI video modes.
+            </p></li><li><p>
+              Mac OS X guests only work with one CPU assigned to the VM.
+              Support for SMP will be provided in a future release.
+            </p></li><li><p>
+              Depending on your system and version of Mac OS X, you
+              might experience guest hangs after some time. This can be
+              fixed by turning off energy saving. Set the timeout to
+              "Never" in the system preferences.
+            </p></li><li><p>
+              By default, the Oracle VM VirtualBox EFI enables debug output of
+              the Mac OS X kernel to help you diagnose boot problems.
+              Note that there is a lot of output and not all errors are
+              fatal. They would also show when using a physical Apple
+              Macintosh computer. You can turn off these messages by
+              using the following command:
+            </p><pre class="screen">$ VBoxManage setextradata <em class="replaceable"><code>VM-name</code></em> "VBoxInternal2/EfiBootArgs" "  "</pre><p>
+              To revert to the previous behavior, use the following
+              command:
+            </p><pre class="screen">$ VBoxManage setextradata <em class="replaceable"><code>VM-name</code></em> "VBoxInternal2/EfiBootArgs" ""</pre></li><li><p>
+              It is currently not possible to start a Mac OS X guest in
+              safe mode by specifying the <code class="option">-x</code> option in
+              <code class="literal">VBoxInternal2/EfiBootArgs</code> extradata.
+            </p></li></ul></div></li><li><p>
+          <span class="bold"><strong>Oracle Solaris hosts:</strong></span>
+        </p><div class="itemizedlist"><ul type="circle"><li><p>
+              USB support on Oracle Solaris hosts requires Oracle
+              Solaris 11 version snv_124 or later. Webcams and other
+              isochronous devices are known to have poor performance.
+            </p></li><li><p>
+              Host Webcam passthrough is restricted to 640x480 frames at
+              20 frames per second due to limitations in the Oracle
+              Solaris V4L2 API. This may be addressed in a future Oracle
+              Solaris release.
+            </p></li><li><p>
+              No ACPI information, such as battery status or power
+              source, is reported to the guest.
+            </p></li><li><p>
+              No support for using wireless adapters with bridged
+              networking.
+            </p></li><li><p>
+              Crossbow-based bridged networking on Oracle Solaris 11
+              hosts does not work directly with aggregate links.
+              However, you can use <span><strong class="command">dladm</strong></span> to manually
+              create a VNIC over the aggregate link and use that with a
+              VM. This limitation does not exist in Oracle Solaris 11u1
+              build 17 and later.
+            </p></li></ul></div></li><li><p>
+          Neither virtio nor Intel PRO/1000 drivers for
+          <span class="bold"><strong>Windows XP guests</strong></span> support
+          segmentation offloading. Therefore Windows XP guests have
+          slower transmission rates comparing to other guest types.
+          Refer to MS Knowledge base article 842264 for additional
+          information.
+        </p></li><li><p>
+          <span class="bold"><strong>Guest Additions for OS/2.</strong></span>
+          Seamless windows and automatic guest resizing will probably
+          never be implemented due to inherent limitations of the OS/2
+          graphics system.
+        </p></li><li><p>
+          Some guest operating systems predating ATAPI CD-ROMs may
+          exhibit long delays or entirely fail to boot in certain
+          configurations. This is most likely to happen when an
+          IDE/ATAPI CD-ROM exists alone on a primary or secondary IDE
+          channel.
+        </p><p>
+          Affected operating systems are MS OS/2 1.21: fails to boot
+          with an error message referencing COUNTRY.SYS and MS OS/2 1.3:
+          long boot delays. To avoid such problems, disable the emulated
+          IDE/ATAPI CD-ROM. The guest OS cannot use this device, anyway.
+        </p></li></ul></div></div></div></body></html>

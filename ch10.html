@@ -1,0 +1,611 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter 10. Technical Background</title><meta name="generator" content="DocBook XSL Stylesheets V1.69.1"><link rel="start" href="index.html" title="Oracle® VM VirtualBox®"><link rel="up" href="index.html" title="Oracle® VM VirtualBox®"><link rel="prev" href="ch09.html" title="Chapter 9. Advanced Topics"><link rel="next" href="ch11.html" title="Chapter 11. Oracle VM VirtualBox Programming Interfaces"><style type="text/css"><!--
+   body
+   {
+     font-family:  Verdana, Sans-serif, Arial, 'Trebuchet MS', 'Times New Roman';
+     font-size: small;
+   }
+   h2.title
+   {
+     font-family: Verdana, Sans-serif, Arial, 'Trebuchet MS', 'Times New Roman';
+     margin: 5px 0 0;
+     padding: 1px 5px 1px;
+     border: 1px solid #6b89d4;
+     -moz-border-radius: 0.3em;
+     background: #e6edff;
+   }
+   .titlepage
+   {
+     text-align: center;
+   }
+   .refsynopsisdiv, .refsect1, .refsect2, .refsect3
+   {
+     text-align: left;
+   }
+   .warning
+   {
+     padding: 5px;
+     border: 1px solid #ff0011;
+     -moz-border-radius: 0.3em;
+     background: #ffbbbb;
+   }
+   .warning .title { margin: 0px 0px 5px 0px; }
+   .warning p { margin: 1px; }
+   .note
+   {
+     padding: 1px 5px 1px;
+     border: 1px solid #84c43b;
+     -moz-border-radius: 0.3em;
+     background: #d7e9a7;
+   }
+   .note .title { margin: 0px 0px 5px 0px; }
+   .note p { margin: 1px; }
+   .cmdsynopsis
+   {
+     font-family: monospace;
+   }
+   .refsynopsisdiv        > .cmdsynopsis p, .refsect1        > .cmdsynopsis p,
+   .refsynopsisdiv .sect2 > .cmdsynopsis p, .refsect1 .sect2 > .cmdsynopsis p
+   {
+     margin-top: 0px;
+     margin-bottom: 0px;
+   }
+   .cmdsynopsis p
+   {
+     padding-left: 3.4em;
+     text-indent: -2.2em;
+   }
+   p.nextcommand
+   {
+     margin-top:    0px;
+     margin-bottom: 0px;
+   }
+   p.lastcommand
+   {
+     margin-top:    0px;
+   }
+   .refentry * h3
+   {
+     font-size: large;
+   }
+   .refentry * h4
+   {
+     font-size: larger;
+   }
+   .refentry * h5
+   {
+     font-size: larger;
+   }
+
+  --></style></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="TechnicalBackground"></a>Chapter 10. Technical Background</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="ch10.html#vboxconfigdata">10.1. Where Oracle VM VirtualBox Stores its Files</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch10.html#vboxconfigdata-machine-folder">10.1.1. The Machine Folder</a></span></dt><dt><span class="sect2"><a href="ch10.html#vboxconfigdata-global">10.1.2. Global Settings</a></span></dt><dt><span class="sect2"><a href="ch10.html#vboxconfigdata-summary-locations">10.1.3. Summary of Configuration Data Locations</a></span></dt><dt><span class="sect2"><a href="ch10.html#vboxconfigdata-XML-files">10.1.4. Oracle VM VirtualBox XML Files</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch10.html#technical-components">10.2. Oracle VM VirtualBox Executables and Components</a></span></dt><dt><span class="sect1"><a href="ch10.html#hwvirt">10.3. Hardware Virtualization</a></span></dt><dt><span class="sect1"><a href="ch10.html#hwvirt-details">10.4. Details About Hardware Virtualization</a></span></dt><dt><span class="sect1"><a href="ch10.html#gimproviders">10.5. Paravirtualization Providers</a></span></dt><dt><span class="sect1"><a href="ch10.html#nestedpaging">10.6. Nested Paging and VPIDs</a></span></dt></dl></div><p>
+    This chapter provides additional information for readers who are
+    familiar with computer architecture and technology and wish to find
+    out more about how Oracle VM VirtualBox works <span class="emphasis"><em>under the
+    hood</em></span>. The contents of this chapter are not required
+    reading in order to use Oracle VM VirtualBox successfully.
+  </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vboxconfigdata"></a>10.1. Where Oracle VM VirtualBox Stores its Files</h2></div></div></div><p>
+      In Oracle VM VirtualBox, a virtual machine and its settings are
+      described in a virtual machine settings file in XML format. In
+      addition, most virtual machines have one or more virtual hard
+      disks. These are typically represented by disk images, such as
+      those in VDI format. The location of these files may vary,
+      depending on the host operating system. See
+      <a href="ch10.html#vboxconfigdata-machine-folder" title="10.1.1. The Machine Folder">Section 10.1.1, &#8220;The Machine Folder&#8221;</a>.
+    </p><p>
+      Global configuration data for Oracle VM VirtualBox is maintained in
+      another location on the host. See
+      <a href="ch10.html#vboxconfigdata-global" title="10.1.2. Global Settings">Section 10.1.2, &#8220;Global Settings&#8221;</a>.
+    </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="vboxconfigdata-machine-folder"></a>10.1.1. The Machine Folder</h3></div></div></div><p>
+        By default, each virtual machine has a directory on your host
+        computer where all the files of that machine are stored: the XML
+        settings file, with a <code class="filename">.vbox</code> file extension,
+        and its disk images. This is called the <span class="emphasis"><em>machine
+        folder</em></span>.
+      </p><p>
+        By default, this machine folder is located in a common folder
+        called <code class="filename">VirtualBox VMs</code>, which Oracle VM VirtualBox
+        creates in the current system user's home directory. The
+        location of this home directory depends on the conventions of
+        the host operating system, as follows:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            On Windows, this is the location returned by the
+            <code class="literal">SHGetFolderPath</code> function of the Windows
+            system library Shell32.dll, asking for the user profile. A
+            typical location is
+            <code class="filename">C:\Users\<em class="replaceable"><code>username</code></em></code>.
+          </p></li><li><p>
+            On Linux, Mac OS X, and Oracle Solaris, this is generally
+            taken from the environment variable
+            <code class="filename">$HOME</code>, except for the user
+            <code class="literal">root</code> where it is taken from the account
+            database. This is a workaround for the frequent trouble
+            caused by users using Oracle VM VirtualBox in combination with the
+            tool <span><strong class="command">sudo</strong></span>, which by default does not
+            reset the environment variable <code class="filename">$HOME</code>.
+          </p><p>
+            A typical location on Linux and Oracle Solaris is
+            <code class="filename">/home/<em class="replaceable"><code>username</code></em></code>
+            and on Mac OS X is
+            <code class="filename">/Users/<em class="replaceable"><code>username</code></em></code>.
+          </p></li></ul></div><p>
+        For simplicity, we abbreviate the location of the home directory
+        as <code class="filename">$HOME</code>. Using that convention, the common
+        folder for all virtual machines is <code class="filename">$HOME/VirtualBox
+        VMs</code>.
+      </p><p>
+        As an example, when you create a virtual machine called "Example
+        VM", Oracle VM VirtualBox creates the following:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            A machine folder: <code class="filename">$HOME/VirtualBox VMs/Example
+            VM/</code>
+          </p></li><li><p>
+            In the machine folder, a settings file: <code class="filename">Example
+            VM.vbox</code>
+          </p></li><li><p>
+            In the machine folder, a virtual disk image:
+            <code class="filename">Example VM.vdi</code>.
+          </p></li></ul></div><p>
+        This is the default layout if you use the
+        <span class="bold"><strong>Create New Virtual Machine</strong></span>
+        wizard described in <a href="ch01.html#gui-createvm" title="1.7. Creating Your First Virtual Machine">Section 1.7, &#8220;Creating Your First Virtual Machine&#8221;</a>. Once you
+        start working with the VM, additional files are added. Log files
+        are in a subfolder called <code class="filename">Logs</code>, and if you
+        have taken snapshots, they are in a
+        <code class="filename">Snapshots</code> subfolder. For each VM, you can
+        change the location of its snapshots folder in the VM settings.
+      </p><p>
+        You can change the default machine folder by selecting
+        <span class="bold"><strong>Preferences</strong></span> from the
+        <span class="bold"><strong>File</strong></span> menu in the Oracle VM VirtualBox
+        main window. Then, in the displayed window, click on the
+        <span class="bold"><strong>General</strong></span> tab. Alternatively, use
+        the <span><strong class="command">VBoxManage setproperty machinefolder</strong></span>
+        command. See <a href="ch08.html#vboxmanage-setproperty" title="8.29. VBoxManage setproperty">Section 8.29, &#8220;VBoxManage setproperty&#8221;</a>.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="vboxconfigdata-global"></a>10.1.2. Global Settings</h3></div></div></div><p>
+        In addition to the files for the virtual machines,
+        Oracle VM VirtualBox maintains global configuration data in the
+        following directory:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            <span class="bold"><strong>Linux and Oracle Solaris:</strong></span>
+            <code class="filename">$HOME/.config/VirtualBox</code>.
+          </p></li><li><p>
+            <span class="bold"><strong>Windows:</strong></span>
+            <code class="filename">$HOME/.VirtualBox</code>.
+          </p></li><li><p>
+            <span class="bold"><strong>Mac OS X:</strong></span>
+            <code class="filename">$HOME/Library/VirtualBox</code>.
+          </p></li></ul></div><p>
+        Oracle VM VirtualBox creates this configuration directory
+        automatically, if necessary. You can specify an alternate
+        configuration directory by either setting the
+        <code class="literal">VBOX_USER_HOME</code> environment variable, or on
+        Linux or Oracle Solaris by using the standard
+        <code class="literal">XDG_CONFIG_HOME</code> variable. Since the global
+        <code class="filename">VirtualBox.xml</code> settings file points to all
+        other configuration files, this enables switching between
+        several Oracle VM VirtualBox configurations.
+      </p><p>
+        In this configuration directory, Oracle VM VirtualBox stores its
+        global settings file, an XML file called
+        <code class="filename">VirtualBox.xml</code>. This file includes global
+        configuration options and a list of registered virtual machines
+        with pointers to their XML settings files.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="vboxconfigdata-summary-locations"></a>10.1.3. Summary of Configuration Data Locations</h3></div></div></div><p>
+        The following table gives a brief overview of the configuration
+        data locations on an Oracle VM VirtualBox host.
+      </p><div class="oracle-all"><a name="table-config-summary"></a><p class="title"><b>Table 10.1. Configuration File Locations</b></p><table summary="Configuration File Locations" border="1"><colgroup><col><col></colgroup><thead><tr><th><p>
+                  <span class="bold"><strong>Setting</strong></span>
+                </p></th><th><p>
+                  <span class="bold"><strong>Location</strong></span>
+                </p></th></tr></thead><tbody><tr><td><p>
+                  Default machines folder
+                </p></td><td><p>
+                  <code class="filename">$HOME/VirtualBox VMs</code>
+                </p></td></tr><tr><td><p>
+                  Default disk image location
+                </p></td><td><p>
+                  In each machine's folder
+                </p></td></tr><tr><td><p>
+                  Machine settings file extension
+                </p></td><td><p>
+                  <code class="filename">.vbox</code>
+                </p></td></tr><tr><td><p>
+                  Media registry
+                </p></td><td><p>
+                  Each machine settings file
+                </p>
+
+
+
+                <p>
+                  Media registration is done automatically when a
+                  storage medium is attached to a VM
+                </p></td></tr></tbody></table></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="vboxconfigdata-XML-files"></a>10.1.4. Oracle VM VirtualBox XML Files</h3></div></div></div><p>
+        Oracle VM VirtualBox uses XML for both the machine settings files and
+        the global configuration file,
+        <code class="filename">VirtualBox.xml</code>.
+      </p><p>
+        All Oracle VM VirtualBox XML files are versioned. When a new settings
+        file is created, for example because a new virtual machine is
+        created, Oracle VM VirtualBox automatically uses the settings format
+        of the current Oracle VM VirtualBox version. These files may not be
+        readable if you downgrade to an earlier version of
+        Oracle VM VirtualBox. However, when Oracle VM VirtualBox encounters a
+        settings file from an earlier version, such as after upgrading
+        Oracle VM VirtualBox, it attempts to preserve the settings format as
+        much as possible. It will only silently upgrade the settings
+        format if the current settings cannot be expressed in the old
+        format, for example because you enabled a feature that was not
+        present in an earlier version of Oracle VM VirtualBox.
+      </p><p>
+        In such cases, Oracle VM VirtualBox backs up the old settings file in
+        the virtual machine's configuration directory. If you need to go
+        back to the earlier version of Oracle VM VirtualBox, then you will
+        need to manually copy these backup files back.
+      </p><p>
+        We intentionally do not document the specifications of the
+        Oracle VM VirtualBox XML files, as we must reserve the right to modify
+        them in the future. We therefore strongly suggest that you do
+        not edit these files manually. Oracle VM VirtualBox provides complete
+        access to its configuration data through its the
+        <span><strong class="command">VBoxManage</strong></span> command line tool, see
+        <a href="ch08.html" title="Chapter 8. VBoxManage">Chapter 8, <i>VBoxManage</i></a> and its API, see
+        <a href="ch11.html" title="Chapter 11. Oracle VM VirtualBox Programming Interfaces">Chapter 11, <i>Oracle VM VirtualBox Programming Interfaces</i></a>.
+      </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="technical-components"></a>10.2. Oracle VM VirtualBox Executables and Components</h2></div></div></div><p>
+      Oracle VM VirtualBox was designed to be modular and flexible. When the
+      Oracle VM VirtualBox graphical user interface (GUI) is opened and a VM
+      is started, at least the following three processes are running:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          <span><strong class="command">VBoxSVC</strong></span>, the Oracle VM VirtualBox service process
+          which always runs in the background. This process is started
+          automatically by the first Oracle VM VirtualBox client process and
+          exits a short time after the last client exits. The first
+          Oracle VM VirtualBox service can be the GUI,
+          <span><strong class="command">VBoxManage</strong></span>,
+          <span><strong class="command">VBoxHeadless</strong></span>, the web service amongst
+          others. The service is responsible for bookkeeping,
+          maintaining the state of all VMs, and for providing
+          communication between Oracle VM VirtualBox components. This
+          communication is implemented using COM/XPCOM.
+        </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+            When we refer to <span class="emphasis"><em>clients</em></span> here, we mean
+            the local clients of a particular <span><strong class="command">VBoxSVC</strong></span>
+            server process, not clients in a network. Oracle VM VirtualBox
+            employs its own client/server design to allow its processes
+            to cooperate, but all these processes run under the same
+            user account on the host operating system, and this is
+            totally transparent to the user.
+          </p></div></li><li><p>
+          The GUI process, <span><strong class="command">VirtualBoxVM</strong></span>, a client
+          application based on the cross-platform Qt library. When
+          started without the <code class="option">--startvm</code> option, this
+          application acts as the VirtualBox Manager, displaying the VMs
+          and their settings. It then communicates settings and state
+          changes to <span><strong class="command">VBoxSVC</strong></span> and also reflects
+          changes effected through other means, such as the
+          <span><strong class="command">VBoxManage</strong></span> command.
+        </p></li><li><p>
+          If the <span><strong class="command">VirtualBoxVM</strong></span> client application is
+          started with the <code class="option">--startvm</code> argument, it loads
+          the VMM library which includes the actual hypervisor and then
+          runs a virtual machine and provides the input and output for
+          the guest.
+        </p></li></ul></div><p>
+      Any Oracle VM VirtualBox front-end, or client, will communicate with the
+      service process and can both control and reflect the current
+      state. For example, either the VM selector or the VM window or
+      VBoxManage can be used to pause the running VM, and other
+      components will always reflect the changed state.
+    </p><p>
+      The Oracle VM VirtualBox GUI application is only one of several
+      available front ends, or clients. The complete list shipped with
+      Oracle VM VirtualBox is as follows:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          <span><strong class="command">VirtualBoxVM</strong></span>: The Qt front end implementing
+          the VirtualBox Manager and running VMs.
+        </p></li><li><p>
+          <span><strong class="command">VBoxManage</strong></span>: A less user-friendly but more
+          powerful alternative. See <a href="ch08.html" title="Chapter 8. VBoxManage">Chapter 8, <i>VBoxManage</i></a>.
+        </p></li><li><p>
+          <span><strong class="command">VBoxHeadless</strong></span>: A VM front end which does not
+          directly provide any video output and keyboard or mouse input,
+          but enables redirection through the VirtualBox Remote Desktop
+          Extension. See <a href="ch07.html#vboxheadless" title="7.1.2. VBoxHeadless, the Remote Desktop Server">Section 7.1.2, &#8220;VBoxHeadless, the Remote Desktop Server&#8221;</a>.
+        </p></li><li><p>
+          <span><strong class="command">vboxwebsrv</strong></span>: The Oracle VM VirtualBox web service
+          process which enables control of an Oracle VM VirtualBox host
+          remotely. This is described in detail in the Oracle VM VirtualBox
+          Software Development Kit (SDK) reference. See
+          <a href="ch11.html" title="Chapter 11. Oracle VM VirtualBox Programming Interfaces">Chapter 11, <i>Oracle VM VirtualBox Programming Interfaces</i></a>.
+        </p></li><li><p>
+          The Oracle VM VirtualBox Python shell: A Python alternative to
+          <span><strong class="command">VBoxManage</strong></span>. This is also described in the
+          SDK reference.
+        </p></li></ul></div><p>
+      Internally, Oracle VM VirtualBox consists of many more or less separate
+      components. You may encounter these when analyzing Oracle VM VirtualBox
+      internal error messages or log files. These include the following:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          IPRT: A portable runtime library which abstracts file access,
+          threading, and string manipulation. Whenever Oracle VM VirtualBox
+          accesses host operating features, it does so through this
+          library for cross-platform portability.
+        </p></li><li><p>
+          VMM (Virtual Machine Monitor): The heart of the hypervisor.
+        </p></li><li><p>
+          EM (Execution Manager): Controls execution of guest code.
+        </p></li><li><p>
+          TRPM (Trap Manager): Intercepts and processes guest traps and
+          exceptions.
+        </p></li><li><p>
+          HM (Hardware Acceleration Manager): Provides support for VT-x
+          and AMD-V.
+        </p></li><li><p>
+          GIM (Guest Interface Manager): Provides support for various
+          paravirtualization interfaces to the guest.
+        </p></li><li><p>
+          PDM (Pluggable Device Manager): An abstract interface between
+          the VMM and emulated devices which separates device
+          implementations from VMM internals and makes it easy to add
+          new emulated devices. Through PDM, third-party developers can
+          add new virtual devices to Oracle VM VirtualBox without having to
+          change Oracle VM VirtualBox itself.
+        </p></li><li><p>
+          PGM (Page Manager): A component that controls guest paging.
+        </p></li><li><p>
+          TM (Time Manager): Handles timers and all aspects of time
+          inside guests.
+        </p></li><li><p>
+          CFGM (Configuration Manager): Provides a tree structure which
+          holds configuration settings for the VM and all emulated
+          devices.
+        </p></li><li><p>
+          SSM (Saved State Manager): Saves and loads VM state.
+        </p></li><li><p>
+          VUSB (Virtual USB): A USB layer which separates emulated USB
+          controllers from the controllers on the host and from USB
+          devices. This component also enables remote USB.
+        </p></li><li><p>
+          DBGF (Debug Facility): A built-in VM debugger.
+        </p></li><li><p>
+          Oracle VM VirtualBox emulates a number of devices to provide the
+          hardware environment that various guests need. Most of these
+          are standard devices found in many PC compatible machines and
+          widely supported by guest operating systems. For network and
+          storage devices in particular, there are several options for
+          the emulated devices to access the underlying hardware. These
+          devices are managed by PDM.
+        </p></li><li><p>
+          Guest Additions for various guest operating systems. This is
+          code that is installed from within a virtual machine. See
+          <a href="ch04.html" title="Chapter 4. Guest Additions">Chapter 4, <i>Guest Additions</i></a>.
+        </p></li><li><p>
+          The "Main" component is special. It ties all the above bits
+          together and is the only public API that Oracle VM VirtualBox
+          provides. All the client processes listed above use only this
+          API and never access the hypervisor components directly. As a
+          result, third-party applications that use the Oracle VM VirtualBox
+          Main API can rely on the fact that it is always well-tested
+          and that all capabilities of Oracle VM VirtualBox are fully exposed.
+          It is this API that is described in the Oracle VM VirtualBox SDK.
+          See <a href="ch11.html" title="Chapter 11. Oracle VM VirtualBox Programming Interfaces">Chapter 11, <i>Oracle VM VirtualBox Programming Interfaces</i></a>.
+        </p></li></ul></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="hwvirt"></a>10.3. Hardware Virtualization</h2></div></div></div><p>
+      Oracle VM VirtualBox enables software in the virtual machine to run
+      directly on the processor of the host, but an array of complex
+      techniques is employed to intercept operations that would
+      interfere with your host. Whenever the guest attempts to do
+      something that could be harmful to your computer and its data,
+      Oracle VM VirtualBox steps in and takes action. In particular, for lots
+      of hardware that the guest believes to be accessing,
+      Oracle VM VirtualBox simulates a certain <span class="emphasis"><em>virtual</em></span>
+      environment according to how you have configured a virtual
+      machine. For example, when the guest attempts to access a hard
+      disk, Oracle VM VirtualBox redirects these requests to whatever you have
+      configured to be the virtual machine's virtual hard disk. This is
+      normally an image file on your host.
+    </p><p>
+      Unfortunately, the x86 platform was never designed to be
+      virtualized. Detecting situations in which Oracle VM VirtualBox needs to
+      take control over the guest code that is executing, as described
+      above, is difficult. To achieve this, Oracle VM VirtualBox uses
+      <span class="emphasis"><em>hardware virtualization</em></span>.
+    </p><p>
+      Intel and AMD processors have support for hardware virtualization.
+      This means that these processors can help Oracle VM VirtualBox to
+      intercept potentially dangerous operations that a guest operating
+      system may be attempting and also makes it easier to present
+      virtual hardware to a virtual machine.
+    </p><p>
+      These hardware features differ between Intel and AMD processors.
+      Intel named its technology VT-x, AMD calls theirs AMD-V. The Intel
+      and AMD support for virtualization is very different in detail,
+      but not very different in principle.
+    </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+        On many systems, the hardware virtualization features first need
+        to be enabled in the BIOS before Oracle VM VirtualBox can use them.
+      </p></div><p>
+      Enabling hardware virtualization is <span class="emphasis"><em>required</em></span>
+      in the following scenarios:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          Certain rare guest operating systems like OS/2 make use of
+          very esoteric processor instructions. For virtual machines
+          that are configured to use such an operating system, hardware
+          virtualization is enabled automatically.
+        </p></li><li><p>
+          Oracle VM VirtualBox's 64-bit guest and multiprocessing (SMP)
+          support both require hardware virtualization to be enabled.
+          This is not much of a limitation since the vast majority of
+          64-bit and multicore CPUs ship with hardware virtualization.
+          The exceptions to this rule are some legacy Intel and AMD
+          CPUs.
+        </p></li></ul></div><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>
+        Do not run other hypervisors, either open source or commercial
+        virtualization products, together with Oracle VM VirtualBox. While
+        several hypervisors can normally be
+        <span class="emphasis"><em>installed</em></span> in parallel, do not attempt to
+        <span class="emphasis"><em>run</em></span> several virtual machines from competing
+        hypervisors at the same time. Oracle VM VirtualBox cannot track what
+        another hypervisor is currently attempting to do on the same
+        host, and especially if several products attempt to use hardware
+        virtualization features such as VT-x, this can crash the entire
+        host.
+      </p></div><p>
+      See <a href="ch10.html#hwvirt-details" title="10.4. Details About Hardware Virtualization">Section 10.4, &#8220;Details About Hardware Virtualization&#8221;</a> for a technical discussion of
+      hardware virtualization.
+    </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="hwvirt-details"></a>10.4. Details About Hardware Virtualization</h2></div></div></div><p>
+      With Intel VT-x, there are two distinct modes of CPU operation:
+      VMX root mode and non-root mode.
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          In root mode, the CPU operates much like older generations of
+          processors without VT-x support. There are four privilege
+          levels, called rings, and the same instruction set is
+          supported, with the addition of several virtualization
+          specific instruction. Root mode is what a host operating
+          system without virtualization uses, and it is also used by a
+          hypervisor when virtualization is active.
+        </p></li><li><p>
+          In non-root mode, CPU operation is significantly different.
+          There are still four privilege rings and the same instruction
+          set, but a new structure called VMCS (Virtual Machine Control
+          Structure) now controls the CPU operation and determines how
+          certain instructions behave. Non-root mode is where guest
+          systems run.
+        </p></li></ul></div><p>
+      Switching from root mode to non-root mode is called "VM entry",
+      the switch back is "VM exit". The VMCS includes a guest and host
+      state area which is saved/restored at VM entry and exit. Most
+      importantly, the VMCS controls which guest operations will cause
+      VM exits.
+    </p><p>
+      The VMCS provides fairly fine-grained control over what the guests
+      can and cannot do. For example, a hypervisor can allow a guest to
+      write certain bits in shadowed control registers, but not others.
+      This enables efficient virtualization in cases where guests can be
+      allowed to write control bits without disrupting the hypervisor,
+      while preventing them from altering control bits over which the
+      hypervisor needs to retain full control. The VMCS also provides
+      control over interrupt delivery and exceptions.
+    </p><p>
+      Whenever an instruction or event causes a VM exit, the VMCS
+      contains information about the exit reason, often with
+      accompanying detail. For example, if a write to the CR0 register
+      causes an exit, the offending instruction is recorded, along with
+      the fact that a write access to a control register caused the
+      exit, and information about source and destination register. Thus
+      the hypervisor can efficiently handle the condition without
+      needing advanced techniques such as CSAM and PATM described above.
+    </p><p>
+      VT-x inherently avoids several of the problems which software
+      virtualization faces. The guest has its own completely separate
+      address space not shared with the hypervisor, which eliminates
+      potential clashes. Additionally, guest OS kernel code runs at
+      privilege ring 0 in VMX non-root mode, obviating the problems by
+      running ring 0 code at less privileged levels. For example the
+      SYSENTER instruction can transition to ring 0 without causing
+      problems. Naturally, even at ring 0 in VMX non-root mode, any I/O
+      access by guest code still causes a VM exit, allowing for device
+      emulation.
+    </p><p>
+      The biggest difference between VT-x and AMD-V is that AMD-V
+      provides a more complete virtualization environment. VT-x requires
+      the VMX non-root code to run with paging enabled, which precludes
+      hardware virtualization of real-mode code and non-paged
+      protected-mode software. This typically only includes firmware and
+      OS loaders, but nevertheless complicates VT-x hypervisor
+      implementation. AMD-V does not have this restriction.
+    </p><p>
+      Of course hardware virtualization is not perfect. Compared to
+      software virtualization, the overhead of VM exits is relatively
+      high. This causes problems for devices whose emulation requires
+      high number of traps. One example is a VGA device in 16-color
+      mode, where not only every I/O port access but also every access
+      to the framebuffer memory must be trapped.
+    </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="gimproviders"></a>10.5. Paravirtualization Providers</h2></div></div></div><p>
+      Oracle VM VirtualBox enables the exposure of a paravirtualization
+      interface, to facilitate accurate and efficient execution of
+      software within a virtual machine. These interfaces require the
+      guest operating system to recognize their presence and make use of
+      them in order to leverage the benefits of communicating with the
+      Oracle VM VirtualBox hypervisor.
+    </p><p>
+      Most modern, mainstream guest operating systems, including Windows
+      and Linux, ship with support for one or more paravirtualization
+      interfaces. Hence, there is typically no need to install
+      additional software in the guest to take advantage of this
+      feature.
+    </p><p>
+      Exposing a paravirtualization provider to the guest operating
+      system does not rely on the choice of host platforms. For example,
+      the <span class="emphasis"><em>Hyper-V</em></span> paravirtualization provider can
+      be used for VMs to run on any host platform supported by
+      Oracle VM VirtualBox and not just Windows.
+    </p><p>
+      Oracle VM VirtualBox provides the following interfaces:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          <span class="bold"><strong>Minimal</strong></span>: Announces the
+          presence of a virtualized environment. Additionally, reports
+          the TSC and APIC frequency to the guest operating system. This
+          provider is mandatory for running any Mac OS X guests.
+        </p></li><li><p>
+          <span class="bold"><strong>KVM</strong></span>: Presents a Linux KVM
+          hypervisor interface which is recognized by Linux kernels
+          version 2.6.25 or later. Oracle VM VirtualBox's implementation
+          currently supports paravirtualized clocks and SMP spinlocks.
+          This provider is recommended for Linux guests.
+        </p></li><li><p>
+          <span class="bold"><strong>Hyper-V</strong></span>: Presents a Microsoft
+          Hyper-V hypervisor interface which is recognized by Windows 7
+          and newer operating systems. Oracle VM VirtualBox's implementation
+          currently supports paravirtualized clocks, APIC frequency
+          reporting, guest debugging, guest crash reporting and relaxed
+          timer checks. This provider is recommended for Windows guests.
+        </p></li></ul></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="nestedpaging"></a>10.6. Nested Paging and VPIDs</h2></div></div></div><p>
+      In addition to normal hardware virtualization, your processor may
+      also support the following additional sophisticated techniques:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          Nested paging implements some memory management in hardware,
+          which can greatly accelerate hardware virtualization since
+          these tasks no longer need to be performed by the
+          virtualization software.
+        </p><p>
+          With nested paging, the hardware provides another level of
+          indirection when translating linear to physical addresses.
+          Page tables function as before, but linear addresses are now
+          translated to "guest physical" addresses first and not
+          physical addresses directly. A new set of paging registers now
+          exists under the traditional paging mechanism and translates
+          from guest physical addresses to host physical addresses,
+          which are used to access memory.
+        </p><p>
+          Nested paging eliminates the overhead caused by VM exits and
+          page table accesses. In essence, with nested page tables the
+          guest can handle paging without intervention from the
+          hypervisor. Nested paging thus significantly improves
+          virtualization performance.
+        </p><p>
+          On AMD processors, nested paging has been available starting
+          with the Barcelona (K10) architecture. They now call it rapid
+          virtualization indexing (RVI). Intel added support for nested
+          paging, which they call extended page tables (EPT), with their
+          Core i7 (Nehalem) processors.
+        </p><p>
+          If nested paging is enabled, the Oracle VM VirtualBox hypervisor can
+          also use <span class="emphasis"><em>large pages</em></span> to reduce TLB usage
+          and overhead. This can yield a performance improvement of up
+          to 5%. To enable this feature for a VM, you use the
+          <span><strong class="command">VBoxManage modifyvm --largepages</strong></span> command.
+          See <a href="ch08.html#vboxmanage-modifyvm" title="8.8. VBoxManage modifyvm">Section 8.8, &#8220;VBoxManage modifyvm&#8221;</a>.
+        </p><p>
+          If you have an Intel CPU with EPT, please consult
+          <a href="ch13.html#sec-rec-cve-2018-3646" title="13.4.1. CVE-2018-3646">Section 13.4.1, &#8220;CVE-2018-3646&#8221;</a> for security concerns
+          regarding EPT.
+        </p></li><li><p>
+          On Intel CPUs, a hardware feature called Virtual Processor
+          Identifiers (VPIDs) can greatly accelerate context switching
+          by reducing the need for expensive flushing of the processor's
+          Translation Lookaside Buffers (TLBs).
+        </p><p>
+          To enable these features for a VM, you use the
+          <span><strong class="command">VBoxManage modifyvm --vtxvpid</strong></span> and
+          <span><strong class="command">VBoxManage modifyvm --largepages</strong></span> commands.
+          See <a href="ch08.html#vboxmanage-modifyvm" title="8.8. VBoxManage modifyvm">Section 8.8, &#8220;VBoxManage modifyvm&#8221;</a>.
+        </p></li></ul></div></div></div></body></html>

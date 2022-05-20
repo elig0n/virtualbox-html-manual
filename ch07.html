@@ -1,0 +1,819 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter 7. Remote Virtual Machines</title><meta name="generator" content="DocBook XSL Stylesheets V1.69.1"><link rel="start" href="index.html" title="Oracle® VM VirtualBox®"><link rel="up" href="index.html" title="Oracle® VM VirtualBox®"><link rel="prev" href="ch06.html" title="Chapter 6. Virtual Networking"><link rel="next" href="ch08.html" title="Chapter 8. VBoxManage"><style type="text/css"><!--
+   body
+   {
+     font-family:  Verdana, Sans-serif, Arial, 'Trebuchet MS', 'Times New Roman';
+     font-size: small;
+   }
+   h2.title
+   {
+     font-family: Verdana, Sans-serif, Arial, 'Trebuchet MS', 'Times New Roman';
+     margin: 5px 0 0;
+     padding: 1px 5px 1px;
+     border: 1px solid #6b89d4;
+     -moz-border-radius: 0.3em;
+     background: #e6edff;
+   }
+   .titlepage
+   {
+     text-align: center;
+   }
+   .refsynopsisdiv, .refsect1, .refsect2, .refsect3
+   {
+     text-align: left;
+   }
+   .warning
+   {
+     padding: 5px;
+     border: 1px solid #ff0011;
+     -moz-border-radius: 0.3em;
+     background: #ffbbbb;
+   }
+   .warning .title { margin: 0px 0px 5px 0px; }
+   .warning p { margin: 1px; }
+   .note
+   {
+     padding: 1px 5px 1px;
+     border: 1px solid #84c43b;
+     -moz-border-radius: 0.3em;
+     background: #d7e9a7;
+   }
+   .note .title { margin: 0px 0px 5px 0px; }
+   .note p { margin: 1px; }
+   .cmdsynopsis
+   {
+     font-family: monospace;
+   }
+   .refsynopsisdiv        > .cmdsynopsis p, .refsect1        > .cmdsynopsis p,
+   .refsynopsisdiv .sect2 > .cmdsynopsis p, .refsect1 .sect2 > .cmdsynopsis p
+   {
+     margin-top: 0px;
+     margin-bottom: 0px;
+   }
+   .cmdsynopsis p
+   {
+     padding-left: 3.4em;
+     text-indent: -2.2em;
+   }
+   p.nextcommand
+   {
+     margin-top:    0px;
+     margin-bottom: 0px;
+   }
+   p.lastcommand
+   {
+     margin-top:    0px;
+   }
+   .refentry * h3
+   {
+     font-size: large;
+   }
+   .refentry * h4
+   {
+     font-size: larger;
+   }
+   .refentry * h5
+   {
+     font-size: larger;
+   }
+
+  --></style></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="remotevm"></a>Chapter 7. Remote Virtual Machines</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="ch07.html#vrde">7.1. Remote Display (VRDP Support)</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch07.html#rdp-viewers">7.1.1. Common Third-Party RDP Viewers</a></span></dt><dt><span class="sect2"><a href="ch07.html#vboxheadless">7.1.2. VBoxHeadless, the Remote Desktop Server</a></span></dt><dt><span class="sect2"><a href="ch07.html#headless-vm-steps">7.1.3. Step by Step: Creating a Virtual Machine on a Headless Server</a></span></dt><dt><span class="sect2"><a href="ch07.html#usb-over-rdp">7.1.4. Remote USB</a></span></dt><dt><span class="sect2"><a href="ch07.html#vbox-auth">7.1.5. RDP Authentication</a></span></dt><dt><span class="sect2"><a href="ch07.html#vrde-crypt">7.1.6. RDP Encryption</a></span></dt><dt><span class="sect2"><a href="ch07.html#vrde-multiconnection">7.1.7. Multiple Connections to the VRDP Server</a></span></dt><dt><span class="sect2"><a href="ch07.html#vrde-multimonitor">7.1.8. Multiple Remote Monitors</a></span></dt><dt><span class="sect2"><a href="ch07.html#vrde-videochannel">7.1.9. VRDP Video Redirection</a></span></dt><dt><span class="sect2"><a href="ch07.html#vrde-customization">7.1.10. VRDP Customization</a></span></dt></dl></dd><dt><span class="sect1"><a href="ch07.html#teleporting">7.2. Teleporting</a></span></dt><dt><span class="sect1"><a href="ch07.html#man_vboxheadless">7.3. VBoxHeadless</a></span></dt></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vrde"></a>7.1. Remote Display (VRDP Support)</h2></div></div></div><p>
+      Oracle VM VirtualBox can display virtual machines remotely, meaning that
+      a virtual machine can execute on one computer even though the
+      machine will be displayed on a second computer, and the machine
+      will be controlled from there as well, as if the virtual machine
+      was running on that second computer.
+    </p><p>
+      For maximum flexibility, Oracle VM VirtualBox implements remote machine
+      display through a generic extension interface called the
+      VirtualBox Remote Desktop Extension (VRDE). The base open source
+      Oracle VM VirtualBox package only provides this interface, while
+      implementations can be supplied by third parties with
+      Oracle VM VirtualBox extension packages, which must be installed
+      separately from the base package. See
+      <a href="ch01.html#intro-installing" title="1.5. Installing Oracle VM VirtualBox and Extension Packs">Section 1.5, &#8220;Installing Oracle VM VirtualBox and Extension Packs&#8221;</a>.
+    </p><p>
+      Oracle provides support for the VirtualBox Remote Display Protocol
+      (VRDP) in such an Oracle VM VirtualBox extension package.
+    </p><p>
+      VRDP is a backwards-compatible extension to Microsoft's Remote
+      Desktop Protocol (RDP). As a result, you can use any standard RDP
+      client to control the remote VM.
+    </p><p>
+      Even when the extension is installed, the VRDP server is disabled
+      by default. It can easily be enabled on a per-VM basis either in
+      the VirtualBox Manager in the
+      <span class="bold"><strong>Display</strong></span> settings, see
+      <a href="ch03.html#settings-display" title="3.6. Display Settings">Section 3.6, &#8220;Display Settings&#8221;</a>, or with the
+      <span><strong class="command">VBoxManage</strong></span> command, as follows:
+    </p><pre class="screen">$ VBoxManage modifyvm <em class="replaceable"><code>VM-name</code></em> --vrde on</pre><p>
+      By default, the VRDP server uses TCP port <code class="literal">3389</code>.
+      You will need to change the default port if you run more than one
+      VRDP server, since the port can only be used by one server at a
+      time. You might also need to change it on Windows hosts since the
+      default port might already be used by the RDP server that is built
+      into Windows itself. Ports 5000 through 5050 are typically not
+      used and might be a good choice.
+    </p><p>
+      The port can be changed either in the
+      <span class="bold"><strong>Display</strong></span> settings of the graphical
+      user interface or with the <code class="option">--vrdeport</code> option of
+      the <span><strong class="command">VBoxManage modifyvm</strong></span> command. You can
+      specify a comma-separated list of ports or ranges of ports. Use a
+      dash between two port numbers to specify a range. The VRDP server
+      will bind to <span class="emphasis"><em>one</em></span> of the available ports from
+      the specified list. For example, <span><strong class="command">VBoxManage modifyvm
+      <em class="replaceable"><code>VM-name</code></em> --vrdeport
+      5000,5010-5012</strong></span> configures the server to bind to one of
+      the ports 5000, 5010, 5011, or 5012. See
+      <a href="ch08.html#vboxmanage-modifyvm" title="8.8. VBoxManage modifyvm">Section 8.8, &#8220;VBoxManage modifyvm&#8221;</a>.
+    </p><p>
+      The actual port used by a running VM can be either queried with
+      the <span><strong class="command">VBoxManage showvminfo</strong></span> command or seen in
+      the GUI on the <span class="bold"><strong>Runtime</strong></span> tab of the
+      <span class="bold"><strong>Session Information</strong></span> dialog, which
+      is accessible from the <span class="bold"><strong>Machine</strong></span>
+      menu of the VM window.
+    </p><p>
+      Oracle VM VirtualBox supports IPv6. If the host OS supports IPv6 the
+      VRDP server will automatically listen for IPv6 connections in
+      addition to IPv4.
+    </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="rdp-viewers"></a>7.1.1. Common Third-Party RDP Viewers</h3></div></div></div><p>
+        Since VRDP is backwards-compatible to RDP, you can use any
+        standard RDP viewer to connect to such a remote virtual machine.
+        For this to work, you must specify the IP address of your
+        <span class="emphasis"><em>host</em></span> system, not of the virtual machine, as
+        the server address to connect to. You must also specify the port
+        number that the VRDP server is using.
+      </p><p>
+        The following examples are for the most common RDP viewers:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            On Windows, you can use the Microsoft Terminal Services
+            Connector, <span><strong class="command">mstsc.exe</strong></span>, that is included
+            with Windows. Press the Windows key + R, to display the
+            <span class="bold"><strong>Run</strong></span> dialog. Enter
+            <span><strong class="command">mstsc</strong></span> to start the program. You can also
+            find the program in <span class="bold"><strong>Start</strong></span>,
+            <span class="bold"><strong>All Programs</strong></span>,
+            <span class="bold"><strong>Accessories</strong></span>,
+            <span class="bold"><strong>Remote Desktop Connection</strong></span>.
+            If you use the <span class="bold"><strong>Run</strong></span> dialog,
+            you can enter options directly. For example:
+          </p><pre class="screen">mstsc 1.2.3.4:3389</pre><p>
+            Replace <code class="literal">1.2.3.4</code> with the host IP address,
+            and <code class="literal">3389</code> with a different port, if
+            necessary.
+          </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><div class="itemizedlist"><ul type="circle"><li><p>
+                  IPv6 addresses must be enclosed in square brackets to
+                  specify a port. For example: <code class="literal">mstsc
+                  [fe80::1:2:3:4]:3389</code>
+                </p></li><li><p>
+                  When connecting to localhost in order to test the
+                  connection, the addresses <code class="literal">localhost</code>
+                  and <code class="literal">127.0.0.1</code> might not work using
+                  <span><strong class="command">mstsc.exe</strong></span>. Instead, the address
+                  <code class="literal">127.0.0.2[:3389]</code> has to be used.
+                </p></li></ul></div></div></li><li><p>
+            On other systems, you can use the standard open source
+            <span><strong class="command">rdesktop</strong></span> program. This ships with most
+            Linux distributions, but Oracle VM VirtualBox also comes with a
+            modified variant of <span><strong class="command">rdesktop</strong></span> for remote
+            USB support. See <a href="ch07.html#usb-over-rdp" title="7.1.4. Remote USB">Section 7.1.4, &#8220;Remote USB&#8221;</a>.
+          </p><p>
+            With <span><strong class="command">rdesktop</strong></span>, use a command line such as
+            the following:
+          </p><pre class="screen">$ rdesktop -a 16 -N 1.2.3.4:3389</pre><p>
+            Replace <code class="literal">1.2.3.4</code> with the host IP address,
+            and <code class="literal">3389</code> with a different port, if
+            necessary. The <code class="option">-a 16</code> option requests a
+            color depth of 16 bits per pixel, which we recommend. For
+            best performance, after installation of the guest operating
+            system, you should set its display color depth to the same
+            value. The <code class="option">-N</code> option enables use of the
+            NumPad keys.
+          </p></li><li><p>
+            You can use the Remmina remote desktop client with VRDP.
+            This application is included with some Linux distributions,
+            such as Debian and Ubuntu.
+          </p></li><li><p>
+            If you run the KDE desktop, you can use
+            <span><strong class="command">krdc</strong></span>, the KDE RDP viewer. A typical
+            command line is as follows:
+          </p><pre class="screen">$ krdc rdp://1.2.3.4:3389</pre><p>
+            Replace <code class="literal">1.2.3.4</code> with the host IP address,
+            and <code class="literal">3389</code> with a different port, if
+            necessary. The <code class="literal">rdp:// </code> prefix is required
+            with <span><strong class="command">krdc</strong></span> to switch it into RDP mode.
+          </p></li><li><p>
+            With Sun Ray thin clients you can use
+            <span><strong class="command">uttsc</strong></span>, which is part of the Sun Ray
+            Windows Connector package. See the Sun Ray documentation for
+            details.
+          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="vboxheadless"></a>7.1.2. VBoxHeadless, the Remote Desktop Server</h3></div></div></div><p>
+        While any VM started from the VirtualBox Manager is capable of
+        running virtual machines remotely, it is not convenient to have
+        to run the full GUI if you never want to have VMs displayed
+        locally in the first place. In particular, if you are running
+        server hardware whose only purpose is to host VMs, and all your
+        VMs are supposed to run remotely over VRDP, then it is pointless
+        to have a graphical user interface on the server at all. This is
+        especially true for Linux or Oracle Solaris hosts, as the
+        VirtualBox Manager comes with dependencies on the Qt and SDL
+        libraries. This is inconvenient if you would rather not have the
+        X Window system on your server at all.
+      </p><p>
+        Oracle VM VirtualBox therefore comes with a front-end called
+        <span><strong class="command">VBoxHeadless</strong></span>, which produces no visible
+        output on the host at all, but still can optionally deliver VRDP
+        data. This front-end has no dependencies on the X Window system
+        on Linux and Oracle Solaris hosts.
+      </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+          In legacy releases of Oracle VM VirtualBox, the headless server was
+          called <span><strong class="command">VBoxVRDP</strong></span>. For backwards
+          compatibility, the Oracle VM VirtualBox installation still includes
+          an executable with that name.
+        </p></div><p>
+        To start a virtual machine with <span><strong class="command">VBoxHeadless</strong></span>,
+        you have the following options:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            Use the <span><strong class="command">VBoxManage</strong></span> command, as follows:
+          </p><pre class="screen">$ VBoxManage startvm <em class="replaceable"><code>VM-name</code></em> --type headless</pre><p>
+            The <code class="option">--type</code> option causes Oracle VM VirtualBox to
+            use <span><strong class="command">VBoxHeadless</strong></span> as the front-end to the
+            internal virtualization engine, instead of the Qt front-end.
+          </p></li><li><p>
+            Use the <span><strong class="command">VBoxHeadless</strong></span> command, as follows:
+          </p><pre class="screen">VBoxHeadless --startvm <em class="replaceable"><code>uuid</code></em>|<em class="replaceable"><code>vmname</code></em></pre><p>
+            This way of starting the VM helps troubleshooting problems
+            reported by <span><strong class="command">VBoxManage startvm</strong></span>, because
+            you can sometimes see more detailed error messages,
+            especially for early failures before the VM execution is
+            started. In normal situations <span><strong class="command">VBoxManage
+            startvm</strong></span> is preferred, since it runs the VM
+            directly as a background process which has to be done
+            explicitly when directly starting with
+            <span><strong class="command">VBoxHeadless</strong></span>. The full documentation of
+            the command is in <a href="ch07.html#man_vboxheadless" title="7.3. VBoxHeadless">Section 7.3, &#8220;VBoxHeadless&#8221;</a>.
+          </p></li><li><p>
+            Start <span><strong class="command">VBoxHeadless</strong></span> from the VirtualBox
+            Manager GUI, by pressing the Shift key when starting a
+            virtual machine or by selecting
+            <span class="bold"><strong>Headless Start</strong></span> from the
+            <span class="bold"><strong>Machine</strong></span> menu.
+          </p></li></ul></div><p>
+        When you use the <span><strong class="command">VBoxHeadless</strong></span> command to
+        start a VM, the VRDP server will be enabled according to the VM
+        configuration. You can override the VM's setting using
+        <code class="option">--vrde</code> command line parameter. To enable the
+        VRDP server, start the VM as follows:
+      </p><pre class="screen">VBoxHeadless --startvm <em class="replaceable"><code>uuid</code></em>|<em class="replaceable"><code>vmname</code></em> --vrde on</pre><p>
+        To disable the VRDP server:
+      </p><pre class="screen">VBoxHeadless --startvm <em class="replaceable"><code>uuid</code></em>|<em class="replaceable"><code>vmname</code></em> --vrde off</pre><p>
+        To have the VRDP server enabled depending on the VM
+        configuration, as for other front-ends:
+      </p><pre class="screen">VBoxHeadless --startvm <em class="replaceable"><code>uuid</code></em>|<em class="replaceable"><code>vmname</code></em> --vrde config</pre><p>
+        This command is the same as the following:
+      </p><pre class="screen">VBoxHeadless --startvm <em class="replaceable"><code>uuid</code></em>|<em class="replaceable"><code>vmname</code></em></pre><p>
+        If you start the VM with <span><strong class="command">VBoxManage startvm</strong></span>
+        then the configuration settings of the VM are always used.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="headless-vm-steps"></a>7.1.3. Step by Step: Creating a Virtual Machine on a Headless Server</h3></div></div></div><p>
+        The following instructions describe how to create a virtual
+        machine on a headless server over a network connection. This
+        example creates a virtual machine, establishes an RDP connection
+        and installs a guest operating system. All of these tasks are
+        done without having to touch the headless server. You need the
+        following prerequisites:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            Oracle VM VirtualBox on a server machine with a supported host
+            operating system. The Oracle VM VirtualBox Extension Pack for the
+            VRDP server must be installed, see <a href="ch07.html#vrde" title="7.1. Remote Display (VRDP Support)">Section 7.1, &#8220;Remote Display (VRDP Support)&#8221;</a>.
+            The procedures assume a Linux server is used.
+          </p></li><li><p>
+            An ISO file accessible from the server, containing the
+            installation data for the guest operating system to install.
+            Windows XP is used in the example.
+          </p></li><li><p>
+            A terminal connection to that host through which you can
+            access a command line, such as <span><strong class="command">ssh</strong></span>.
+          </p></li><li><p>
+            An RDP viewer on the remote client. See
+            <a href="ch07.html#rdp-viewers" title="7.1.1. Common Third-Party RDP Viewers">Section 7.1.1, &#8220;Common Third-Party RDP Viewers&#8221;</a> for examples.
+          </p></li></ul></div><p>
+        Note that on the server machine, since we will only use the
+        headless server, Qt and the X Window system are not required.
+      </p><div class="orderedlist"><ol type="1"><li><p>
+            On the headless server, create a new virtual machine. For
+            example:
+          </p><pre class="screen">VBoxManage createvm --name "Windows XP" --ostype WindowsXP --register</pre><p>
+            If you do not specify <code class="option">--register</code>, you will
+            have to manually use the <span><strong class="command">registervm</strong></span>
+            command later.
+          </p><p>
+            You do not need to specify <code class="option">--ostype</code>, but
+            doing so selects some sensible default values for certain VM
+            parameters. For example, the RAM size and the type of the
+            virtual network device. To get a complete list of supported
+            operating systems you can use the following command:
+          </p><pre class="screen">VBoxManage list ostypes</pre></li><li><p>
+            Make sure the settings for the VM are appropriate for the
+            guest operating system that we will install. For example:
+          </p><pre class="screen">VBoxManage modifyvm "Windows XP" --memory 256 --acpi on --boot1 dvd --nic1 nat</pre></li><li><p>
+            Create a virtual hard disk for the VM. For example, to
+            create a 10 GB virtual hard disk:
+          </p><pre class="screen">VBoxManage createhd --filename "WinXP.vdi" --size 10000</pre></li><li><p>
+            Add an IDE Controller to the new VM. For example:
+          </p><pre class="screen">VBoxManage storagectl "Windows XP" --name "IDE Controller"
+  --add ide --controller PIIX4</pre></li><li><p>
+            Set the VDI file you created as the first virtual hard disk
+            of the new VM. For example:
+          </p><pre class="screen">VBoxManage storageattach "Windows XP" --storagectl "IDE Controller"
+ --port 0 --device 0 --type hdd --medium "WinXP.vdi"</pre></li><li><p>
+            Attach the ISO file that contains the operating system
+            installation that you want to install later to the virtual
+            machine. This is done so that the VM can boot from it.
+          </p><pre class="screen">VBoxManage storageattach "Windows XP" --storagectl "IDE Controller"
+ --port 0 --device 1 --type dvddrive --medium /full/path/to/iso.iso</pre></li><li><p>
+            Enable the VirtualBox Remote Desktop Extension, the VRDP
+            server, as follows:
+          </p><pre class="screen">VBoxManage modifyvm "Windows XP" --vrde on</pre></li><li><p>
+            Start the virtual machine using the
+            <span><strong class="command">VBoxHeadless</strong></span> command:
+          </p><pre class="screen">VBoxHeadless --startvm "Windows XP"</pre><p>
+            If the configuration steps worked, you should see a
+            copyright notice. If you are returned to the command line,
+            then something did not work correctly.
+          </p></li><li><p>
+            On the client machine, start the RDP viewer and connect to
+            the server. See <a href="ch07.html#rdp-viewers" title="7.1.1. Common Third-Party RDP Viewers">Section 7.1.1, &#8220;Common Third-Party RDP Viewers&#8221;</a> for details
+            of how to use various common RDP viewers.
+          </p><p>
+            The installation routine of your guest operating system
+            should be displayed in the RDP viewer.
+          </p></li></ol></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="usb-over-rdp"></a>7.1.4. Remote USB</h3></div></div></div><p>
+        As a special feature additional to the VRDP support,
+        Oracle VM VirtualBox also supports remote USB devices over the wire.
+        That is, an Oracle VM VirtualBox guest that runs on one computer can
+        access the USB devices of the remote computer on which the VRDP
+        data is being displayed the same way as USB devices that are
+        connected to the actual host. This enables running of virtual
+        machines on an Oracle VM VirtualBox host that acts as a server, where
+        a client can connect from elsewhere that needs only a network
+        adapter and a display capable of running an RDP viewer. When USB
+        devices are plugged into the client, the remote Oracle VM VirtualBox
+        server can access them.
+      </p><p>
+        For these remote USB devices, the same filter rules apply as for
+        other USB devices. See <a href="ch03.html#settings-usb" title="3.11.1. USB Settings">Section 3.11.1, &#8220;USB Settings&#8221;</a>. All you
+        have to do is specify Remote, or Any, when setting up these
+        rules.
+      </p><p>
+        Accessing remote USB devices is only possible if the RDP client
+        supports this extension. On Linux and Oracle Solaris hosts, the
+        Oracle VM VirtualBox installation provides a suitable VRDP client
+        called <span><strong class="command">rdesktop-vrdp</strong></span>. Some versions of
+        <span><strong class="command">uttsc</strong></span>, a client tailored for the use with Sun
+        Ray thin clients, also support accessing remote USB devices. RDP
+        clients for other platforms will be provided in future
+        Oracle VM VirtualBox versions.
+      </p><p>
+        To make a remote USB device available to a VM,
+        <span><strong class="command">rdesktop-vrdp</strong></span> should be started as follows:
+      </p><pre class="screen">rdesktop-vrdp -r usb -a 16 -N my.host.address</pre><p>
+        See <a href="ch12.html#ts_usb-linux" title="12.7.5. USB Not Working">Section 12.7.5, &#8220;USB Not Working&#8221;</a> for further details on how
+        to properly set up the permissions for USB devices. Furthermore
+        it is advisable to disable automatic loading of any host driver
+        on the remote host which might work on USB devices to ensure
+        that the devices are accessible by the RDP client. If the setup
+        was properly done on the remote host, plug and unplug events are
+        visible in the VBox.log file of the VM.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="vbox-auth"></a>7.1.5. RDP Authentication</h3></div></div></div><p>
+        For each virtual machine that is remotely accessible using RDP,
+        you can individually determine if and how client connections are
+        authenticated. For this, use the <span><strong class="command">VBoxManage
+        modifyvm</strong></span> command with the
+        <code class="option">--vrdeauthtype</code> option. See
+        <a href="ch08.html#vboxmanage-modifyvm" title="8.8. VBoxManage modifyvm">Section 8.8, &#8220;VBoxManage modifyvm&#8221;</a>. The following methods of
+        authentication are available:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            The <span class="bold"><strong>null</strong></span> method means that
+            there is no authentication at all. Any client can connect to
+            the VRDP server and thus the virtual machine. This is very
+            insecure and only to be recommended for private networks.
+          </p></li><li><p>
+            The <span class="bold"><strong>external</strong></span> method
+            provides external authentication through a special
+            authentication library. Oracle VM VirtualBox ships with two
+            special authentication libraries:
+          </p><div class="orderedlist"><ol type="1"><li><p>
+                The default authentication library,
+                <span><strong class="command">VBoxAuth</strong></span>, authenticates against user
+                credentials of the hosts. Depending on the host
+                platform, this means the following:
+              </p><div class="itemizedlist"><ul type="circle"><li><p>
+                    On Linux hosts, <span><strong class="command">VBoxAuth.so</strong></span>
+                    authenticates users against the host's PAM system.
+                  </p></li><li><p>
+                    On Windows hosts, <span><strong class="command">VBoxAuth.dll</strong></span>
+                    authenticates users against the host's WinLogon
+                    system.
+                  </p></li><li><p>
+                    On Mac OS X hosts, <span><strong class="command">VBoxAuth.dylib</strong></span>
+                    authenticates users against the host's directory
+                    service.
+                  </p></li></ul></div><p>
+                In other words, the external method by default performs
+                authentication with the user accounts that exist on the
+                host system. Any user with valid authentication
+                credentials is accepted. For example, the username does
+                not have to correspond to the user running the VM.
+              </p></li><li><p>
+                An additional library called
+                <span><strong class="command">VBoxAuthSimple</strong></span> performs
+                authentication against credentials configured in the
+                <code class="literal">extradata</code> section of a virtual
+                machine's XML settings file. This is probably the
+                simplest way to get authentication that does not depend
+                on a running and supported guest. The following steps
+                are required:
+              </p><div class="orderedlist"><ol type="a"><li><p>
+                    Enable <span><strong class="command">VBoxAuthSimple</strong></span> with the
+                    following command:
+                  </p><pre class="screen">VBoxManage setproperty vrdeauthlibrary "VBoxAuthSimple"</pre></li><li><p>
+                    To enable the library for a particular VM, you must
+                    switch authentication to external, as follows:
+                  </p><pre class="screen">VBoxManage modifyvm <em class="replaceable"><code>VM-name</code></em> --vrdeauthtype external</pre><p>
+                    Replace <em class="replaceable"><code>VM-name</code></em> with the
+                    VM name or UUID.
+                  </p></li><li><p>
+                    You then need to configure users and passwords by
+                    writing items into the machine's extradata. Since
+                    the XML machine settings file, into whose
+                    <code class="literal">extradata</code> section the password
+                    needs to be written, is a plain text file,
+                    Oracle VM VirtualBox uses hashes to encrypt passwords. The
+                    following command must be used:
+                  </p><pre class="screen">VBoxManage setextradata <em class="replaceable"><code>VM-name</code></em> "VBoxAuthSimple/users/<em class="replaceable"><code>user</code></em>" <em class="replaceable"><code>hash</code></em></pre><p>
+                    Replace <em class="replaceable"><code>VM-name</code></em> with the
+                    VM name or UUID, <em class="replaceable"><code>user</code></em>
+                    with the user name who should be allowed to log in
+                    and <em class="replaceable"><code>hash</code></em> with the
+                    encrypted password. The following command example
+                    obtains the hash value for the password
+                    <code class="literal">secret</code>:
+                  </p><pre class="screen">$ VBoxManage internalcommands passwordhash "secret"
+2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b</pre><p>
+                    You then use <span><strong class="command">VBoxManage
+                    setextradata</strong></span> to store this value in the
+                    machine's <code class="literal">extradata</code> section.
+                  </p><p>
+                    As a combined example, to set the password for the
+                    user <code class="literal">john</code> and the machine
+                    <code class="literal">My VM</code> to
+                    <code class="literal">secret</code>, use this command:
+                  </p><pre class="screen">VBoxManage setextradata "My VM" "VBoxAuthSimple/users/john"
+    2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b</pre></li></ol></div></li></ol></div></li><li><p>
+            The <span class="bold"><strong>guest</strong></span> authentication
+            method performs authentication with a special component that
+            comes with the Guest Additions. As a result, authentication
+            is not performed on the host, but with the guest user
+            accounts.
+          </p><p>
+            This method is currently still in testing and not yet
+            supported.
+          </p></li></ul></div><p>
+        In addition to the methods described above, you can replace the
+        default external authentication module with any other module.
+        For this, Oracle VM VirtualBox provides a well-defined interface that
+        enables you to write your own authentication module. This is
+        described in detail in the Oracle VM VirtualBox Software Development
+        Kit (SDK) reference. See <a href="ch11.html" title="Chapter 11. Oracle VM VirtualBox Programming Interfaces">Chapter 11, <i>Oracle VM VirtualBox Programming Interfaces</i></a>.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="vrde-crypt"></a>7.1.6. RDP Encryption</h3></div></div></div><p>
+        RDP features data stream encryption, which is based on the RC4
+        symmetric cipher, with keys up to 128-bit. The RC4 keys are
+        replaced at regular intervals, every 4096 packets.
+      </p><p>
+        RDP provides the following different authentication methods:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            <span class="bold"><strong>RDP 4</strong></span> authentication was
+            used historically. With RDP 4, the RDP client does not
+            perform any checks in order to verify the identity of the
+            server it connects to. Since user credentials can be
+            obtained using a man in the middle (MITM) attack, RDP4
+            authentication is insecure and should generally not be used.
+          </p></li><li><p>
+            <span class="bold"><strong>RDP 5.1</strong></span> authentication
+            employs a server certificate for which the client possesses
+            the public key. This way it is guaranteed that the server
+            possess the corresponding private key. However, as this
+            hard-coded private key became public some years ago, RDP 5.1
+            authentication is also insecure.
+          </p></li><li><p>
+            <span class="bold"><strong>RDP 5.2 or later</strong></span>
+            authentication uses Enhanced RDP Security, which means that
+            an external security protocol is used to secure the
+            connection. RDP 4 and RDP 5.1 use Standard RDP Security. The
+            VRDP server supports Enhanced RDP Security with TLS protocol
+            and, as a part of the TLS handshake, sends the server
+            certificate to the client.
+          </p><p>
+            The <code class="literal">Security/Method</code> VRDE property sets
+            the desired security method, which is used for a connection.
+            Valid values are as follows:
+          </p><div class="itemizedlist"><ul type="circle"><li><p>
+                <span class="bold"><strong>Negotiate.</strong></span> Both
+                Enhanced (TLS) and Standard RDP Security connections are
+                allowed. The security method is negotiated with the
+                client. This is the default setting.
+              </p></li><li><p>
+                <span class="bold"><strong>RDP.</strong></span> Only Standard RDP
+                Security is accepted.
+              </p></li><li><p>
+                <span class="bold"><strong>TLS.</strong></span> Only Enhanced RDP
+                Security is accepted. The client must support TLS.
+              </p><p>
+                The version of OpenSSL used by Oracle VM VirtualBox supports
+                TLS versions 1.0, 1.1, 1.2, and 1.3.
+              </p></li></ul></div><p>
+            For example, the following command enables a client to use
+            either Standard or Enhanced RDP Security connection:
+          </p><pre class="screen">vboxmanage modifyvm <em class="replaceable"><code>VM-name</code></em> --vrdeproperty "Security/Method=negotiate"</pre><p>
+            If the <code class="literal">Security/Method</code> property is set to
+            either Negotiate or TLS, the TLS protocol will be
+            automatically used by the server, if the client supports
+            TLS. However, in order to use TLS the server must possess
+            the Server Certificate, the Server Private Key and the
+            Certificate Authority (CA) Certificate. The following
+            example shows how to generate a server certificate.
+          </p><div class="orderedlist"><ol type="1"><li><p>
+                Create a CA self signed certificate.
+              </p><pre class="screen">openssl req -new -x509 -days 365 -extensions v3_ca \
+  -keyout ca_key_private.pem -out ca_cert.pem</pre></li><li><p>
+                Generate a server private key and a request for signing.
+              </p><pre class="screen">openssl genrsa -out server_key_private.pem
+openssl req -new -key server_key_private.pem -out server_req.pem</pre></li><li><p>
+                Generate the server certificate.
+              </p><pre class="screen">openssl x509 -req -days 365 -in server_req.pem \
+  -CA ca_cert.pem -CAkey ca_key_private.pem -set_serial 01 -out server_cert.pem</pre></li></ol></div><p>
+            The server must be configured to access the required files.
+            For example:
+          </p><pre class="screen">vboxmanage modifyvm <em class="replaceable"><code>VM-name</code></em> \
+  --vrdeproperty "Security/CACertificate=path/ca_cert.pem"</pre><pre class="screen">vboxmanage modifyvm <em class="replaceable"><code>VM-name</code></em> \
+  --vrdeproperty "Security/ServerCertificate=path/server_cert.pem"</pre><pre class="screen">vboxmanage modifyvm <em class="replaceable"><code>VM-name</code></em> \
+  --vrdeproperty "Security/ServerPrivateKey=path/server_key_private.pem"</pre></li></ul></div><p>
+        As the client that connects to the server determines what type
+        of encryption will be used, with <span><strong class="command">rdesktop</strong></span>,
+        the Linux RDP viewer, use the <code class="option">-4</code> or
+        <code class="option">-5</code> options.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="vrde-multiconnection"></a>7.1.7. Multiple Connections to the VRDP Server</h3></div></div></div><p>
+        The VRDP server of Oracle VM VirtualBox supports multiple simultaneous
+        connections to the same running VM from different clients. All
+        connected clients see the same screen output and share a mouse
+        pointer and keyboard focus. This is similar to several people
+        using the same computer at the same time, taking turns at the
+        keyboard.
+      </p><p>
+        The following command enables multiple connection mode:
+      </p><pre class="screen">VBoxManage modifyvm <em class="replaceable"><code>VM-name</code></em> --vrdemulticon on</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="vrde-multimonitor"></a>7.1.8. Multiple Remote Monitors</h3></div></div></div><p>
+        To access two or more remote VM displays you have to enable the
+        VRDP multiconnection mode. See
+        <a href="ch07.html#vrde-multiconnection" title="7.1.7. Multiple Connections to the VRDP Server">Section 7.1.7, &#8220;Multiple Connections to the VRDP Server&#8221;</a>.
+      </p><p>
+        The RDP client can select the virtual monitor number to connect
+        to using the <code class="literal">domain</code> login parameter
+        (<code class="option">-d</code>). If the parameter ends with
+        <code class="literal">@</code> followed by a number, Oracle VM VirtualBox
+        interprets this number as the screen index. The primary guest
+        screen is selected with <code class="literal">@1</code>, the first
+        secondary screen is <code class="literal">@2</code>, and so on.
+      </p><p>
+        The Microsoft RDP 6 client does not let you specify a separate
+        domain name. Instead, enter
+        <code class="literal"><em class="replaceable"><code>domain</code></em>\<em class="replaceable"><code>username</code></em></code>
+        in the <span class="bold"><strong>Username</strong></span> field. For
+        example, <code class="literal">@2\<em class="replaceable"><code>name</code></em></code>.
+        <em class="replaceable"><code>name</code></em> must be supplied, and must be
+        the name used to log in if the VRDP server is set up to require
+        credentials. If it is not, you may use any text as the username.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="vrde-videochannel"></a>7.1.9. VRDP Video Redirection</h3></div></div></div><p>
+        The VRDP server can redirect video streams from the guest to the
+        RDP client. Video frames are compressed using the JPEG algorithm
+        allowing a higher compression ratio than standard RDP bitmap
+        compression methods. It is possible to increase the compression
+        ratio by lowering the video quality.
+      </p><p>
+        The VRDP server automatically detects video streams in a guest
+        as frequently updated rectangular areas. As a result, this
+        method works with any guest operating system without having to
+        install additional software in the guest. In particular, the
+        Guest Additions are not required.
+      </p><p>
+        On the client side, however, currently only the Windows 7 Remote
+        Desktop Connection client supports this feature. If a client
+        does not support video redirection, the VRDP server falls back
+        to regular bitmap updates.
+      </p><p>
+        The following command enables video redirection:
+      </p><pre class="screen">VBoxManage modifyvm <em class="replaceable"><code>VM-name</code></em> --vrdevideochannel on</pre><p>
+        The quality of the video is defined as a value from 10 to 100
+        percent, representing a JPEG compression level, where lower
+        numbers mean lower quality but higher compression. The quality
+        can be changed using the following command:
+      </p><pre class="screen">VBoxManage modifyvm <em class="replaceable"><code>VM-name</code></em> --vrdevideochannelquality 75</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="vrde-customization"></a>7.1.10. VRDP Customization</h3></div></div></div><p>
+        You can disable display output, mouse and keyboard input, audio,
+        remote USB, or clipboard individually in the VRDP server.
+      </p><p>
+        The following commands change the corresponding server settings:
+      </p><pre class="screen">$ VBoxManage modifyvm <em class="replaceable"><code>VM-name</code></em> --vrdeproperty Client/DisableDisplay=1
+$ VBoxManage modifyvm <em class="replaceable"><code>VM-name</code></em> --vrdeproperty Client/DisableInput=1
+$ VBoxManage modifyvm <em class="replaceable"><code>VM-name</code></em> --vrdeproperty Client/DisableUSB=1
+$ VBoxManage modifyvm <em class="replaceable"><code>VM-name</code></em> --vrdeproperty Client/DisableAudio=1
+$ VBoxManage modifyvm <em class="replaceable"><code>VM-name</code></em> --vrdeproperty Client/DisableClipboard=1
+$ VBoxManage modifyvm <em class="replaceable"><code>VM-name</code></em> --vrdeproperty Client/DisableUpstreamAudio=1</pre><p>
+        To reenable a feature, use a similar command without the
+        trailing 1. For example:
+      </p><pre class="screen">$ VBoxManage modifyvm <em class="replaceable"><code>VM-name</code></em> --vrdeproperty Client/DisableDisplay=</pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="teleporting"></a>7.2. Teleporting</h2></div></div></div><p>
+      Oracle VM VirtualBox supports <span class="emphasis"><em>teleporting</em></span>.
+      Teleporting is moving a virtual machine over a network from one
+      Oracle VM VirtualBox host to another, while the virtual machine is
+      running. This works regardless of the host operating system that
+      is running on the hosts. You can teleport virtual machines between
+      Oracle Solaris and Mac OS X hosts, for example.
+    </p><p>
+      Teleporting requires that a machine be currently running on one
+      host, which is called the <span class="emphasis"><em>source</em></span>. The host to
+      which the virtual machine will be teleported is called the
+      <span class="emphasis"><em>target</em></span>. The machine on the target is then
+      configured to wait for the source to contact the target. The
+      machine's running state will then be transferred from the source
+      to the target with minimal downtime.
+    </p><p>
+      Teleporting happens over any TCP/IP network. The source and the
+      target only need to agree on a TCP/IP port which is specified in
+      the teleporting settings.
+    </p><p>
+      At this time, there are a few prerequisites for this to work, as
+      follows:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+          On the target host, you must configure a virtual machine in
+          Oracle VM VirtualBox with exactly the same hardware settings as the
+          machine on the source that you want to teleport. This does not
+          apply to settings which are merely descriptive, such as the VM
+          name, but obviously for teleporting to work, the target
+          machine must have the same amount of memory and other hardware
+          settings. Otherwise teleporting will fail with an error
+          message.
+        </p></li><li><p>
+          The two virtual machines on the source and the target must
+          share the same storage, hard disks as well as floppy disks and
+          CD/DVD images. This means that they either use the same iSCSI
+          targets or that the storage resides somewhere on the network
+          and both hosts have access to it using NFS or SMB/CIFS.
+        </p><p>
+          This also means that neither the source nor the target machine
+          can have any snapshots.
+        </p></li></ul></div><p>
+      To configure teleporting, perform the following steps:
+    </p><div class="orderedlist"><ol type="1"><li><p>
+          On the <span class="emphasis"><em>target</em></span> host, configure the virtual
+          machine to wait for a teleport request to arrive when it is
+          started, instead of actually attempting to start the machine.
+          This is done with the following <span><strong class="command">VBoxManage</strong></span>
+          command:
+        </p><pre class="screen">VBoxManage modifyvm <em class="replaceable"><code>targetvmname</code></em> --teleporter on --teleporterport <em class="replaceable"><code>port</code></em></pre><p>
+          <em class="replaceable"><code>targetvmname</code></em> is the name of the
+          virtual machine on the target host and
+          <em class="replaceable"><code>port</code></em> is a TCP/IP port number to be
+          used on both the source and the target hosts. For example, use
+          6000. See <a href="ch08.html#vboxmanage-modifyvm" title="8.8. VBoxManage modifyvm">Section 8.8, &#8220;VBoxManage modifyvm&#8221;</a>.
+        </p></li><li><p>
+          Start the VM on the target host. Instead of running, the VM
+          shows a progress dialog, indicating that it is waiting for a
+          teleport request to arrive.
+        </p></li><li><p>
+          Start the VM on the <span class="emphasis"><em>source</em></span> host as usual.
+          When it is running and you want it to be teleported, issue the
+          following command on the source host:
+        </p><pre class="screen">VBoxManage controlvm <em class="replaceable"><code>sourcevmname</code></em> teleport --host <em class="replaceable"><code>targethost</code></em> --port <em class="replaceable"><code>port</code></em></pre><p>
+          where <em class="replaceable"><code>sourcevmname</code></em> is the name of
+          the virtual machine on the source host, which is the machine
+          that is currently running.
+          <em class="replaceable"><code>targethost</code></em> is the host or IP name
+          of the target host on which the machine is waiting for the
+          teleport request, and <em class="replaceable"><code>port</code></em> must be
+          the same number as specified in the command on the target
+          host. See <a href="ch08.html#vboxmanage-controlvm" title="8.13. VBoxManage controlvm">Section 8.13, &#8220;VBoxManage controlvm&#8221;</a>.
+        </p></li></ol></div><p>
+      For testing, you can also teleport machines on the same host. In
+      that case, use localhost as the hostname on both the source and
+      the target host.
+    </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+        In rare cases, if the CPUs of the source and the target are very
+        different, teleporting can fail with an error message, or the
+        target may hang. This may happen especially if the VM is running
+        application software that is highly optimized to run on a
+        particular CPU without correctly checking that certain CPU
+        features are actually present. Oracle VM VirtualBox filters what CPU
+        capabilities are presented to the guest operating system.
+        Advanced users can attempt to restrict these virtual CPU
+        capabilities with the <span><strong class="command">VBoxManage modifyvm
+        --cpuid</strong></span> command. See
+        <a href="ch08.html#vboxmanage-modifyvm" title="8.8. VBoxManage modifyvm">Section 8.8, &#8220;VBoxManage modifyvm&#8221;</a>.
+      </p></div></div><div class="refentry"><div class="sect1" lang="en"><div class="titlepage"><div><div><div class="refentry"><h2 class="title" style="clear: both"><a name="man_vboxheadless"></a>7.3. VBoxHeadless</h2></div></div></div></div><p>Oracle VM VirtualBox remote desktop server.</p><div class="not-in-toc refsynopsisdiv"><div class="sect2" lang="en"><div class="titlepage"><div><div><div class="not-in-toc refsynopsisdiv"><h3 class="title"><a name="idp18962496"></a>Synopsis</h3></div></div></div></div><div class="cmdsynopsis"><p><a name="synopsis-vboxmanage-vboxheadless"></a></p><p class="lastcommand"><code class="command">VBoxHeadless</code>  [--startvm= [ <em class="replaceable"><code>uuid</code></em>  |   <em class="replaceable"><code>vmname</code></em> ]] [--vrde=   on  |   off  |   config  ] [--vrdeproperty=<em class="replaceable"><code>prop-name</code></em>=[<em class="replaceable"><code>prop-value</code></em>]] [--settingspw=[<em class="replaceable"><code>password</code></em>]] [--settingspwfile=<em class="replaceable"><code>password-file</code></em>] [--start-paused=<em class="replaceable"><code>vmname</code></em>] [--capture] [--width=<em class="replaceable"><code>width</code></em>] [--height=<em class="replaceable"><code>height</code></em>] [--bitrate=<em class="replaceable"><code>bit-rate</code></em>] [--filename=<em class="replaceable"><code>filename</code></em>]</p></div></div></div><div class="not-in-toc refsect1"><div class="sect2" lang="en"><div class="titlepage"><div><div><div class="not-in-toc refsect1"><h3 class="title"><a name="idp18985504"></a>Description</h3></div></div></div></div><p>
+      The <span><strong class="command">VBoxHeadless</strong></span> command is an alternate front
+      end that enables you to remotely manage virtual machines (VMs).
+      The front end is a CLI rather than the VirtualBox Manager
+      graphical user interface (GUI).
+    </p><p>
+      For information about using this command, see
+      <a href="ch07.html#vboxheadless" title="7.1.2. VBoxHeadless, the Remote Desktop Server">Section 7.1.2, &#8220;VBoxHeadless, the Remote Desktop Server&#8221;</a>.
+    </p><div class="not-in-toc refsect2"><div class="sect3" lang="en"><div class="titlepage"><div><div><div class="not-in-toc refsect2"><h4 class="title"><a name="idp18989200"></a>Command Options</h4></div></div></div></div><div class="variablelist"><dl><dt><span class="term">
+            <code class="option">--startvm=<em class="replaceable"><code>uuid</code></em> | <em class="replaceable"><code>vmname</code></em></code>
+          </span></dt><dd><p>
+              Specifies the Universally Unique Identifier (UUID) or name
+              of the VM to start.
+            </p><p>
+              Use the <span><strong class="command">VBoxManage list vms</strong></span> command to
+              obtain VM information.
+            </p><p>
+              The short versions of this option are <code class="option">-s</code>
+              and <code class="option">-startvm</code>.
+            </p></dd><dt><span class="term">
+            <code class="option">--vrde=on | off | config</code>
+          </span></dt><dd><p>
+              Specifies how to use the VRDP server. The default value is
+              <code class="literal">config</code>. Valid values are as follows:
+            </p><div class="itemizedlist"><ul type="disc"><li><p><code class="literal">on</code> enables the VRDP server.
+                </p><pre class="screen">VBoxHeadless --startvm=<em class="replaceable"><code>vmname</code></em> --vrde=on</pre></li><li><p><code class="literal">off</code> disables the VRDP server.
+                </p><pre class="screen">VBoxHeadless --startvm=<em class="replaceable"><code>vmname</code></em> --vrde=off</pre></li><li><p><code class="literal">config</code> enables the VRDP server
+                  depending on the VM configuration.
+                </p><pre class="screen">VBoxHeadless --startvm=<em class="replaceable"><code>vmname</code></em> --vrde=config</pre></li></ul></div><p>
+              The short version of this option is <code class="option">-v</code>.
+            </p></dd><dt><span class="term">
+            <code class="option">--vrdeproperty=<em class="replaceable"><code>prop-name</code></em>=<em class="replaceable"><code>prop-value</code></em></code>
+          </span></dt><dd><p>
+              Specifies a value for one of the following properties:
+            </p><div class="itemizedlist"><ul type="disc"><li><p>
+                  The <code class="literal">TCP/Ports</code> property value is a
+                  comma-separated list of ports to which the VRDE server
+                  can bind. Use a hyphen (<code class="literal">-</code>) between
+                  two port numbers to specify a range of ports.
+                </p></li><li><p>
+                  The <code class="literal">TCP/Address</code> property value is
+                  the interface IP address to which to bind the VRDE
+                  server.
+                </p></li></ul></div></dd><dt><span class="term">
+            <code class="option">--settingspw=[<em class="replaceable"><code>password</code></em>]</code>
+          </span></dt><dd><p>
+              Specifies a settings password to access encrypted
+              settings. If you do not specify the password on the
+              command line, <span><strong class="command">VBoxHeadless</strong></span> prompts you
+              for the password.
+            </p></dd><dt><span class="term">
+            <code class="option">--settingspwfile=<em class="replaceable"><code>password-file</code></em></code>
+          </span></dt><dd><p>
+              Specifies the file that contains the settings password.
+            </p></dd><dt><span class="term">
+            <code class="option">--start-paused=<em class="replaceable"><code>vmname</code></em></code>
+          </span></dt><dd><p>
+              Starts the specified VM in the paused state.
+            </p></dd><dt><span class="term">
+            <code class="option">--capture</code>
+          </span></dt><dd><p>
+              Records the VM screen output to a file. In addition to
+              this option, you must use the <code class="option">--filename</code>
+              option to specify the name of the file.
+            </p></dd><dt><span class="term">
+            <code class="option">--width=<em class="replaceable"><code>width</code></em></code>
+          </span></dt><dd><p>
+              Specifies the frame width of the recording in pixels. This
+              option is associated with the <code class="option">--capture</code>
+              option.
+            </p></dd><dt><span class="term">
+            <code class="option">--height=<em class="replaceable"><code>height</code></em></code>
+          </span></dt><dd><p>
+              Specifies the frame height of the recording in pixels.
+              This option is associated with the
+              <code class="option">--capture</code> option.
+            </p></dd><dt><span class="term">
+            <code class="option">--bitrate=<em class="replaceable"><code>bit-rate</code></em></code>
+          </span></dt><dd><p>
+              Specifies the bit rate of the recording in kilobits per
+              second. This option is associated with the
+              <code class="option">--capture</code> option.
+            </p></dd><dt><span class="term">
+            <code class="option">--filename=<em class="replaceable"><code>filename</code></em></code>
+          </span></dt><dd><p>
+              Specifies the name of the file in which to store the
+              recording. The codec used is based on the file extension
+              that you choose. You must specify this option if you use
+              the <code class="option">--capture</code> option.
+            </p></dd></dl></div></div></div></div></div><div class="not-in-toc refsect1"><div class="sect2" lang="en"><div class="titlepage"><div><div><div class="not-in-toc refsect1"><h3 class="title"><a name="idp19040592"></a>Examples</h3></div></div></div></div><p>
+      The following command starts the <code class="literal">ol7u4</code> VM:
+    </p><pre class="screen">$ VBoxHeadless --startvm "ol7u4"</pre><p>
+      The following command starts the <code class="literal">ol7u6</code> VM in
+      the Paused state.
+    </p><pre class="screen">$ VBoxHeadless --startvm "ol7u6" --start-paused</pre><p>
+      The following command starts the <code class="literal">ol7u6</code> VM and
+      records the session. The recording is saved to the
+      <code class="filename">ol7u6-recording</code> WebM file.
+    </p><pre class="screen">$ VBoxHeadless --startvm "ol7u6" --capture --filename ol7u6-recording.webm</pre></div></div><div class="not-in-toc refsect1"><div class="sect2" lang="en"><div class="titlepage"><div><div><div class="not-in-toc refsect1"><h3 class="title"><a name="idp19048336"></a>See Also</h3></div></div></div></div><p><a href="ch08.html#vboxmanage-list" title="8.4. VBoxManage list">Section 8.4, &#8220;VBoxManage list&#8221;</a>,
+      <a href="ch08.html#vboxmanage-startvm" title="8.12. VBoxManage startvm">Section 8.12, &#8220;VBoxManage startvm&#8221;</a></p></div></div></div></div></div></body></html>
